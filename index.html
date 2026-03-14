@@ -55,6 +55,7 @@
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
+        <!-- Background image container -- swap img for <video> when ready -->
         <div class="hero-bg-image" aria-hidden="true">
             <img src="reference-images/small-town/seth-dewey-EOlo15oy8Ks-unsplash.jpg" alt="" loading="eager">
         </div>
@@ -62,51 +63,54 @@
         <div class="hero-texture" aria-hidden="true"></div>
 
         <div class="hero-content" data-reveal="fade-up">
-            <div class="hero-badge">
-                <!-- Small anvil icon -->
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <rect x="3" y="2" width="8" height="4" rx="1" fill="currentColor"/>
-                    <path d="M7 6V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M4 12H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                Your Neighbor in the Farmington Valley
-            </div>
-            <h1 class="hero-title">
-                I help small businesses<br>
-                <span class="hero-accent">look great and work right.</span>
-            </h1>
-            <p class="hero-subtitle">
-                I'm Jesse -- a web designer and IT guy right here in Connecticut.
-                I build websites, fix tech problems, and treat every client like a neighbor.
-                Because you are one.
-            </p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">
-                    <span>Let's Talk</span>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Opaque text box: semi-transparent anvil charcoal panel -->
+            <div class="hero-content-box">
+                <div class="hero-badge">
+                    <!-- Small anvil icon -->
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <rect x="3" y="2" width="8" height="4" rx="1" fill="currentColor"/>
+                        <path d="M7 6V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M4 12H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
-                </a>
-                <a href="#services" class="btn btn-ghost">See What I Do</a>
-            </div>
-            <div class="hero-trust">
-                <div class="trust-item">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                        <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>One Person, Real Answers</span>
+                    Your Neighbor in the Farmington Valley
                 </div>
-                <div class="trust-item">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                        <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Made Right Here in CT</span>
+                <h1 class="hero-title">
+                    I help small businesses<br>
+                    <span class="hero-accent">look great and work right.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    I'm Jesse -- a web designer and IT guy right here in Connecticut.
+                    I build websites, fix tech problems, and treat every client like a neighbor.
+                    Because you are one.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Let's Talk</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#services" class="btn btn-ghost">See What I Do</a>
                 </div>
-                <div class="trust-item">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                        <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>No Hidden Fees</span>
+                <div class="hero-trust">
+                    <div class="trust-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>One Person, Real Answers</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Made Right Here in CT</span>
+                    </div>
+                    <div class="trust-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M13.3 4L6 11.3L2.7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>No Hidden Fees</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,9 +127,8 @@
                 <div class="meet-jesse-bio">
                     <span class="section-label">Meet Jesse</span>
                     <h2 class="section-title">The person behind<br><span class="text-accent">Hammer & Pixels.</span></h2>
-                    <p>Hi, I'm Jesse. I'm an IT professional with over a decade of technical experience building applications, websites, and tech support for thousands of people across several companies. I love what I do, and I want to use those skills to help you connect with customers, build applications that elevate your business, and fix the problems you see day-to-day.</p>
-                    <p>I started Hammer & Pixels because I noticed small businesses get treated like ticket numbers at big companies. You deserve better.</p>
-                    <p>My mission is simple: help small businesses succeed with websites, applications, and tech support that actually fit your needs. I'm committed to making people happy and helping the world be a better place.</p>
+                    <p>I'm an IT professional with over a decade of experience building websites, applications, and tech support for thousands of people. I started Hammer & Pixels because small businesses deserve better than ticket numbers at big companies.</p>
+                    <p>My mission is simple: help local businesses succeed with websites and tech that actually fit your needs -- not a one-size-fits-all package.</p>
                 </div>
                 <div class="meet-jesse-values">
                     <div class="value-card" data-reveal="fade-up" data-delay="0">
@@ -137,7 +140,7 @@
                             </svg>
                         </div>
                         <h3>One person. Not a ticket queue.</h3>
-                        <p>When you reach out, you get me. Not a chatbot, not a call center, not a rotating cast of strangers. Just someone who already knows your name and your project.</p>
+                        <p>You get me -- not a chatbot, not a call center. Someone who knows your name and your project.</p>
                     </div>
                     <div class="value-card" data-reveal="fade-up" data-delay="100">
                         <div class="value-icon" aria-hidden="true">
@@ -147,7 +150,7 @@
                             </svg>
                         </div>
                         <h3>I don't believe in templates.</h3>
-                        <p>Your business isn't generic, so your website shouldn't be either. I build everything from scratch because cookie-cutter sites get cookie-cutter results.</p>
+                        <p>Your business isn't generic, so your site shouldn't be either. Everything is built from scratch.</p>
                     </div>
                     <div class="value-card" data-reveal="fade-up" data-delay="200">
                         <div class="value-icon" aria-hidden="true">
@@ -156,7 +159,7 @@
                             </svg>
                         </div>
                         <h3>I'll tell you the truth.</h3>
-                        <p>If you don't need something, I'll say so. If there's a cheaper way to get what you want, I'll tell you. I'd rather earn your trust than pad an invoice.</p>
+                        <p>If you don't need something, I'll say so. I'd rather earn your trust than pad an invoice.</p>
                     </div>
                 </div>
             </div>
@@ -168,8 +171,8 @@
         <div class="container">
             <header class="section-header" data-reveal="fade-up">
                 <span class="section-label">What I Do</span>
-                <h2 class="section-title">Your business needs are unique.<br><span class="text-accent">I don't believe in one-size-fits-all.</span></h2>
-                <p class="section-description">I don't do templates. I sit down, learn how your business works, and build exactly what you need -- nothing more, nothing less.</p>
+                <h2 class="section-title">Custom solutions.<br><span class="text-accent">Not one-size-fits-all.</span></h2>
+                <p class="section-description">I learn how your business works and build exactly what you need -- nothing more, nothing less.</p>
             </header>
 
             <div class="services-grid">
@@ -185,11 +188,11 @@
                         </svg>
                     </div>
                     <h3 class="service-title">Website Design</h3>
-                    <p class="service-description">I'll build you a website that actually looks like your business -- not a template with your name slapped on it. Every site I make is hand-crafted, because your work deserves that.</p>
+                    <p class="service-description">A hand-crafted site that looks like your business -- not a template with your name on it.</p>
                     <ul class="service-highlights">
                         <li>Custom design, built from scratch</li>
                         <li>Looks great on every device</li>
-                        <li>Search engine foundations included</li>
+                        <li>SEO foundations included</li>
                         <li>You own everything -- always</li>
                     </ul>
                     <div class="service-price">
@@ -207,10 +210,10 @@
                         </svg>
                     </div>
                     <h3 class="service-title">Website Care</h3>
-                    <p class="service-description">Once your site is live, I keep it running smoothly. Updates, backups, security checks, and content changes -- one less thing you have to worry about.</p>
+                    <p class="service-description">I keep your site running smoothly -- updates, backups, security, and content changes handled.</p>
                     <ul class="service-highlights">
                         <li>Updates, backups & security</li>
-                        <li>Content edits whenever you need them</li>
+                        <li>Content edits when you need them</li>
                         <li>Uptime monitoring</li>
                         <li>Monthly check-ins from me</li>
                     </ul>
@@ -228,11 +231,11 @@
                         </svg>
                     </div>
                     <h3 class="service-title">IT Support</h3>
-                    <p class="service-description">Printers, email, networks, computers -- the stuff that drives you crazy. I'll fix it, explain what happened in plain English, and make sure it doesn't happen again.</p>
+                    <p class="service-description">Printers, email, networks -- the stuff that drives you crazy. I fix it and explain what happened in plain English.</p>
                     <ul class="service-highlights">
-                        <li>Remote & on-site, whatever works</li>
+                        <li>Remote & on-site support</li>
                         <li>Network & device setup</li>
-                        <li>I speak your language, not jargon</li>
+                        <li>Plain English, not jargon</li>
                         <li>Same-day response</li>
                     </ul>
                     <div class="service-price">
@@ -257,12 +260,11 @@
                 <div class="serve-content">
                     <span class="section-label">Who I Work With</span>
                     <h2 class="section-title">I build for people<br><span class="text-accent">who build things.</span></h2>
-                    <p>Contractors, salons, restaurants, shops, nonprofits -- the businesses that keep the Farmington Valley running. You're excellent at what you do. You shouldn't have to be excellent at websites too.</p>
-                    <p>I know your work because I live here. I've sat in your chairs, eaten at your tables, and hired your crews. When I build your site, I understand what your customers need -- because I am your customer.</p>
+                    <p>Contractors, salons, restaurants, shops, nonprofits -- the businesses that keep the Farmington Valley running. You're great at what you do. You shouldn't have to be great at websites too.</p>
                     <ul class="serve-list">
                         <li>
                             <strong>Contractors & Trades</strong>
-                            <span>Websites that show your craftsmanship, not just list your number</span>
+                            <span>Sites that show your craftsmanship, not just list your number</span>
                         </li>
                         <li>
                             <strong>Salons & Studios</strong>
@@ -288,7 +290,7 @@
             <header class="section-header" data-reveal="fade-up">
                 <span class="section-label">My Work</span>
                 <h2 class="section-title">Built with care.<br><span class="text-accent">See the results.</span></h2>
-                <p class="section-description">Every project starts with understanding your business and ends with something you're proud to put your name on.</p>
+                <p class="section-description">Every project starts with understanding your business and ends with something you're proud to show off.</p>
             </header>
 
             <div class="portfolio-grid" data-reveal="fade-up">
@@ -319,7 +321,7 @@
                     <div class="portfolio-info">
                         <span class="portfolio-type">Website Design</span>
                         <h3>Valley Hardscapes</h3>
-                        <p>Full website redesign for a Canton-based landscaping company. Gallery, quote form, and service pages that actually convert.</p>
+                        <p>Full redesign for a Canton landscaping company. Gallery, quote form, and service pages that convert.</p>
                         <div class="portfolio-tags">
                             <span>Design</span>
                             <span>Development</span>
@@ -354,7 +356,7 @@
                     <div class="portfolio-info">
                         <span class="portfolio-type">Website + Maintenance</span>
                         <h3>The Collins Cafe</h3>
-                        <p>New site with online menu, hours integration, and a monthly care plan. Mobile-first because 80% of their traffic comes from phones.</p>
+                        <p>Mobile-first site with online menu, hours integration, and a monthly care plan.</p>
                         <div class="portfolio-tags">
                             <span>Design</span>
                             <span>Mobile-First</span>
@@ -390,7 +392,7 @@
                     <div class="portfolio-info">
                         <span class="portfolio-type">Website + IT Support</span>
                         <h3>Simsbury Family Dental</h3>
-                        <p>Professional website with online booking, plus ongoing IT support for their office network and equipment.</p>
+                        <p>Professional site with online booking, plus ongoing IT support for their office network.</p>
                         <div class="portfolio-tags">
                             <span>Design</span>
                             <span>IT Support</span>
@@ -401,7 +403,7 @@
             </div>
 
             <div class="portfolio-cta" data-reveal="fade-up">
-                <p>These are example projects that represent the kind of work I do. <strong>Your project could be next.</strong></p>
+                <p>These represent the kind of work I do. <strong>Your project could be next.</strong></p>
                 <a href="#contact" class="btn btn-outline">Let's Talk About Yours</a>
             </div>
         </div>
@@ -421,29 +423,29 @@
         <div class="container">
             <header class="section-header" data-reveal="fade-up">
                 <span class="section-label">Why Work With Me</span>
-                <h2 class="section-title">More than a template.<br><span class="text-accent">Less than agency bloat.</span></h2>
+                <h2 class="section-title">Not an agency.<br><span class="text-accent">Not a template.</span></h2>
             </header>
 
             <div class="why-grid">
                 <article class="why-card" data-reveal="fade-up" data-delay="0">
                     <div class="why-number" aria-hidden="true">01</div>
                     <h3>Your Neighbor, Not a Chatbot</h3>
-                    <p>I'm a real person right here in Connecticut you can actually call. Not a ticket queue. Not a faceless agency three states away. Someone who knows your name and your business.</p>
+                    <p>I'm a real person in Connecticut you can actually call. Someone who knows your name and your business.</p>
                 </article>
                 <article class="why-card" data-reveal="fade-up" data-delay="100">
                     <div class="why-number" aria-hidden="true">02</div>
                     <h3>Craftsmanship, Not Shortcuts</h3>
-                    <p>I don't drag-and-drop templates and call it custom. Every site is hand-built with clean code, thoughtful design, and the kind of attention you'd expect from someone who takes pride in their work.</p>
+                    <p>Every site is hand-built with clean code, thoughtful design, and the attention to detail your business deserves.</p>
                 </article>
                 <article class="why-card" data-reveal="fade-up" data-delay="200">
                     <div class="why-number" aria-hidden="true">03</div>
                     <h3>Total Transparency</h3>
-                    <p>No hidden fees. No corporate nonsense. No surprise invoices six months later. You'll know exactly what you're paying for and what you're getting before I write a single line of code.</p>
+                    <p>No hidden fees. No surprise invoices. You'll know exactly what you're paying for before I write a single line of code.</p>
                 </article>
                 <article class="why-card" data-reveal="fade-up" data-delay="300">
                     <div class="why-number" aria-hidden="true">04</div>
                     <h3>Web & Tech Under One Roof</h3>
-                    <p>Most small businesses need both a website and tech support. I handle both, so you don't juggle vendors, logins, or blame games between providers.</p>
+                    <p>Website and IT support from one person. No juggling vendors or blame games between providers.</p>
                 </article>
             </div>
 
@@ -462,8 +464,8 @@
                         </svg>
                     </div>
                     <div class="local-text">
-                        <h3>Proudly Based in the Farmington Valley</h3>
-                        <p>I live and work right here in central Connecticut. From contractors in Canton to salons in Simsbury, restaurants in Collinsville to offices in Avon -- if you're local, I'm your guy.</p>
+                        <h3>Based in the Farmington Valley</h3>
+                        <p>From contractors in Canton to salons in Simsbury, restaurants in Collinsville to offices in Avon -- if you're local, I'm your guy.</p>
                     </div>
                 </div>
             </div>
@@ -475,8 +477,8 @@
         <div class="container">
             <header class="section-header" data-reveal="fade-up">
                 <span class="section-label">Honest Pricing</span>
-                <h2 class="section-title">Clear costs.<br><span class="text-accent">No surprises. No upselling.</span></h2>
-                <p class="section-description">Every project is scoped before I start. You'll know the price, the timeline, and what's included -- in writing, before any work begins.</p>
+                <h2 class="section-title">Clear costs.<br><span class="text-accent">No surprises.</span></h2>
+                <p class="section-description">You'll know the price, the timeline, and what's included -- in writing -- before any work begins.</p>
             </header>
 
             <!-- Website Design Tiers -->
@@ -569,7 +571,7 @@
                         </div>
                         <h4>Website Care</h4>
                         <div class="monthly-price">$75 - $250<span>/mo</span></div>
-                        <p>Updates, backups, security checks, and content edits</p>
+                        <p>Updates, backups, security, and content edits</p>
                     </div>
                     <div class="monthly-card">
                         <div class="monthly-icon" aria-hidden="true">
@@ -579,7 +581,7 @@
                         </div>
                         <h4>IT Support</h4>
                         <div class="monthly-price">$75<span> min</span> / $125<span>/hr onsite</span></div>
-                        <p>Remote troubleshooting, printer help, email & network setup</p>
+                        <p>Remote troubleshooting, email & network setup</p>
                     </div>
                     <div class="monthly-card">
                         <div class="monthly-icon" aria-hidden="true">
@@ -603,9 +605,8 @@
                 <div class="about-content">
                     <span class="section-label">About Hammer & Pixels</span>
                     <h2 class="section-title">Where craftsmanship<br><span class="text-accent">meets digital.</span></h2>
-                    <p>The name says it all. The hammer represents real work -- tangible results, durability, the kind of hands-on care that builds things to last. The pixels represent precision -- clean code, sharp design, digital tools wielded with skill.</p>
-                    <p>I started this business because too many small businesses were stuck choosing between overpriced agencies and cheap templates that fall apart. There's a better way, and it starts with someone who actually cares about your success.</p>
-                    <p>I believe your website should be built the way a good contractor builds a house -- solid foundation, quality materials, and someone who stands behind their work long after the job is done.</p>
+                    <p>The hammer represents real work -- tangible results, durability, hands-on care. The pixels represent precision -- clean code, sharp design, digital tools wielded with skill.</p>
+                    <p>Your website should be built like a good contractor builds a house -- solid foundation, quality materials, and someone who stands behind their work long after the job is done.</p>
                     <div class="about-stats">
                         <div class="stat">
                             <span class="stat-value">CT</span>
@@ -640,8 +641,8 @@
         <div class="container">
             <header class="section-header" data-reveal="fade-up">
                 <span class="section-label">Get In Touch</span>
-                <h2 class="section-title">Let's have a conversation.<br><span class="text-accent">No pressure, no pitch.</span></h2>
-                <p class="section-description">I'm a real person and I like talking to people. Tell me what's going on with your business and I'll get back to you within one business day -- usually sooner.</p>
+                <h2 class="section-title">Let's talk.<br><span class="text-accent">No pitch, no pressure.</span></h2>
+                <p class="section-description">Tell me what's going on with your business. I'll get back to you within one business day -- usually sooner.</p>
             </header>
 
             <div class="contact-layout" data-reveal="fade-up">
@@ -679,10 +680,10 @@
                     </div>
                     <div class="form-group form-group-full">
                         <label for="message">Tell me what's on your mind <span class="required" aria-label="required">*</span></label>
-                        <textarea id="message" name="message" rows="5" required placeholder="What's going on with your business? What are you looking for? No wrong answers here."></textarea>
+                        <textarea id="message" name="message" rows="4" required placeholder="What's going on with your business? What are you looking for?"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-submit">
-                        <span>Let's Talk</span>
+                        <span>Send It Over</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                             <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -726,7 +727,7 @@
 
                     <div class="contact-info-card contact-quote-card">
                         <blockquote>
-                            <p>"I'd rather have a conversation than give you a sales pitch. Let's just figure out what you need."</p>
+                            <p>"I'd rather have a conversation than give you a sales pitch. Let's figure out what you need."</p>
                         </blockquote>
                         <span class="quote-attribution">-- Jesse, Hammer & Pixels</span>
                     </div>
