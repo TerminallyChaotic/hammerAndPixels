@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Groundwork Coffee - Your neighborhood coffee shop in Simsbury, CT. Specialty coffee, pastries, and community events in a cozy space.">
+    <title>Groundwork Coffee | Simsbury, CT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="coffeeshop.css">
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Groundwork Coffee - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <!-- Simple coffee cup icon -->
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 10h16v10a6 6 0 01-6 6H10a6 6 0 01-6-6V10z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                        <path d="M20 12h2a3 3 0 010 6h-2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                        <path d="M8 4c0 2 2 3 2 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M12 3c0 2 2 3 2 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M16 4c0 2 2 3 2 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="logo-text">Groundwork</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
+                <li role="none"><a href="#visit" role="menuitem">Visit</a></li>
+                <li role="none"><a href="#events" role="menuitem">Events</a></li>
+                <li role="none"><a href="#visit" role="menuitem" class="nav-cta">Find Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge" aria-hidden="true">Est. 2019</div>
+            <h1 class="hero-title">Coffee worth<br>slowing down for.</h1>
+            <p class="hero-subtitle">Specialty beans, homemade pastries, and a seat with your name on it. Your neighborhood third place in the heart of Simsbury.</p>
+            <div class="hero-actions">
+                <a href="#menu" class="btn btn-primary">See the Menu</a>
+                <a href="#visit" class="btn btn-secondary">Visit Us</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Replace with actual image: overhead shot of latte art on rustic wood table -->
+            <div class="image-placeholder" role="img" aria-label="Overhead view of a latte with rosetta art on a warm wood table, surrounded by pastries and an open book">
+                <span>Latte art on reclaimed wood table with pastry and book</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section section-about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-col">
+                    <!-- Replace with actual image: interior of cozy coffee shop -->
+                    <div class="image-placeholder image-placeholder--lg" role="img" aria-label="Cozy interior with exposed beams, mismatched vintage chairs, and warm pendant lighting">
+                        <span>Shop interior -- warm wood, vintage chairs, pendant lights</span>
+                    </div>
+                </div>
+                <div class="about-text-col">
+                    <p class="section-label">Our Story</p>
+                    <h2 class="section-heading">Brewed with<br>intention.</h2>
+                    <p class="about-body">Groundwork started with a simple idea: Simsbury deserved a coffee shop that cared as much about community as it did about the coffee. We source our beans from small-lot roasters, bake our pastries fresh every morning, and keep the WiFi strong.</p>
+                    <p class="about-body">Whether you're settling in for a work session, catching up with friends, or just need a perfect cortado on your way to the trail, we're glad you're here.</p>
+                    <div class="about-perks">
+                        <div class="perk">
+                            <span class="perk-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8.5 2C8.5 2 7 4 7 5.5S8 8 8 8M12 2c0 0-1.5 2-1.5 3.5S12 8 12 8M15.5 2c0 0-1.5 2-1.5 3.5S15.5 8 15.5 8M4 10h16v2a8 8 0 01-8 8 8 8 0 01-8-8v-2z"/></svg>
+                            </span>
+                            <div>
+                                <strong>Specialty Coffee</strong>
+                                <p>Single-origin and blends from ethical roasters</p>
+                            </div>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/><circle cx="12" cy="15" r="1.5"/></svg>
+                            </span>
+                            <div>
+                                <strong>Free WiFi</strong>
+                                <p>Fast, reliable, no time limits</p>
+                            </div>
+                        </div>
+                        <div class="perk">
+                            <span class="perk-icon" aria-hidden="true">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg>
+                            </span>
+                            <div>
+                                <strong>Cozy Seating</strong>
+                                <p>Couches, communal tables, and quiet corners</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MENU ========== -->
+    <section class="section section-menu" id="menu">
+        <div class="container">
+            <div class="menu-header">
+                <p class="section-label">The Menu</p>
+                <h2 class="section-heading">What we're serving</h2>
+                <p class="menu-note">All coffee available hot, iced, or oat. Pastries baked fresh daily -- when they're gone, they're gone.</p>
+            </div>
+
+            <div class="menu-columns">
+                <!-- Coffee -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">Coffee</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Drip Coffee</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$3.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Pour Over</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Espresso</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$3.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cortado</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$4.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cappuccino</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Latte</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Mocha</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$6.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cold Brew</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.00</span>
+                        </li>
+                        <li class="menu-item menu-item--highlight">
+                            <span class="menu-item-name">Seasonal Special</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$6.50</span>
+                        </li>
+                    </ul>
+                    <p class="menu-addon">+$0.75 oat, almond, or coconut milk</p>
+                    <p class="menu-addon">+$0.50 extra shot, vanilla, or lavender</p>
+                </div>
+
+                <!-- Not Coffee -->
+                <div class="menu-category">
+                    <h3 class="menu-category-title">Not Coffee</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Matcha Latte</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Chai Latte</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$5.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Hot Chocolate</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$4.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Loose Leaf Tea</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$4.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Fresh Juice</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$6.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Sparkling Water</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$2.50</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="menu-category-title menu-category-title--space">Pastries & Eats</h3>
+                    <ul class="menu-list">
+                        <li class="menu-item">
+                            <span class="menu-item-name">Croissant (plain or almond)</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$4.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Blueberry Muffin</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$3.75</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Banana Bread</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$3.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Avocado Toast</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$8.00</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Breakfast Sandwich</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$7.50</span>
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-item-name">Cookie (rotating flavors)</span>
+                            <span class="menu-item-dots" aria-hidden="true"></span>
+                            <span class="menu-item-price">$3.00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VISIT ========== -->
+    <section class="section section-visit" id="visit">
+        <div class="container">
+            <div class="visit-grid">
+                <div class="visit-info">
+                    <p class="section-label">Visit Us</p>
+                    <h2 class="section-heading">Pull up a chair.</h2>
+                    <p class="visit-intro">We're right on Hopmeadow Street, next to the library. Street parking and a small lot out back. Bikes welcome -- we have a rack.</p>
+
+                    <div class="visit-cards">
+                        <div class="visit-card">
+                            <h3 class="visit-card-title">Hours</h3>
+                            <div class="hours-grid">
+                                <span class="hours-day">Monday -- Friday</span>
+                                <span class="hours-time">6:30 AM -- 5:00 PM</span>
+                                <span class="hours-day">Saturday</span>
+                                <span class="hours-time">7:00 AM -- 5:00 PM</span>
+                                <span class="hours-day">Sunday</span>
+                                <span class="hours-time">7:30 AM -- 3:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="visit-card">
+                            <h3 class="visit-card-title">Location</h3>
+                            <p>742 Hopmeadow Street<br>Simsbury, CT 06070</p>
+                            <a href="#" class="visit-link">Get Directions &rarr;</a>
+                        </div>
+                        <div class="visit-card">
+                            <h3 class="visit-card-title">The Essentials</h3>
+                            <ul class="essentials-list">
+                                <li>Free WiFi (password on the wall)</li>
+                                <li>Outlets at every table</li>
+                                <li>Dog-friendly patio</li>
+                                <li>Bike rack out front</li>
+                                <li>Accessible entrance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="visit-image-col">
+                    <!-- Replace with image: storefront exterior, warm light glowing from windows -->
+                    <div class="image-placeholder image-placeholder--tall" role="img" aria-label="Groundwork Coffee storefront on a sunny morning, warm light through large windows, chalkboard sign on sidewalk">
+                        <span>Storefront -- sidewalk chalk sign, warm window glow, flower boxes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COMMUNITY EVENTS ========== -->
+    <section class="section section-events" id="events">
+        <div class="container">
+            <p class="section-label section-label--center">Community</p>
+            <h2 class="section-heading section-heading--center">What's happening</h2>
+            <p class="events-intro">Groundwork is more than coffee. It's a place where the neighborhood comes together. Here's what's coming up.</p>
+
+            <div class="events-grid">
+                <article class="event-card">
+                    <div class="event-date">
+                        <span class="event-month">MAR</span>
+                        <span class="event-day">22</span>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Acoustic Open Mic Night</h3>
+                        <p class="event-time">Saturday, 6:00 PM -- 8:00 PM</p>
+                        <p class="event-desc">Bring your guitar, your voice, or just your ears. Sign-up at 5:30. All skill levels welcome.</p>
+                    </div>
+                </article>
+                <article class="event-card">
+                    <div class="event-date">
+                        <span class="event-month">MAR</span>
+                        <span class="event-day">26</span>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Latte Art Workshop</h3>
+                        <p class="event-time">Wednesday, 4:00 PM -- 5:30 PM</p>
+                        <p class="event-desc">Learn to pour hearts, rosettas, and tulips with our head barista. $15 includes all materials and a drink.</p>
+                    </div>
+                </article>
+                <article class="event-card">
+                    <div class="event-date">
+                        <span class="event-month">APR</span>
+                        <span class="event-day">05</span>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Saturday Morning Book Club</h3>
+                        <p class="event-time">Saturday, 9:00 AM -- 10:30 AM</p>
+                        <p class="event-desc">This month we're reading "Demon Copperhead" by Barbara Kingsolver. Coffee and pastries included.</p>
+                    </div>
+                </article>
+                <article class="event-card">
+                    <div class="event-date">
+                        <span class="event-month">APR</span>
+                        <span class="event-day">12</span>
+                    </div>
+                    <div class="event-details">
+                        <h3 class="event-title">Local Artists Pop-Up</h3>
+                        <p class="event-time">Saturday, 10:00 AM -- 2:00 PM</p>
+                        <p class="event-desc">Browse and buy work from Farmington Valley artists. Ceramics, prints, jewelry, and more.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INSTAGRAM / SOCIAL ========== -->
+    <section class="section section-social">
+        <div class="container">
+            <div class="social-banner">
+                <div class="social-text">
+                    <h2 class="social-heading">Follow the vibes.</h2>
+                    <p class="social-handle">@groundworkcoffee</p>
+                </div>
+                <div class="social-gallery">
+                    <!-- Replace with actual Instagram feed images -->
+                    <div class="social-img image-placeholder" role="img" aria-label="Latte art close-up"><span>Latte art</span></div>
+                    <div class="social-img image-placeholder" role="img" aria-label="Pastry display case"><span>Pastry case</span></div>
+                    <div class="social-img image-placeholder" role="img" aria-label="Customer reading by the window"><span>Window reading</span></div>
+                    <div class="social-img image-placeholder" role="img" aria-label="Barista pouring espresso"><span>Espresso pour</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-logo">Groundwork</p>
+                    <p class="footer-tagline">Coffee worth slowing down for.</p>
+                    <p class="footer-address">742 Hopmeadow Street, Simsbury, CT 06070</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#menu">Menu</a>
+                    <a href="#visit">Visit</a>
+                    <a href="#events">Events</a>
+                </div>
+                <div class="footer-social-links">
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="#" aria-label="TikTok">TikTok</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Groundwork Coffee. All rights reserved.</p>
+                <p class="footer-credit">Website by <a href="https://hammerandpixels.com" target="_blank" rel="noopener">Hammer & Pixels</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* ---- Navigation Toggle ---- */
+    (function() {
+        var toggle = document.querySelector('.nav-toggle');
+        var menu = document.querySelector('.nav-menu');
+        var navbar = document.getElementById('navbar');
+
+        toggle.addEventListener('click', function() {
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            menu.classList.toggle('open');
+            this.classList.toggle('open');
+        });
+
+        menu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                menu.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    })();
+
+    /* ---- Smooth scroll ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    /* ---- Scroll reveal ---- */
+    (function() {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.section, .event-card, .visit-card, .perk').forEach(function(el) {
+            el.classList.add('reveal-target');
+            observer.observe(el);
+        });
+    })();
+
+    /* ---- Menu item hover parallax ---- */
+    (function() {
+        var menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(4px)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>

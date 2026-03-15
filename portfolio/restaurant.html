@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Embers & Oak - Contemporary fine dining in the heart of Connecticut. Seasonal menus, craft cocktails, and an unforgettable atmosphere.">
+    <title>Embers & Oak | Fine Dining | Hartford, CT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="restaurant.css">
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#hero" class="logo" aria-label="Embers and Oak - Home">
+                <span class="logo-mark" aria-hidden="true">&amp;</span>
+                <span class="logo-text">Embers <em>&</em> Oak</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#story" role="menuitem">Our Story</a></li>
+                <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
+                <li role="none"><a href="#chef" role="menuitem">The Chef</a></li>
+                <li role="none"><a href="#ambiance" role="menuitem">Ambiance</a></li>
+                <li role="none"><a href="#reservations" role="menuitem" class="nav-cta">Reserve a Table</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="hero">
+        <div class="hero-bg">
+            <!-- Replace with actual hero image: dimly lit dining room, candlelight on dark wood -->
+            <div class="hero-placeholder" role="img" aria-label="Elegant dining room with warm candlelight reflecting off dark oak tables and copper accents">
+                <span class="hero-placeholder-label">Hero Image: Candlelit dining room with copper accents</span>
+            </div>
+            <div class="hero-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-tagline">Contemporary Fine Dining</p>
+            <h1 class="hero-title">Embers <em>&</em> Oak</h1>
+            <p class="hero-subtitle">Where fire meets craft. Seasonal ingredients, open-flame cooking, and an atmosphere that lingers.</p>
+            <div class="hero-actions">
+                <a href="#reservations" class="btn btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn btn-ghost">View Menu</a>
+            </div>
+        </div>
+        <div class="hero-scroll" aria-hidden="true">
+            <span class="hero-scroll-line"></span>
+        </div>
+    </header>
+
+    <!-- ========== OUR STORY ========== -->
+    <section class="section section-story" id="story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-image-col">
+                    <!-- Replace with actual image: close-up of hands plating a dish -->
+                    <div class="image-placeholder image-placeholder--tall" role="img" aria-label="Chef carefully plating a seasonal dish with tweezers">
+                        <span>Chef plating a dish with seasonal microgreens</span>
+                    </div>
+                </div>
+                <div class="story-text-col">
+                    <p class="section-label">Our Story</p>
+                    <h2 class="section-heading">Rooted in fire.<br>Refined by hand.</h2>
+                    <p class="story-body">Embers & Oak was born from a simple conviction: the best meals happen when great ingredients meet open flame. Nestled in Hartford's historic district, our kitchen pays homage to primal cooking techniques while embracing the precision of contemporary cuisine.</p>
+                    <p class="story-body">Every dish tells a story of Connecticut's seasons -- from spring morels foraged in Litchfield County to winter root vegetables from farms in the valley. We work directly with local growers, fishermen, and artisans to bring the region's finest to your table.</p>
+                    <div class="story-details">
+                        <div class="detail-item">
+                            <span class="detail-number">12</span>
+                            <span class="detail-label">Local Farm Partners</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-number">4</span>
+                            <span class="detail-label">Seasonal Menus / Year</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-number">1</span>
+                            <span class="detail-label">Wood-Fired Hearth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MENU ========== -->
+    <section class="section section-menu" id="menu">
+        <div class="container">
+            <p class="section-label section-label--center">The Menu</p>
+            <h2 class="section-heading section-heading--center">Spring 2026</h2>
+            <p class="menu-intro">Our menu changes with the seasons. Each course is designed to be experienced as part of the whole, though we're happy to accommodate dietary needs and preferences.</p>
+
+            <!-- Menu Category Tabs -->
+            <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+                <button class="menu-tab active" role="tab" aria-selected="true" aria-controls="tab-starters" id="btn-starters">First Course</button>
+                <button class="menu-tab" role="tab" aria-selected="false" aria-controls="tab-mains" id="btn-mains">Main Course</button>
+                <button class="menu-tab" role="tab" aria-selected="false" aria-controls="tab-desserts" id="btn-desserts">Dessert</button>
+                <button class="menu-tab" role="tab" aria-selected="false" aria-controls="tab-drinks" id="btn-drinks">Cocktails</button>
+            </div>
+
+            <!-- Starters -->
+            <div class="menu-panel active" id="tab-starters" role="tabpanel" aria-labelledby="btn-starters">
+                <div class="menu-grid">
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Spring Pea Veloute</h3>
+                            <span class="menu-item-price">$18</span>
+                        </div>
+                        <p class="menu-item-desc">Chilled English pea soup, cr&egrave;me fra&icirc;che, pea tendrils, lemon oil, black sesame tuile</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Hamachi Crudo</h3>
+                            <span class="menu-item-price">$24</span>
+                        </div>
+                        <p class="menu-item-desc">Yellowtail, yuzu kosho, pickled daikon, shiso, crispy rice</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Burrata & Morels</h3>
+                            <span class="menu-item-price">$22</span>
+                        </div>
+                        <p class="menu-item-desc">Creamy burrata, saut&eacute;ed Litchfield morels, charred sourdough, aged balsamic, arugula</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Beef Tartare</h3>
+                            <span class="menu-item-price">$21</span>
+                        </div>
+                        <p class="menu-item-desc">Hand-cut wagyu, smoked egg yolk, capers, cornichon, bone marrow toast</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Mains -->
+            <div class="menu-panel" id="tab-mains" role="tabpanel" aria-labelledby="btn-mains" hidden>
+                <div class="menu-grid">
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Hearth-Roasted Duck</h3>
+                            <span class="menu-item-price">$44</span>
+                        </div>
+                        <p class="menu-item-desc">Dry-aged duck breast, cherry gastrique, turnip pur&eacute;e, crispy skin, grilled radicchio</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Pan-Seared Halibut</h3>
+                            <span class="menu-item-price">$48</span>
+                        </div>
+                        <p class="menu-item-desc">Wild halibut, spring vegetable nage, fiddleheads, fingerling potatoes, dill oil</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Bone-In Ribeye</h3>
+                            <span class="menu-item-price">$62</span>
+                        </div>
+                        <p class="menu-item-desc">32oz prime ribeye, wood-fired, bone marrow butter, roasted cipollini, watercress</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Wild Mushroom Risotto</h3>
+                            <span class="menu-item-price">$32</span>
+                        </div>
+                        <p class="menu-item-desc">Arborio rice, seasonal foraged mushrooms, truffle, Parmigiano-Reggiano, herbs</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-panel" id="tab-desserts" role="tabpanel" aria-labelledby="btn-desserts" hidden>
+                <div class="menu-grid">
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Dark Chocolate Fondant</h3>
+                            <span class="menu-item-price">$16</span>
+                        </div>
+                        <p class="menu-item-desc">Valrhona 72%, salted caramel core, espresso cr&egrave;me anglaise, cocoa nib tuile</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cr&egrave;me Br&ucirc;l&eacute;e</h3>
+                            <span class="menu-item-price">$14</span>
+                        </div>
+                        <p class="menu-item-desc">Madagascar vanilla bean, torched sugar crust, seasonal berry compote</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Cheese Selection</h3>
+                            <span class="menu-item-price">$22</span>
+                        </div>
+                        <p class="menu-item-desc">Three artisanal cheeses, local CT honey, fig jam, candied walnuts, grilled bread</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Cocktails -->
+            <div class="menu-panel" id="tab-drinks" role="tabpanel" aria-labelledby="btn-drinks" hidden>
+                <div class="menu-grid">
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">The Ember</h3>
+                            <span class="menu-item-price">$17</span>
+                        </div>
+                        <p class="menu-item-desc">Mezcal, charred pineapple, ancho chile, lime, smoked salt rim</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Hartford Old Fashioned</h3>
+                            <span class="menu-item-price">$16</span>
+                        </div>
+                        <p class="menu-item-desc">Rye whiskey, maple bitters, demerara, expressed orange, Luxardo cherry</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Garden Gimlet</h3>
+                            <span class="menu-item-price">$15</span>
+                        </div>
+                        <p class="menu-item-desc">Gin, cucumber, elderflower, fresh basil, lime, sparkling finish</p>
+                    </article>
+                    <article class="menu-item">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-name">Seasonal Spritz</h3>
+                            <span class="menu-item-price">$14</span>
+                        </div>
+                        <p class="menu-item-desc">Rotating seasonal fruit, prosecco, aperitivo, fresh herbs -- ask your server</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CHEF ========== -->
+    <section class="section section-chef" id="chef">
+        <div class="container">
+            <div class="chef-grid">
+                <div class="chef-text-col">
+                    <p class="section-label">The Chef</p>
+                    <h2 class="section-heading">Elena Morales</h2>
+                    <p class="chef-title">Executive Chef & Co-Founder</p>
+                    <p class="chef-body">With fifteen years in kitchens from New York to Barcelona, Chef Morales brings a philosophy rooted in simplicity and respect for ingredients. Her time at Mugaritz and Gramercy Tavern shaped a style that balances technical precision with rustic warmth.</p>
+                    <p class="chef-body">At Embers & Oak, Elena oversees every aspect of the culinary program, from sourcing to plating. Her commitment to Connecticut's agricultural community drives the restaurant's farm-forward identity.</p>
+                    <blockquote class="chef-quote">
+                        <p>"The fire doesn't lie. It demands your attention and rewards your patience. That's what we try to bring to every plate."</p>
+                    </blockquote>
+                </div>
+                <div class="chef-image-col">
+                    <!-- Replace with actual image: chef in kitchen, natural light, working at the hearth -->
+                    <div class="image-placeholder image-placeholder--portrait" role="img" aria-label="Chef Elena Morales working at the wood-fired hearth">
+                        <span>Chef Elena Morales at the open hearth</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AMBIANCE ========== -->
+    <section class="section section-ambiance" id="ambiance">
+        <div class="container">
+            <p class="section-label section-label--center">The Space</p>
+            <h2 class="section-heading section-heading--center">Designed for the experience</h2>
+            <p class="ambiance-intro">Exposed brick, reclaimed oak, and the soft glow of the open hearth define our dining room. Every detail -- from the handmade ceramics to the custom copper light fixtures -- was chosen to create an atmosphere of warmth and intention.</p>
+        </div>
+        <div class="ambiance-gallery">
+            <div class="ambiance-item" role="img" aria-label="Main dining room with exposed brick walls, warm lighting, and dark wood tables">
+                <div class="image-placeholder">
+                    <span>Main dining room -- exposed brick, candlelight, dark oak</span>
+                </div>
+                <p class="ambiance-caption">The Main Dining Room</p>
+            </div>
+            <div class="ambiance-item" role="img" aria-label="Private dining alcove with floor-to-ceiling wine display">
+                <div class="image-placeholder">
+                    <span>Private dining alcove with wine wall</span>
+                </div>
+                <p class="ambiance-caption">Private Dining</p>
+            </div>
+            <div class="ambiance-item" role="img" aria-label="The bar area with copper fixtures and leather seating">
+                <div class="image-placeholder">
+                    <span>Bar area -- copper fixtures, leather stools, back-lit bottles</span>
+                </div>
+                <p class="ambiance-caption">The Bar</p>
+            </div>
+            <div class="ambiance-item" role="img" aria-label="Outdoor patio with string lights and garden views">
+                <div class="image-placeholder">
+                    <span>Seasonal patio -- string lights, herb garden views</span>
+                </div>
+                <p class="ambiance-caption">Seasonal Patio</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== RESERVATIONS ========== -->
+    <section class="section section-reservations" id="reservations">
+        <div class="container">
+            <div class="reservations-grid">
+                <div class="reservations-info">
+                    <p class="section-label">Reservations</p>
+                    <h2 class="section-heading">Join us at the table</h2>
+                    <p class="reservations-body">We accept reservations up to 30 days in advance. For parties of 8 or more, please contact us directly to arrange private dining.</p>
+                    <div class="reservations-details">
+                        <div class="res-detail">
+                            <h3 class="res-detail-label">Hours</h3>
+                            <p>Tuesday -- Thursday: 5:00 PM -- 10:00 PM</p>
+                            <p>Friday -- Saturday: 5:00 PM -- 11:00 PM</p>
+                            <p>Sunday: 4:00 PM -- 9:00 PM</p>
+                            <p class="res-closed">Closed Monday</p>
+                        </div>
+                        <div class="res-detail">
+                            <h3 class="res-detail-label">Location</h3>
+                            <p>247 Asylum Street<br>Hartford, CT 06103</p>
+                        </div>
+                        <div class="res-detail">
+                            <h3 class="res-detail-label">Contact</h3>
+                            <p>(860) 555-0192</p>
+                            <p>hello@embersandoak.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reservations-form-col">
+                    <form class="reservation-form" aria-label="Make a reservation" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="res-name">Full Name</label>
+                                <input type="text" id="res-name" name="name" required autocomplete="name" placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="res-email">Email</label>
+                                <input type="email" id="res-email" name="email" required autocomplete="email" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="res-date">Date</label>
+                                <input type="date" id="res-date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="res-time">Time</label>
+                                <select id="res-time" name="time" required>
+                                    <option value="" disabled selected>Select time</option>
+                                    <option value="17:00">5:00 PM</option>
+                                    <option value="17:30">5:30 PM</option>
+                                    <option value="18:00">6:00 PM</option>
+                                    <option value="18:30">6:30 PM</option>
+                                    <option value="19:00">7:00 PM</option>
+                                    <option value="19:30">7:30 PM</option>
+                                    <option value="20:00">8:00 PM</option>
+                                    <option value="20:30">8:30 PM</option>
+                                    <option value="21:00">9:00 PM</option>
+                                    <option value="21:30">9:30 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="res-guests">Guests</label>
+                                <select id="res-guests" name="guests" required>
+                                    <option value="" disabled selected>Party size</option>
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="3">3 Guests</option>
+                                    <option value="4">4 Guests</option>
+                                    <option value="5">5 Guests</option>
+                                    <option value="6">6 Guests</option>
+                                    <option value="7">7 Guests</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="res-occasion">Occasion <span class="optional">(optional)</span></label>
+                                <select id="res-occasion" name="occasion">
+                                    <option value="">None</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="anniversary">Anniversary</option>
+                                    <option value="date-night">Date Night</option>
+                                    <option value="business">Business Dinner</option>
+                                    <option value="celebration">Celebration</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res-notes">Special Requests <span class="optional">(optional)</span></label>
+                            <textarea id="res-notes" name="notes" rows="3" placeholder="Dietary restrictions, seating preferences, etc."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Request Reservation</button>
+                        <p class="form-note">You'll receive a confirmation email within 2 hours.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-logo">Embers <em>&</em> Oak</p>
+                    <p class="footer-tagline">Contemporary fine dining in Hartford, CT</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Navigate</h3>
+                    <ul>
+                        <li><a href="#story">Our Story</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#chef">The Chef</a></li>
+                        <li><a href="#ambiance">The Space</a></li>
+                        <li><a href="#reservations">Reservations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Visit</h3>
+                    <p>247 Asylum Street<br>Hartford, CT 06103</p>
+                    <p>(860) 555-0192</p>
+                    <p>hello@embersandoak.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">Instagram</a>
+                        <a href="#" aria-label="Facebook">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Embers & Oak. All rights reserved.</p>
+                <p class="footer-credit">Website by <a href="https://hammerandpixels.com" target="_blank" rel="noopener">Hammer & Pixels</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* ---- Navigation Toggle ---- */
+    (function() {
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.nav-menu');
+        const navbar = document.getElementById('navbar');
+
+        toggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            menu.classList.toggle('open');
+            this.classList.toggle('open');
+        });
+
+        /* Close menu when clicking a link */
+        menu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                menu.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        /* Navbar scroll effect */
+        let lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+    })();
+
+    /* ---- Menu Tabs ---- */
+    (function() {
+        const tabs = document.querySelectorAll('.menu-tab');
+        const panels = document.querySelectorAll('.menu-panel');
+
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                tabs.forEach(function(t) {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(function(p) {
+                    p.classList.remove('active');
+                    p.hidden = true;
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                var panel = document.getElementById(this.getAttribute('aria-controls'));
+                panel.classList.add('active');
+                panel.hidden = false;
+            });
+        });
+    })();
+
+    /* ---- Smooth scroll for anchor links ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    /* ---- Reveal on scroll (intersection observer) ---- */
+    (function() {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.section, .menu-item, .ambiance-item').forEach(function(el) {
+            el.classList.add('reveal-target');
+            observer.observe(el);
+        });
+    })();
+    </script>
+
+</body>
+</html>

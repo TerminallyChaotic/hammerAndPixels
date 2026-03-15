@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Root & Rise Studio - Yoga, fitness, and wellness in Avon, CT. Classes for every body, taught by passionate instructors.">
+    <title>Root & Rise Studio | Yoga & Fitness | Avon, CT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="yogagym.css">
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Root and Rise Studio - Home">
+                <span class="logo-icon" aria-hidden="true">
+                    <!-- Minimal leaf/lotus mark -->
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 28c0-8-6-13-12-14C9 13 14 8 15 2c1 6 6 11 12 12-6 1-12 6-12 14z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                        <path d="M15 18v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="logo-text">Root <span class="logo-amp">&</span> Rise</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#classes" role="menuitem">Classes</a></li>
+                <li role="none"><a href="#schedule" role="menuitem">Schedule</a></li>
+                <li role="none"><a href="#instructors" role="menuitem">Instructors</a></li>
+                <li role="none"><a href="#pricing" role="menuitem">Pricing</a></li>
+                <li role="none"><a href="#pricing" role="menuitem" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="hero">
+        <div class="hero-bg">
+            <!-- Replace with: serene studio space, natural light, person in warrior pose -->
+            <div class="hero-placeholder" role="img" aria-label="Sunlit yoga studio with natural wood floors, a person in warrior two pose, plants lining large windows">
+                <span class="hero-placeholder-label">Hero Image: Sunlit yoga studio, natural light, warrior pose</span>
+            </div>
+            <div class="hero-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-tagline">Yoga & Fitness Studio -- Avon, CT</p>
+            <h1 class="hero-title">Find your<br>foundation.</h1>
+            <p class="hero-subtitle">Yoga, strength, and mindfulness classes for every body. Build your practice in a space that meets you where you are.</p>
+            <div class="hero-actions">
+                <a href="#pricing" class="btn btn-primary">Start Your Journey</a>
+                <a href="#schedule" class="btn btn-outline">View Schedule</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section section-about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="section-label">Our Philosophy</p>
+                    <h2 class="section-heading">Strength through stillness.<br>Growth through movement.</h2>
+                    <p class="about-body">Root & Rise was built on the idea that wellness isn't one-size-fits-all. Whether you're stepping onto the mat for the first time or training for your hundredth race, our classes are designed to challenge, restore, and transform.</p>
+                    <p class="about-body">We blend traditional yoga philosophy with modern fitness science, offering a range of classes from restorative yin to high-intensity strength training. Our 3,500 sq ft studio features heated and non-heated rooms, a meditation alcove, and a small retail space featuring local wellness brands.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Replace with: studio interior, plants, warm tones -->
+                    <div class="image-placeholder image-placeholder--lg" role="img" aria-label="Studio interior with bamboo floors, hanging plants, and warm natural light from skylights">
+                        <span>Studio interior -- bamboo floors, skylights, hanging greenery</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-stats">
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Classes Per Week</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Certified Instructors</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3,500</span>
+                    <span class="stat-label">Sq Ft Studio Space</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Active Members</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CLASS TYPES ========== -->
+    <section class="section section-classes" id="classes">
+        <div class="container">
+            <p class="section-label section-label--center">Classes</p>
+            <h2 class="section-heading section-heading--center">Find your practice</h2>
+            <p class="classes-intro">From slow and restorative to fast and fierce. Every class is open to all levels unless noted.</p>
+
+            <div class="classes-grid">
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="14"/><path d="M16 8v8l5.5 5.5"/></svg>
+                    </div>
+                    <div class="class-card-tag">Yoga</div>
+                    <h3 class="class-card-title">Vinyasa Flow</h3>
+                    <p class="class-card-desc">Dynamic, breath-linked movement. Build strength and flexibility through creative sequencing. Moderate intensity.</p>
+                    <div class="class-card-meta">
+                        <span>60 min</span>
+                        <span>All Levels</span>
+                    </div>
+                </article>
+
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 2C8 2 2 10 2 16s6 14 14 14 14-6 14-14S24 2 16 2z"/><path d="M10 20s2-4 6-4 6 4 6 4"/><circle cx="12" cy="13" r="1.5" fill="currentColor"/><circle cx="20" cy="13" r="1.5" fill="currentColor"/></svg>
+                    </div>
+                    <div class="class-card-tag">Yoga</div>
+                    <h3 class="class-card-title">Restorative Yin</h3>
+                    <p class="class-card-desc">Slow, supported postures held for 3-5 minutes. Deep connective tissue release. The antidote to a busy week.</p>
+                    <div class="class-card-meta">
+                        <span>75 min</span>
+                        <span>All Levels</span>
+                    </div>
+                </article>
+
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 28h24M8 28V14l8-10 8 10v14"/><path d="M14 28V20h4v8"/></svg>
+                    </div>
+                    <div class="class-card-tag">Yoga</div>
+                    <h3 class="class-card-title">Hot Power Yoga</h3>
+                    <p class="class-card-desc">95-degree heated room. Challenging sequences, advanced postures, and serious sweat. Experience recommended.</p>
+                    <div class="class-card-meta">
+                        <span>60 min</span>
+                        <span>Intermediate+</span>
+                    </div>
+                </article>
+
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 16h20M16 6v20"/><circle cx="6" cy="16" r="4"/><circle cx="26" cy="16" r="4"/><circle cx="16" cy="6" r="3"/><circle cx="16" cy="26" r="3"/></svg>
+                    </div>
+                    <div class="class-card-tag">Fitness</div>
+                    <h3 class="class-card-title">Strength & Sculpt</h3>
+                    <p class="class-card-desc">Functional strength training with dumbbells, bands, and bodyweight. Build lean muscle and improve endurance.</p>
+                    <div class="class-card-meta">
+                        <span>45 min</span>
+                        <span>All Levels</span>
+                    </div>
+                </article>
+
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16c4-8 8-12 12-12s8 4 12 12c-4 8-8 12-12 12S8 24 4 16z"/><circle cx="16" cy="16" r="5"/><circle cx="16" cy="16" r="2" fill="currentColor"/></svg>
+                    </div>
+                    <div class="class-card-tag">Mindfulness</div>
+                    <h3 class="class-card-title">Meditation & Breathwork</h3>
+                    <p class="class-card-desc">Guided meditation, pranayama, and nervous system regulation. Perfect for stress relief and mental clarity.</p>
+                    <div class="class-card-meta">
+                        <span>30 min</span>
+                        <span>All Levels</span>
+                    </div>
+                </article>
+
+                <article class="class-card">
+                    <div class="class-card-icon" aria-hidden="true">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="24" height="16" rx="3"/><path d="M12 14l4 4 4-4"/></svg>
+                    </div>
+                    <div class="class-card-tag">Fitness</div>
+                    <h3 class="class-card-title">HIIT & Flow</h3>
+                    <p class="class-card-desc">High-intensity intervals paired with yoga recovery. The best of both worlds. Bring water and a towel.</p>
+                    <div class="class-card-meta">
+                        <span>50 min</span>
+                        <span>All Levels</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCHEDULE ========== -->
+    <section class="section section-schedule" id="schedule">
+        <div class="container">
+            <p class="section-label section-label--center">Schedule</p>
+            <h2 class="section-heading section-heading--center">This week at the studio</h2>
+            <p class="schedule-intro">Drop in or book ahead. First-timers always welcome.</p>
+
+            <!-- Day selector -->
+            <div class="schedule-tabs" role="tablist" aria-label="Day of the week">
+                <button class="schedule-tab active" role="tab" aria-selected="true" data-day="monday">Mon</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="tuesday">Tue</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="wednesday">Wed</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="thursday">Thu</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="friday">Fri</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="saturday">Sat</button>
+                <button class="schedule-tab" role="tab" aria-selected="false" data-day="sunday">Sun</button>
+            </div>
+
+            <!-- Monday schedule (shown by default) -->
+            <div class="schedule-panel active" data-day="monday">
+                <div class="schedule-item">
+                    <span class="schedule-time">6:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Vinyasa Flow</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">7:30 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Strength & Sculpt</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">45 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:30 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Hot Power Yoga</span>
+                        <span class="schedule-instructor">with Sarah Lin</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">12:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Meditation & Breathwork</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">30 min</span>
+                    <span class="schedule-tag schedule-tag--mind">Mind</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">5:30 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">HIIT & Flow</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">50 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">7:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Restorative Yin</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">75 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+            </div>
+
+            <!-- Other days (same structure, simplified for demo) -->
+            <div class="schedule-panel" data-day="tuesday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">6:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Strength & Sculpt</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">45 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Vinyasa Flow</span>
+                        <span class="schedule-instructor">with Sarah Lin</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">12:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">HIIT & Flow</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">50 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">5:30 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Hot Power Yoga</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">7:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Meditation & Breathwork</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">30 min</span>
+                    <span class="schedule-tag schedule-tag--mind">Mind</span>
+                </div>
+            </div>
+
+            <div class="schedule-panel" data-day="wednesday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">6:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Vinyasa Flow</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:30 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Restorative Yin</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">75 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">12:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Strength & Sculpt</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">45 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">5:30 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Hot Power Yoga</span>
+                        <span class="schedule-instructor">with Sarah Lin</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">7:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">HIIT & Flow</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">50 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+            </div>
+
+            <div class="schedule-panel" data-day="thursday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">6:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">HIIT & Flow</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">50 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Vinyasa Flow</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">12:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Meditation & Breathwork</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">30 min</span>
+                    <span class="schedule-tag schedule-tag--mind">Mind</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">5:30 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Hot Power Yoga</span>
+                        <span class="schedule-instructor">with Sarah Lin</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">7:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Restorative Yin</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">75 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+            </div>
+
+            <div class="schedule-panel" data-day="friday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">6:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Strength & Sculpt</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">45 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Vinyasa Flow</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">12:00 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">HIIT & Flow</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">50 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">4:30 PM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Restorative Yin</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">75 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+            </div>
+
+            <div class="schedule-panel" data-day="saturday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">8:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Saturday Power Flow</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">75 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">10:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Strength & Sculpt</span>
+                        <span class="schedule-instructor">with Derek Owens</span>
+                    </div>
+                    <span class="schedule-duration">45 min</span>
+                    <span class="schedule-tag schedule-tag--fitness">Fitness</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">11:30 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Meditation & Breathwork</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">30 min</span>
+                    <span class="schedule-tag schedule-tag--mind">Mind</span>
+                </div>
+            </div>
+
+            <div class="schedule-panel" data-day="sunday" hidden>
+                <div class="schedule-item">
+                    <span class="schedule-time">9:00 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Gentle Flow</span>
+                        <span class="schedule-instructor">with Anya Petrov</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">10:30 AM</span>
+                    <div class="schedule-info">
+                        <span class="schedule-class">Community Yoga (Free)</span>
+                        <span class="schedule-instructor">with Maya Chen</span>
+                    </div>
+                    <span class="schedule-duration">60 min</span>
+                    <span class="schedule-tag schedule-tag--yoga">Yoga</span>
+                </div>
+            </div>
+
+            <p class="schedule-note">Schedule subject to change. Follow us on Instagram for real-time updates.</p>
+        </div>
+    </section>
+
+    <!-- ========== INSTRUCTORS ========== -->
+    <section class="section section-instructors" id="instructors">
+        <div class="container">
+            <p class="section-label section-label--center">Instructors</p>
+            <h2 class="section-heading section-heading--center">Your guides</h2>
+            <p class="instructors-intro">Our instructors bring diverse backgrounds and certifications. What they share: a genuine commitment to your growth.</p>
+
+            <div class="instructors-grid">
+                <article class="instructor-card">
+                    <div class="instructor-image">
+                        <!-- Replace with headshot -->
+                        <div class="image-placeholder image-placeholder--square" role="img" aria-label="Maya Chen, lead yoga instructor, smiling warmly in studio">
+                            <span>Maya Chen headshot</span>
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Maya Chen</h3>
+                    <p class="instructor-role">Lead Yoga Instructor & Co-Founder</p>
+                    <p class="instructor-bio">E-RYT 500, 15 years of practice. Trained in Mysore, India. Specializes in vinyasa and power yoga. Former competitive gymnast.</p>
+                    <div class="instructor-teaches">
+                        <span>Vinyasa</span>
+                        <span>Power</span>
+                        <span>Meditation</span>
+                    </div>
+                </article>
+
+                <article class="instructor-card">
+                    <div class="instructor-image">
+                        <div class="image-placeholder image-placeholder--square" role="img" aria-label="Derek Owens, fitness instructor, in the gym">
+                            <span>Derek Owens headshot</span>
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Derek Owens</h3>
+                    <p class="instructor-role">Fitness Director</p>
+                    <p class="instructor-bio">NASM-CPT, CrossFit L2. Blends functional training with yoga-inspired mobility. Believes strength is for everyone, not just athletes.</p>
+                    <div class="instructor-teaches">
+                        <span>Strength</span>
+                        <span>HIIT</span>
+                        <span>Mobility</span>
+                    </div>
+                </article>
+
+                <article class="instructor-card">
+                    <div class="instructor-image">
+                        <div class="image-placeholder image-placeholder--square" role="img" aria-label="Sarah Lin, hot yoga instructor, in a seated meditation pose">
+                            <span>Sarah Lin headshot</span>
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Sarah Lin</h3>
+                    <p class="instructor-role">Hot Yoga Specialist</p>
+                    <p class="instructor-bio">RYT 500, Bikram-certified. 8 years teaching in heated environments. Known for challenging classes with an emphasis on proper alignment.</p>
+                    <div class="instructor-teaches">
+                        <span>Hot Yoga</span>
+                        <span>Vinyasa</span>
+                    </div>
+                </article>
+
+                <article class="instructor-card">
+                    <div class="instructor-image">
+                        <div class="image-placeholder image-placeholder--square" role="img" aria-label="Anya Petrov, restorative yoga and meditation instructor">
+                            <span>Anya Petrov headshot</span>
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Anya Petrov</h3>
+                    <p class="instructor-role">Restorative & Meditation</p>
+                    <p class="instructor-bio">E-RYT 200, certified breathwork facilitator. Background in psychology. Creates deeply calming spaces for nervous system restoration.</p>
+                    <div class="instructor-teaches">
+                        <span>Yin</span>
+                        <span>Restorative</span>
+                        <span>Breathwork</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section section-testimonials">
+        <div class="container">
+            <p class="section-label section-label--center">Testimonials</p>
+            <h2 class="section-heading section-heading--center">From our community</h2>
+
+            <div class="testimonials-carousel" role="region" aria-label="Testimonials" aria-roledescription="carousel">
+                <div class="testimonials-track" id="testimonials-track">
+                    <blockquote class="testimonial active" role="group" aria-roledescription="slide" aria-label="Testimonial 1 of 3">
+                        <p class="testimonial-text">"I came to Root & Rise thinking yoga wasn't for me. Two years later, I've completed a 200-hour teacher training. This studio changed my life -- not through pressure, but through patience."</p>
+                        <footer class="testimonial-author">
+                            <strong>Jamie K.</strong>
+                            <span>Member since 2024</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial" role="group" aria-roledescription="slide" aria-label="Testimonial 2 of 3">
+                        <p class="testimonial-text">"As a runner, I always thought strength training and yoga were separate worlds. Derek's HIIT & Flow class made me realize they're two sides of the same coin. My marathon time dropped 12 minutes."</p>
+                        <footer class="testimonial-author">
+                            <strong>Marcus T.</strong>
+                            <span>Member since 2023</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial" role="group" aria-roledescription="slide" aria-label="Testimonial 3 of 3">
+                        <p class="testimonial-text">"The Wednesday evening yin class with Anya is the best hour of my week. The studio is beautiful, the community is warm, and the instructors genuinely care about your practice."</p>
+                        <footer class="testimonial-author">
+                            <strong>Priya M.</strong>
+                            <span>Member since 2024</span>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn testimonial-prev" aria-label="Previous testimonial">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4l-6 6 6 6"/></svg>
+                    </button>
+                    <div class="testimonial-dots" role="tablist" aria-label="Testimonial navigation">
+                        <button class="testimonial-dot active" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+                        <button class="testimonial-dot" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+                        <button class="testimonial-dot" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+                    </div>
+                    <button class="testimonial-btn testimonial-next" aria-label="Next testimonial">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 4l6 6-6 6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRICING ========== -->
+    <section class="section section-pricing" id="pricing">
+        <div class="container">
+            <p class="section-label section-label--center">Pricing</p>
+            <h2 class="section-heading section-heading--center">Simple, honest pricing</h2>
+            <p class="pricing-intro">No contracts. No cancellation fees. Just show up.</p>
+
+            <div class="pricing-grid">
+                <article class="pricing-card">
+                    <h3 class="pricing-title">Drop-In</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-dollar">$</span>
+                        <span class="pricing-number">22</span>
+                        <span class="pricing-period">/ class</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Any single class</li>
+                        <li>Mat and towel rental included</li>
+                        <li>No commitment</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-full">Book a Class</a>
+                </article>
+
+                <article class="pricing-card pricing-card--featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3 class="pricing-title">Unlimited Monthly</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-dollar">$</span>
+                        <span class="pricing-number">129</span>
+                        <span class="pricing-period">/ month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Unlimited classes</li>
+                        <li>All class types included</li>
+                        <li>10% retail discount</li>
+                        <li>Priority booking</li>
+                        <li>Guest passes (2/month)</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-full">Get Started</a>
+                </article>
+
+                <article class="pricing-card">
+                    <h3 class="pricing-title">10-Class Pack</h3>
+                    <div class="pricing-amount">
+                        <span class="pricing-dollar">$</span>
+                        <span class="pricing-number">180</span>
+                        <span class="pricing-period">/ 10 classes</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>10 classes, any type</li>
+                        <li>Valid for 3 months</li>
+                        <li>Shareable with a friend</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline btn-full">Purchase Pack</a>
+                </article>
+            </div>
+
+            <div class="pricing-extras">
+                <p class="pricing-extra-title">Also available</p>
+                <div class="pricing-extra-grid">
+                    <div class="pricing-extra">
+                        <strong>New Student Special</strong>
+                        <span>$49 for 2 weeks unlimited</span>
+                    </div>
+                    <div class="pricing-extra">
+                        <strong>Private Session</strong>
+                        <span>$85 / hour (1-on-1)</span>
+                    </div>
+                    <div class="pricing-extra">
+                        <strong>Annual Membership</strong>
+                        <span>$109/mo (save $240/year)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <p class="footer-logo">Root <span>&</span> Rise</p>
+                    <p class="footer-tagline">Yoga & Fitness Studio</p>
+                    <p class="footer-address">185 West Main Street<br>Avon, CT 06001</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Studio</h3>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#classes">Classes</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#instructors">Instructors</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Hours</h3>
+                    <p>Mon -- Fri: 5:30 AM -- 8:30 PM</p>
+                    <p>Saturday: 7:30 AM -- 1:00 PM</p>
+                    <p>Sunday: 8:30 AM -- 12:00 PM</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="mailto:hello@rootandrisect.com">Email Us</a></li>
+                        <li><a href="tel:+18605550247">(860) 555-0247</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; 2026 Root & Rise Studio. All rights reserved.</p>
+                <p class="footer-credit">Website by <a href="https://hammerandpixels.com" target="_blank" rel="noopener">Hammer & Pixels</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* ---- Navigation ---- */
+    (function() {
+        var toggle = document.querySelector('.nav-toggle');
+        var menu = document.querySelector('.nav-menu');
+        var navbar = document.getElementById('navbar');
+
+        toggle.addEventListener('click', function() {
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            menu.classList.toggle('open');
+            this.classList.toggle('open');
+        });
+
+        menu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                menu.classList.remove('open');
+                toggle.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    })();
+
+    /* ---- Smooth scroll ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    /* ---- Schedule tabs ---- */
+    (function() {
+        var tabs = document.querySelectorAll('.schedule-tab');
+        var panels = document.querySelectorAll('.schedule-panel');
+
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                var day = this.getAttribute('data-day');
+                tabs.forEach(function(t) {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                panels.forEach(function(p) {
+                    p.classList.remove('active');
+                    p.hidden = true;
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                var panel = document.querySelector('.schedule-panel[data-day="' + day + '"]');
+                panel.classList.add('active');
+                panel.hidden = false;
+            });
+        });
+    })();
+
+    /* ---- Testimonial Carousel ---- */
+    (function() {
+        var testimonials = document.querySelectorAll('.testimonial');
+        var dots = document.querySelectorAll('.testimonial-dot');
+        var prevBtn = document.querySelector('.testimonial-prev');
+        var nextBtn = document.querySelector('.testimonial-next');
+        var current = 0;
+        var total = testimonials.length;
+
+        function showSlide(index) {
+            testimonials.forEach(function(t) { t.classList.remove('active'); });
+            dots.forEach(function(d) {
+                d.classList.remove('active');
+                d.setAttribute('aria-selected', 'false');
+            });
+            current = (index + total) % total;
+            testimonials[current].classList.add('active');
+            dots[current].classList.add('active');
+            dots[current].setAttribute('aria-selected', 'true');
+        }
+
+        prevBtn.addEventListener('click', function() { showSlide(current - 1); });
+        nextBtn.addEventListener('click', function() { showSlide(current + 1); });
+        dots.forEach(function(dot, i) {
+            dot.addEventListener('click', function() { showSlide(i); });
+        });
+
+        /* Auto-advance every 6 seconds */
+        var autoplay = setInterval(function() { showSlide(current + 1); }, 6000);
+        /* Pause on interaction */
+        [prevBtn, nextBtn].concat(Array.from(dots)).forEach(function(el) {
+            el.addEventListener('click', function() {
+                clearInterval(autoplay);
+            });
+        });
+    })();
+
+    /* ---- Scroll reveal ---- */
+    (function() {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.section, .class-card, .instructor-card, .pricing-card, .stat').forEach(function(el) {
+            el.classList.add('reveal-target');
+            observer.observe(el);
+        });
+    })();
+    </script>
+
+</body>
+</html>
