@@ -1,0 +1,660 @@
+/* ========== Bolo Bakery & Café — Demo Site ========== */
+/* Light, airy, modern café aesthetic with Portuguese warmth */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --white: #ffffff;
+    --off-white: #fefcf9;
+    --sand: #f7f3ed;
+    --blush: #f5ebe3;
+    --charcoal: #1e1e1e;
+    --dark: #2a2522;
+    --warm-brown: #6b5a4e;
+    --copper: #b87333;
+    --copper-dark: #9a6029;
+    --sage: #7a9478;
+    --sage-light: #e8f0e7;
+    --border: #e6dfd6;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    background: var(--off-white);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+/* ========== Demo Banner ========== */
+.demo-banner {
+    background: var(--charcoal);
+    color: var(--off-white);
+    text-align: center;
+    padding: 10px 24px;
+    font-size: 13px;
+}
+
+.demo-banner a {
+    color: var(--copper);
+    text-decoration: underline;
+}
+
+/* ========== Navigation ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(254, 252, 249, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.demo-banner + .navbar {
+    top: 38px;
+}
+
+.navbar.scrolled {
+    border-bottom-color: var(--border);
+    box-shadow: 0 1px 12px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+}
+
+.logo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-text {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.logo-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 600;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--warm-brown);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+    color: var(--copper);
+}
+
+.nav-cta {
+    background: var(--copper) !important;
+    color: var(--white) !important;
+    padding: 10px 20px !important;
+    border-radius: 30px;
+    transition: background 0.2s !important;
+}
+
+.nav-cta:hover {
+    background: var(--copper-dark) !important;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.nav-toggle-bar {
+    width: 22px;
+    height: 2px;
+    background: var(--charcoal);
+    border-radius: 2px;
+    transition: transform 0.2s;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--off-white);
+        flex-direction: column;
+        padding: 24px;
+        gap: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+    .nav-menu.open { display: flex; }
+}
+
+/* ========== Hero ========== */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 106px;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 60px 60px 0;
+    padding-left: max(24px, calc((100vw - 1100px) / 2));
+}
+
+.hero-badge {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.accent { color: var(--copper); }
+
+.hero-subtitle {
+    font-size: 17px;
+    color: var(--warm-brown);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    font-weight: 300;
+    max-width: 460px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-visual {
+    display: flex;
+    align-items: stretch;
+}
+
+.hero-img {
+    width: 100%;
+    border-radius: 0;
+    min-height: auto;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 120px;
+    }
+    .hero-content { padding: 40px 24px; }
+    .hero-visual { min-height: 300px; }
+}
+
+/* ========== Buttons ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    transition: all 0.2s;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: var(--copper);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--copper-dark);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--charcoal);
+    background: var(--sand);
+}
+
+/* ========== Section Labels ========== */
+.section-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 48px;
+}
+
+/* ========== Image Placeholders ========== */
+.image-placeholder {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--sand) 100%);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    gap: 8px;
+}
+
+.placeholder-icon {
+    font-size: 48px;
+    opacity: 0.5;
+}
+
+.placeholder-text {
+    font-size: 13px;
+    color: var(--warm-brown);
+    font-style: italic;
+}
+
+/* ========== About ========== */
+.about {
+    background: var(--white);
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-content p {
+    color: var(--warm-brown);
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.about-features {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .about-layout { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ========== Menu ========== */
+.menu {
+    background: var(--sand);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.menu-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+}
+
+.menu-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.menu-emoji {
+    font-size: 28px;
+}
+
+.menu-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.menu-list {
+    list-style: none;
+}
+
+.menu-list li {
+    padding: 7px 0;
+    font-size: 15px;
+    color: var(--charcoal);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 11px;
+    background: var(--sage-light);
+    color: var(--sage);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+    .menu-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== Espresso Bar ========== */
+.espresso {
+    background: var(--white);
+}
+
+.espresso-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.espresso-content p {
+    color: var(--warm-brown);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.drink-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.drink-item {
+    background: var(--sand);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.drink-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--charcoal);
+}
+
+.drink-desc {
+    font-size: 12px;
+    color: var(--warm-brown);
+}
+
+@media (max-width: 768px) {
+    .espresso-layout { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ========== Visit ========== */
+.visit {
+    background: var(--sand);
+}
+
+.visit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.visit-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+}
+
+.visit-card-wide {
+    grid-column: 1 / -1;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+}
+
+.visit-card-wide iframe {
+    border-radius: 16px;
+}
+
+.visit-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+}
+
+.hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--border);
+}
+
+.day { font-weight: 600; font-size: 14px; }
+.time { color: var(--warm-brown); font-size: 14px; }
+
+address {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--copper);
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.contact-link:hover {
+    color: var(--copper-dark);
+}
+
+.contact-link svg {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .visit-layout { grid-template-columns: 1fr; }
+}
+
+/* ========== Footer ========== */
+.footer {
+    background: var(--charcoal);
+    color: var(--off-white);
+    padding: 48px 0 24px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 24px;
+}
+
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+}
+
+.footer-logo-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    max-width: 280px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--copper);
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+}

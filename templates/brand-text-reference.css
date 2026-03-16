@@ -1,0 +1,65 @@
+/*
+ * BRAND TEXT REFERENCE — Original Hammer & Pixels text branding
+ * Saved for reference in case we want to revert from logo-only headers.
+ *
+ * HTML structure:
+ *   <div class="brand">
+ *       <div>
+ *           <h1>Hammer <span class="amp">&</span> Pixels</h1>
+ *           <p>Web Design & IT Support — Farmington Valley, CT</p>
+ *       </div>
+ *   </div>
+ *
+ * Intake questionnaire used class "brand-mark" instead of "brand",
+ * and centered the text with justify-content: center.
+ */
+
+/* Proposal & Invoice header */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 22pt;
+    font-weight: 400;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+}
+
+.brand h1 .amp {
+    color: #c8553a;
+}
+
+.brand p {
+    font-size: 8.5pt;
+    color: #6b6b6b;
+    margin-top: 2px;
+}
+
+/* Intake questionnaire header */
+.brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.brand-mark h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #1a1a1a;
+}
+
+.brand-mark h1 .amp {
+    color: #c8553a;
+}
+
+.brand-mark p {
+    font-size: 13px;
+    color: #6b6b6b;
+    margin-top: 2px;
+}

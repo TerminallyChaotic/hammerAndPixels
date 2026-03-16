@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Proposal — Hammer & Pixels</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --charcoal: #1a1a1a;
+            --slate: #2d2d2d;
+            --warm-gray: #6b6b6b;
+            --light-gray: #e8e8e8;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --accent: #c8553a;
+            --accent-light: #f5ebe8;
+            --font-serif: 'DM Serif Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--white);
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+        }
+
+        @media print {
+            body { padding: 0; }
+        }
+
+        /* ========== Header ========== */
+        .proposal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--charcoal);
+            margin-bottom: 32px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand h1 {
+            font-family: var(--font-serif);
+            font-size: 22pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .brand h1 .amp {
+            color: var(--accent);
+        }
+
+        .brand p {
+            font-size: 8.5pt;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        .proposal-meta {
+            text-align: right;
+            font-size: 9pt;
+            color: var(--warm-gray);
+            line-height: 1.8;
+        }
+
+        .proposal-meta strong {
+            color: var(--charcoal);
+        }
+
+        /* ========== Document Title ========== */
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: 18pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .doc-subtitle {
+            font-size: 10pt;
+            color: var(--warm-gray);
+            margin-bottom: 32px;
+        }
+
+        /* ========== Sections ========== */
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 13pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 12px;
+        }
+
+        /* ========== Client & Project Info ========== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 40px;
+            margin-bottom: 28px;
+        }
+
+        .info-block label {
+            display: block;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            margin-bottom: 2px;
+        }
+
+        .info-block .value {
+            font-size: 10.5pt;
+            color: var(--charcoal);
+            padding: 4px 0;
+            border-bottom: 1px dotted var(--light-gray);
+            min-height: 24px;
+        }
+
+        /* ========== Editable fields ========== */
+        .editable {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* ========== Scope & Deliverables ========== */
+        .scope-text {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .deliverables-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .deliverables-list li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .deliverables-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            border: 1.5px solid var(--accent);
+            border-radius: 2px;
+        }
+
+        /* ========== Pricing Table ========== */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+
+        .pricing-table thead th {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 2px solid var(--charcoal);
+        }
+
+        .pricing-table thead th:last-child {
+            text-align: right;
+        }
+
+        .pricing-table tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .pricing-table tbody td:last-child {
+            text-align: right;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .pricing-table .item-desc {
+            font-size: 9pt;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        .pricing-totals {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .totals-box {
+            width: 260px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 12px;
+            font-size: 10pt;
+        }
+
+        .total-row.grand-total {
+            border-top: 2px solid var(--charcoal);
+            font-weight: 600;
+            font-size: 12pt;
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+
+        /* ========== Timeline ========== */
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .timeline-table th {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 2px solid var(--charcoal);
+        }
+
+        .timeline-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .timeline-table td:first-child {
+            font-weight: 500;
+            width: 180px;
+        }
+
+        /* ========== Terms ========== */
+        .terms-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .terms-list li {
+            padding: 5px 0;
+            padding-left: 16px;
+            position: relative;
+            font-size: 9.5pt;
+            line-height: 1.6;
+        }
+
+        .terms-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--warm-gray);
+        }
+
+        /* ========== Signature ========== */
+        .signature-section {
+            margin-top: 40px;
+            page-break-inside: avoid;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 20px;
+        }
+
+        .signature-block {
+            padding-top: 12px;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--charcoal);
+            height: 40px;
+            margin-bottom: 6px;
+        }
+
+        .sig-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+        }
+
+        .sig-date {
+            margin-top: 20px;
+        }
+
+        /* ========== Footer ========== */
+        .proposal-footer {
+            margin-top: 48px;
+            padding-top: 16px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+            font-size: 8pt;
+            color: var(--warm-gray);
+        }
+
+        .proposal-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* ========== Page break hint ========== */
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="proposal-header">
+        <div class="brand">
+            <img src="../BrandLogoNoLabel.png" alt="Hammer & Pixels logo" class="brand-logo">
+            <div>
+                <h1>Hammer <span class="amp">&</span> Pixels</h1>
+                <p>Web Design & IT Support — Farmington Valley, CT</p>
+            </div>
+        </div>
+        <div class="proposal-meta">
+            <strong>Proposal</strong><br>
+            Date: <span class="editable">[Month Day, Year]</span><br>
+            Valid through: <span class="editable">[30 days from date]</span><br>
+            Proposal #: <span class="editable">[HP-001]</span>
+        </div>
+    </header>
+
+    <!-- ========== TITLE ========== -->
+    <h2 class="doc-title">Project Proposal</h2>
+    <p class="doc-subtitle">Prepared for <span class="editable">[Client Name]</span> — <span class="editable">[Business Name]</span></p>
+
+    <!-- ========== CLIENT & PROJECT INFO ========== -->
+    <div class="info-grid">
+        <div class="info-block">
+            <label>Prepared For</label>
+            <div class="value"><span class="editable">[Client Name]</span></div>
+        </div>
+        <div class="info-block">
+            <label>Prepared By</label>
+            <div class="value">Jesse — Hammer & Pixels</div>
+        </div>
+        <div class="info-block">
+            <label>Business</label>
+            <div class="value"><span class="editable">[Business Name]</span></div>
+        </div>
+        <div class="info-block">
+            <label>Email</label>
+            <div class="value">hello@hammerandpixels.com</div>
+        </div>
+        <div class="info-block">
+            <label>Email</label>
+            <div class="value"><span class="editable">[client@email.com]</span></div>
+        </div>
+        <div class="info-block">
+            <label>Phone</label>
+            <div class="value"><span class="editable">[Your phone number]</span></div>
+        </div>
+    </div>
+
+    <!-- ========== PROJECT OVERVIEW ========== -->
+    <div class="section">
+        <h3 class="section-title">Project Overview</h3>
+        <p class="scope-text">
+            <span class="editable">[Write 2-3 sentences summarizing the client's situation, what they need, and the goal of this project. For example: "Main Street Bakery needs a modern, mobile-friendly website to replace their outdated site. The new site will showcase their menu, enable online ordering for pickup, and help them rank better in local search results."]</span>
+        </p>
+    </div>
+
+    <!-- ========== DELIVERABLES ========== -->
+    <div class="section">
+        <h3 class="section-title">What's Included</h3>
+        <ul class="deliverables-list">
+            <li><span class="editable">[Custom website design — up to X pages]</span></li>
+            <li><span class="editable">[Mobile-responsive layout]</span></li>
+            <li><span class="editable">[Contact form with email notifications]</span></li>
+            <li><span class="editable">[Google Maps integration]</span></li>
+            <li><span class="editable">[Basic SEO setup (meta tags, sitemap, Google indexing)]</span></li>
+            <li><span class="editable">[Domain setup & hosting configuration]</span></li>
+            <li><span class="editable">[X rounds of revisions]</span></li>
+            <li><span class="editable">[Launch support & handoff]</span></li>
+        </ul>
+    </div>
+
+    <!-- ========== PRICING ========== -->
+    <div class="section">
+        <h3 class="section-title">Pricing</h3>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="editable">[Website Design — Standard Package]</span>
+                        <div class="item-desc"><span class="editable">[Custom design, up to 8 pages, two revision rounds]</span></div>
+                    </td>
+                    <td><span class="editable">$2,500.00</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="editable">[Online Booking Integration]</span>
+                        <div class="item-desc"><span class="editable">[Third-party booking widget setup and styling]</span></div>
+                    </td>
+                    <td><span class="editable">$300.00</span></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="editable">[Additional item if needed]</span>
+                        <div class="item-desc"><span class="editable">[Description]</span></div>
+                    </td>
+                    <td><span class="editable">$0.00</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pricing-totals">
+            <div class="totals-box">
+                <div class="total-row grand-total">
+                    <span>Total</span>
+                    <span><span class="editable">$2,800.00</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TIMELINE ========== -->
+    <div class="section">
+        <h3 class="section-title">Timeline</h3>
+        <table class="timeline-table">
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Description</th>
+                    <th>Timeframe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Discovery</td>
+                    <td>Kickoff call, gather content, define goals</td>
+                    <td><span class="editable">[Week 1]</span></td>
+                </tr>
+                <tr>
+                    <td>Design</td>
+                    <td>Homepage mockup, layout direction, feedback</td>
+                    <td><span class="editable">[Weeks 2–3]</span></td>
+                </tr>
+                <tr>
+                    <td>Build</td>
+                    <td>Full site development, content integration</td>
+                    <td><span class="editable">[Weeks 3–4]</span></td>
+                </tr>
+                <tr>
+                    <td>Revisions</td>
+                    <td>Client review and refinements</td>
+                    <td><span class="editable">[Week 5]</span></td>
+                </tr>
+                <tr>
+                    <td>Launch</td>
+                    <td>Go live, testing, handoff documentation</td>
+                    <td><span class="editable">[Week 6]</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== PAYMENT TERMS ========== -->
+    <div class="section">
+        <h3 class="section-title">Payment Terms</h3>
+        <ul class="terms-list">
+            <li><strong>50% deposit</strong> due upon signing this proposal to begin work.</li>
+            <li><strong>50% balance</strong> due upon project completion, before launch.</li>
+            <li>Payment accepted via check, bank transfer, or credit card.</li>
+            <li>This proposal is valid for <strong>30 days</strong> from the date above.</li>
+        </ul>
+    </div>
+
+    <!-- ========== TERMS & CONDITIONS ========== -->
+    <div class="section">
+        <h3 class="section-title">Terms</h3>
+        <ul class="terms-list">
+            <li><strong>Revisions:</strong> This project includes <span class="editable">[two]</span> rounds of revisions. Additional revisions are billed at $75/hour.</li>
+            <li><strong>Content:</strong> Client is responsible for providing text, photos, and logos. I'm happy to assist with copywriting or stock photos at an additional cost.</li>
+            <li><strong>Timeline:</strong> Estimated timeline assumes timely feedback from the client (within 3 business days per review round). Delays in feedback will shift the timeline accordingly.</li>
+            <li><strong>Ownership:</strong> Upon final payment, the client owns all custom design and code produced for this project. Third-party assets (fonts, stock photos) are subject to their respective licenses.</li>
+            <li><strong>Ongoing Care:</strong> After launch, website maintenance is available starting at $75/month. This is optional and can be discussed separately.</li>
+            <li><strong>Cancellation:</strong> If the project is cancelled after work has begun, the deposit is non-refundable. Work completed beyond the deposit amount will be billed at $75/hour.</li>
+        </ul>
+    </div>
+
+    <!-- ========== ACCEPTANCE ========== -->
+    <div class="signature-section">
+        <h3 class="section-title">Acceptance</h3>
+        <p style="font-size: 9.5pt; color: var(--warm-gray); margin-bottom: 8px;">
+            By signing below, both parties agree to the scope, pricing, timeline, and terms outlined in this proposal.
+        </p>
+        <div class="signature-grid">
+            <div class="signature-block">
+                <div class="sig-line"></div>
+                <div class="sig-label"><span class="editable">[Client Name]</span> — <span class="editable">[Business Name]</span></div>
+                <div class="sig-date">
+                    <div class="sig-line" style="width: 160px;"></div>
+                    <div class="sig-label">Date</div>
+                </div>
+            </div>
+            <div class="signature-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Jesse — Hammer & Pixels</div>
+                <div class="sig-date">
+                    <div class="sig-line" style="width: 160px;"></div>
+                    <div class="sig-label">Date</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="proposal-footer">
+        Hammer & Pixels — Web Design & IT Support — Farmington Valley, CT<br>
+        <a href="mailto:hello@hammerandpixels.com">hello@hammerandpixels.com</a> · <a href="https://hammerandpixels.com">hammerandpixels.com</a>
+    </footer>
+
+</body>
+</html>

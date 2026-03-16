@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project Questionnaire — Hammer & Pixels</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --charcoal: #1a1a1a;
+            --slate: #2d2d2d;
+            --warm-gray: #6b6b6b;
+            --light-gray: #e8e8e8;
+            --lighter-gray: #f5f5f5;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --accent: #c8553a;
+            --accent-hover: #b04a33;
+            --accent-light: #f5ebe8;
+            --success: #2e7d4f;
+            --success-light: #e8f5ec;
+            --font-serif: 'DM Serif Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.6in;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--bg);
+        }
+
+        /* ========== Screen Layout ========== */
+        .page-wrap {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* ========== Print Layout ========== */
+        @media print {
+            body {
+                background: var(--white);
+                font-size: 10pt;
+            }
+
+            .page-wrap {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .form-card {
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+            }
+
+            .btn-submit { display: none; }
+            .form-progress { display: none; }
+
+            .section-group {
+                page-break-inside: avoid;
+            }
+
+            input, textarea, select {
+                border: none !important;
+                border-bottom: 1px solid var(--light-gray) !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                padding-left: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .checkbox-group label,
+            .radio-group label {
+                break-inside: avoid;
+            }
+
+            .print-header { display: flex !important; }
+        }
+
+        /* ========== Header ========== */
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .brand-logo {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand-mark h1 {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--charcoal);
+        }
+
+        .brand-mark h1 .amp {
+            color: var(--accent);
+        }
+
+        .brand-mark p {
+            font-size: 13px;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        .print-header .brand-mark {
+            justify-content: flex-start;
+        }
+
+        .form-header h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-top: 24px;
+        }
+
+        .form-header .intro {
+            font-size: 15px;
+            color: var(--warm-gray);
+            margin-top: 8px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        /* Print-only header */
+        .print-header {
+            display: none;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--charcoal);
+            margin-bottom: 24px;
+        }
+
+        .print-header .print-meta {
+            text-align: right;
+            font-size: 9pt;
+            color: var(--warm-gray);
+        }
+
+        /* ========== Form Card ========== */
+        .form-card {
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        @media (max-width: 600px) {
+            .form-card { padding: 24px 20px; }
+        }
+
+        /* ========== Section Groups ========== */
+        .section-group {
+            margin-bottom: 36px;
+        }
+
+        .section-group:last-of-type {
+            margin-bottom: 24px;
+        }
+
+        .section-label {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--charcoal);
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .section-hint {
+            font-size: 13px;
+            color: var(--warm-gray);
+            margin-top: -12px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* ========== Form Fields ========== */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--slate);
+            margin-bottom: 5px;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+        }
+
+        .form-group label .optional {
+            font-weight: 400;
+            color: var(--warm-gray);
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="date"],
+        textarea,
+        select {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--charcoal);
+            background: var(--lighter-gray);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 10px 14px;
+            transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+            width: 100%;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--white);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236b6b6b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        /* ========== Checkbox & Radio Groups ========== */
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .checkbox-group label,
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--charcoal);
+            background: var(--lighter-gray);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .checkbox-group label:hover,
+        .radio-group label:hover {
+            border-color: var(--light-gray);
+            background: var(--white);
+        }
+
+        .checkbox-group input:checked + span,
+        .radio-group input:checked + span {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .checkbox-group label:has(input:checked),
+        .radio-group label:has(input:checked) {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .checkbox-group input,
+        .radio-group input {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========== Budget Scale ========== */
+        .budget-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .budget-options label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--charcoal);
+            background: var(--lighter-gray);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 12px 8px;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .budget-options label:hover {
+            border-color: var(--light-gray);
+        }
+
+        .budget-options label:has(input:checked) {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .budget-options label .budget-range {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .budget-options label .budget-desc {
+            font-size: 11px;
+            color: var(--warm-gray);
+        }
+
+        .budget-options input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ========== Submit Button ========== */
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            padding: 14px 32px;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            margin-top: 8px;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .btn-submit svg {
+            transition: transform 0.15s;
+        }
+
+        .btn-submit:hover svg {
+            transform: translateX(3px);
+        }
+
+        .submit-note {
+            font-size: 12px;
+            color: var(--warm-gray);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        /* ========== Success State ========== */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 60px 24px;
+        }
+
+        .form-success.visible {
+            display: block;
+        }
+
+        .form-success h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .form-success p {
+            font-size: 15px;
+            color: var(--warm-gray);
+            line-height: 1.7;
+        }
+
+        /* ========== Footer ========== */
+        .form-footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 12px;
+            color: var(--warm-gray);
+        }
+
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+
+        <!-- Print-only header -->
+        <div class="print-header">
+            <div class="brand-mark">
+                <img src="../BrandLogoNoLabel.png" alt="Hammer & Pixels logo" class="brand-logo">
+                <div>
+                    <h1>Hammer <span class="amp">&</span> Pixels</h1>
+                    <p>Web Design & IT Support — Farmington Valley, CT</p>
+                </div>
+            </div>
+            <div class="print-meta">
+                <strong>New Project Questionnaire</strong><br>
+                Date: _______________
+            </div>
+        </div>
+
+        <!-- Screen header -->
+        <header class="form-header">
+            <div class="brand-mark">
+                <img src="../BrandLogoNoLabel.png" alt="Hammer & Pixels logo" class="brand-logo">
+                <div>
+                    <h1>Hammer <span class="amp">&</span> Pixels</h1>
+                    <p>Web Design & IT Support — Farmington Valley, CT</p>
+                </div>
+            </div>
+            <h2>New Project Questionnaire</h2>
+            <p class="intro">Before we get started, I'd like to learn a bit about your business and what you're looking for. This helps me put together a proposal that actually fits your needs. Takes about 5 minutes.</p>
+        </header>
+
+        <!-- ========== FORM ========== -->
+        <div class="form-card">
+            <form id="intakeForm" action="https://formspree.io/f/xwvrnpln" method="POST">
+                <!-- Hidden field to identify this as an intake form -->
+                <input type="hidden" name="_subject" value="New Project Questionnaire Submission">
+                <input type="hidden" name="_form_type" value="intake-questionnaire">
+
+                <!-- ===== ABOUT YOU ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">About You</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@business.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone <span class="optional">(optional)</span></label>
+                            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(860) 555-0123">
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred_contact">Preferred Way to Reach You</label>
+                            <select id="preferred_contact" name="preferred_contact">
+                                <option value="">Pick one...</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone call</option>
+                                <option value="text">Text message</option>
+                                <option value="any">Any of the above</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== YOUR BUSINESS ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">Your Business</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="business_name">Business Name <span class="required">*</span></label>
+                            <input type="text" id="business_name" name="business_name" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="business_type">What Do You Do? <span class="required">*</span></label>
+                            <input type="text" id="business_type" name="business_type" required placeholder="e.g. Plumbing contractor, hair salon, bakery">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="business_location">Where Are You Located?</label>
+                            <input type="text" id="business_location" name="business_location" placeholder="Town or city">
+                        </div>
+                        <div class="form-group">
+                            <label for="years_in_business">How Long Have You Been in Business?</label>
+                            <select id="years_in_business" name="years_in_business">
+                                <option value="">Select...</option>
+                                <option value="not-yet">Haven't launched yet</option>
+                                <option value="less-than-1">Less than a year</option>
+                                <option value="1-3">1–3 years</option>
+                                <option value="3-10">3–10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="business_description">Tell Me a Bit About Your Business <span class="required">*</span></label>
+                            <textarea id="business_description" name="business_description" rows="3" required placeholder="What do you do? Who are your typical customers? What makes your business special?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== YOUR CURRENT WEBSITE ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">Your Current Website</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="has_website">Do You Have a Website Now?</label>
+                            <select id="has_website" name="has_website">
+                                <option value="">Select...</option>
+                                <option value="yes-needs-update">Yes, but it needs work</option>
+                                <option value="yes-start-over">Yes, but I want to start fresh</option>
+                                <option value="no">No, this is my first website</option>
+                                <option value="social-only">No, I just use social media</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="current_url">Current Website URL <span class="optional">(if you have one)</span></label>
+                            <input type="url" id="current_url" name="current_url" placeholder="https://yourbusiness.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="website_likes">What Do You Like or Dislike About Your Current Site? <span class="optional">(if applicable)</span></label>
+                            <textarea id="website_likes" name="website_likes" rows="2" placeholder="What's working? What's frustrating? What do customers say about it?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== WHAT YOU'RE LOOKING FOR ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">What You're Looking For</h3>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>What Services Are You Interested In? <span class="required">*</span></label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="services_needed" value="new-website"><span>New website</span></label>
+                                <label><input type="checkbox" name="services_needed" value="redesign"><span>Website redesign</span></label>
+                                <label><input type="checkbox" name="services_needed" value="website-care"><span>Website maintenance</span></label>
+                                <label><input type="checkbox" name="services_needed" value="it-support"><span>IT support</span></label>
+                                <label><input type="checkbox" name="services_needed" value="not-sure"><span>Not sure yet</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>What Features Do You Need? <span class="optional">(check all that apply)</span></label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="features" value="contact-form"><span>Contact form</span></label>
+                                <label><input type="checkbox" name="features" value="photo-gallery"><span>Photo gallery</span></label>
+                                <label><input type="checkbox" name="features" value="online-booking"><span>Online booking</span></label>
+                                <label><input type="checkbox" name="features" value="menu-services"><span>Menu / service list</span></label>
+                                <label><input type="checkbox" name="features" value="maps"><span>Map / directions</span></label>
+                                <label><input type="checkbox" name="features" value="reviews"><span>Customer reviews</span></label>
+                                <label><input type="checkbox" name="features" value="blog"><span>Blog / news</span></label>
+                                <label><input type="checkbox" name="features" value="ecommerce"><span>Online store</span></label>
+                                <label><input type="checkbox" name="features" value="social-feeds"><span>Social media feeds</span></label>
+                                <label><input type="checkbox" name="features" value="other-feature"><span>Other</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="project_goals">What's the Main Goal for This Project? <span class="required">*</span></label>
+                            <textarea id="project_goals" name="project_goals" rows="3" required placeholder="What do you want your website to do for your business? Get more calls? Look more professional? Let customers book online? Get found on Google?"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="inspiration_sites">Any Websites You Like the Look Of? <span class="optional">(optional)</span></label>
+                            <textarea id="inspiration_sites" name="inspiration_sites" rows="2" placeholder="Paste links or describe what you like about them. Could be competitors, businesses in other industries, or anything that catches your eye."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== BUDGET & TIMELINE ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">Budget & Timeline</h3>
+                    <p class="section-hint">No wrong answers here — this helps me recommend the right approach for your situation.</p>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>What's Your Approximate Budget?</label>
+                            <div class="budget-options">
+                                <label>
+                                    <input type="radio" name="budget" value="under-1500">
+                                    <span class="budget-range">Under $1,500</span>
+                                    <span class="budget-desc">Simple & focused</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="1500-2500">
+                                    <span class="budget-range">$1,500 – $2,500</span>
+                                    <span class="budget-desc">Starter to Standard</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="2500-4000">
+                                    <span class="budget-range">$2,500 – $4,000</span>
+                                    <span class="budget-desc">Standard to Premium</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="4000+">
+                                    <span class="budget-range">$4,000+</span>
+                                    <span class="budget-desc">Full custom build</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="budget" value="not-sure">
+                                    <span class="budget-range">Not Sure</span>
+                                    <span class="budget-desc">Let's talk about it</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timeline">When Do You Want to Launch?</label>
+                            <select id="timeline" name="timeline">
+                                <option value="">Select...</option>
+                                <option value="asap">As soon as possible</option>
+                                <option value="1-month">Within a month</option>
+                                <option value="2-3-months">2–3 months</option>
+                                <option value="no-rush">No rush — let's do it right</option>
+                                <option value="specific-date">I have a specific date</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deadline_date">Specific Deadline? <span class="optional">(if any)</span></label>
+                            <input type="date" id="deadline_date" name="deadline_date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== CONTENT & ASSETS ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">Content & Assets</h3>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Do You Have the Following Ready? <span class="optional">(check what you have)</span></label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="assets_ready" value="logo"><span>Logo</span></label>
+                                <label><input type="checkbox" name="assets_ready" value="photos"><span>Photos of your work / business</span></label>
+                                <label><input type="checkbox" name="assets_ready" value="written-content"><span>Written content (about, services, etc.)</span></label>
+                                <label><input type="checkbox" name="assets_ready" value="brand-colors"><span>Brand colors / style guide</span></label>
+                                <label><input type="checkbox" name="assets_ready" value="domain"><span>Domain name (yoursite.com)</span></label>
+                                <label><input type="checkbox" name="assets_ready" value="none"><span>None of the above — I'll need help</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ANYTHING ELSE ===== -->
+                <div class="section-group">
+                    <h3 class="section-label">Anything Else?</h3>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="additional_info">Questions, Concerns, or Anything I Should Know</label>
+                            <textarea id="additional_info" name="additional_info" rows="4" placeholder="Anything else on your mind? Past experiences with web designers? Specific concerns? Things you definitely want or don't want? This is your space."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label for="how_found">How Did You Hear About Hammer & Pixels?</label>
+                            <select id="how_found" name="how_found">
+                                <option value="">Select...</option>
+                                <option value="google">Google search</option>
+                                <option value="referral">Referral / word of mouth</option>
+                                <option value="social">Social media</option>
+                                <option value="local-event">Local event or group</option>
+                                <option value="google-business">Google Business listing</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SUBMIT ===== -->
+                <button type="submit" class="btn-submit">
+                    <span>Send Questionnaire</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <p class="submit-note">I'll review your answers and get back to you within one business day — usually sooner. No obligations, no pressure.</p>
+            </form>
+
+            <!-- Success message (shown after submit) -->
+            <div class="form-success" id="formSuccess">
+                <h3>Got it — thank you!</h3>
+                <p>I'll review your answers and reach out within one business day to set up a time to talk. No obligations, no pressure — just a conversation about your business.</p>
+                <p style="margin-top: 16px; font-size: 13px; color: var(--warm-gray);">— Jesse, Hammer & Pixels</p>
+            </div>
+        </div>
+
+        <footer class="form-footer">
+            Hammer & Pixels — Web Design & IT Support — Farmington Valley, CT<br>
+            <a href="mailto:hello@hammerandpixels.com">hello@hammerandpixels.com</a> · <a href="https://hammerandpixels.com">hammerandpixels.com</a>
+        </footer>
+    </div>
+
+    <script>
+        // Handle form submission with Formspree
+        const form = document.getElementById('intakeForm');
+        const successMsg = document.getElementById('formSuccess');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('.btn-submit');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<span>Sending...</span>';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMsg.classList.add('visible');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    alert('Something went wrong. Please try again or email me directly at hello@hammerandpixels.com');
+                }
+            } catch (error) {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again or email me directly at hello@hammerandpixels.com');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Agreement — Hammer & Pixels</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --charcoal: #1a1a1a;
+            --slate: #2d2d2d;
+            --warm-gray: #6b6b6b;
+            --light-gray: #e8e8e8;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --accent: #c8553a;
+            --accent-light: #f5ebe8;
+            --font-serif: 'DM Serif Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 10pt;
+            line-height: 1.7;
+            color: var(--charcoal);
+            background: var(--white);
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+        }
+
+        @media print {
+            body { padding: 0; }
+        }
+
+        /* ========== Header ========== */
+        .agreement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--charcoal);
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand h1 {
+            font-family: var(--font-serif);
+            font-size: 22pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .brand h1 .amp {
+            color: var(--accent);
+        }
+
+        .brand p {
+            font-size: 8.5pt;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        .agreement-meta {
+            text-align: right;
+            font-size: 9pt;
+            color: var(--warm-gray);
+            line-height: 1.8;
+        }
+
+        .agreement-meta strong {
+            color: var(--charcoal);
+        }
+
+        /* ========== Document Title ========== */
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: 18pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 10pt;
+            color: var(--warm-gray);
+            margin-bottom: 28px;
+        }
+
+        /* ========== Editable fields ========== */
+        .editable {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* ========== Parties ========== */
+        .parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 28px;
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 6px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .party-block label {
+            display: block;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .party-block .party-info {
+            font-size: 10pt;
+            line-height: 1.7;
+        }
+
+        .party-block .party-info strong {
+            font-weight: 600;
+        }
+
+        /* ========== Sections ========== */
+        .section {
+            margin-bottom: 22px;
+        }
+
+        .section-number {
+            font-family: var(--font-serif);
+            font-size: 12pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .section-number .num {
+            color: var(--accent);
+            margin-right: 6px;
+        }
+
+        .section p {
+            margin-bottom: 8px;
+        }
+
+        /* ========== Clause lists ========== */
+        .clause-list {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+
+        .clause-list li {
+            padding: 4px 0 4px 20px;
+            position: relative;
+            font-size: 9.5pt;
+            line-height: 1.7;
+        }
+
+        .clause-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--warm-gray);
+        }
+
+        /* ========== Lettered sub-clauses ========== */
+        .sub-clauses {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+            counter-reset: sub-clause;
+        }
+
+        .sub-clauses li {
+            padding: 4px 0 4px 28px;
+            position: relative;
+            font-size: 9.5pt;
+            line-height: 1.7;
+            counter-increment: sub-clause;
+        }
+
+        .sub-clauses li::before {
+            content: counter(sub-clause, lower-alpha) ")";
+            position: absolute;
+            left: 0;
+            color: var(--warm-gray);
+            font-size: 9pt;
+        }
+
+        /* ========== Pricing table ========== */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+        }
+
+        .pricing-table thead th {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 2px solid var(--charcoal);
+        }
+
+        .pricing-table thead th:last-child {
+            text-align: right;
+        }
+
+        .pricing-table tbody td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 9.5pt;
+        }
+
+        .pricing-table tbody td:last-child {
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .pricing-table tfoot td {
+            padding: 10px 12px;
+            border-top: 2px solid var(--charcoal);
+            font-weight: 600;
+            font-size: 10.5pt;
+        }
+
+        .pricing-table tfoot td:last-child {
+            text-align: right;
+        }
+
+        /* ========== Highlight box ========== */
+        .highlight-box {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 9.5pt;
+            line-height: 1.7;
+        }
+
+        /* ========== Signature ========== */
+        .signature-section {
+            margin-top: 36px;
+            page-break-inside: avoid;
+        }
+
+        .signature-intro {
+            font-size: 9.5pt;
+            color: var(--warm-gray);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .signature-block {
+            padding-top: 8px;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--charcoal);
+            height: 40px;
+            margin-bottom: 6px;
+        }
+
+        .sig-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+        }
+
+        .sig-date {
+            margin-top: 20px;
+        }
+
+        .sig-printed-name {
+            margin-top: 20px;
+        }
+
+        /* ========== Footer ========== */
+        .agreement-footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+            font-size: 8pt;
+            color: var(--warm-gray);
+        }
+
+        .agreement-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* ========== Page breaks ========== */
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="agreement-header">
+        <div class="brand">
+            <img src="../BrandLogoNoLabel.png" alt="Hammer & Pixels logo" class="brand-logo">
+            <div>
+                <h1>Hammer <span class="amp">&</span> Pixels</h1>
+                <p>Web Design & IT Support — Farmington Valley, CT</p>
+            </div>
+        </div>
+        <div class="agreement-meta">
+            <strong>Service Agreement</strong><br>
+            Date: <span class="editable">[Month Day, Year]</span><br>
+            Agreement #: <span class="editable">[HP-SA-001]</span>
+        </div>
+    </header>
+
+    <!-- ========== TITLE ========== -->
+    <h2 class="doc-title">Service Agreement</h2>
+    <p class="doc-subtitle">This agreement outlines the terms between Hammer & Pixels LLC and <span class="editable">[Client Name / Business Name]</span> for the project described below.</p>
+
+    <!-- ========== PARTIES ========== -->
+    <div class="parties">
+        <div class="party-block">
+            <label>Service Provider ("Provider")</label>
+            <div class="party-info">
+                <strong>Jesse — Hammer & Pixels LLC</strong><br>
+                <span class="editable">[Your Address]</span><br>
+                <span class="editable">[City, CT ZIP]</span><br>
+                hello@hammerandpixels.com<br>
+                <span class="editable">[Phone]</span>
+            </div>
+        </div>
+        <div class="party-block">
+            <label>Client ("Client")</label>
+            <div class="party-info">
+                <strong><span class="editable">[Client Name]</span></strong><br>
+                <span class="editable">[Business Name]</span><br>
+                <span class="editable">[Street Address]</span><br>
+                <span class="editable">[City, CT ZIP]</span><br>
+                <span class="editable">[client@email.com]</span><br>
+                <span class="editable">[Phone]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 1. SCOPE OF WORK ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">1.</span> Scope of Work</h3>
+        <p>The Provider agrees to perform the following services for the Client:</p>
+        <p class="editable">[Describe the project in 2-3 sentences. For example: "Design and develop a custom, mobile-responsive website of up to 8 pages for Main Street Bakery. The site will include a homepage, about page, menu page, photo gallery, contact form, and online ordering integration."]</p>
+
+        <p style="margin-top: 12px;"><strong>Deliverables:</strong></p>
+        <ul class="clause-list">
+            <li><span class="editable">[Custom website design — up to X pages]</span></li>
+            <li><span class="editable">[Mobile-responsive layout]</span></li>
+            <li><span class="editable">[Contact form with email notifications]</span></li>
+            <li><span class="editable">[Basic SEO setup]</span></li>
+            <li><span class="editable">[Domain & hosting setup assistance]</span></li>
+            <li><span class="editable">[X rounds of design revisions]</span></li>
+            <li><span class="editable">[Launch support & handoff]</span></li>
+        </ul>
+
+        <p style="margin-top: 8px;">Any work beyond the scope defined above will require a written change order agreed to by both parties, and may result in additional charges.</p>
+    </div>
+
+    <!-- ========== 2. TIMELINE ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">2.</span> Timeline</h3>
+        <p>The estimated project timeline is <span class="editable">[X weeks]</span>, beginning on <span class="editable">[start date]</span> with an estimated completion date of <span class="editable">[end date]</span>.</p>
+        <ul class="sub-clauses">
+            <li>The timeline assumes timely feedback from the Client within <strong>3 business days</strong> of each review round. Delays in Client feedback will shift the timeline accordingly.</li>
+            <li>The Provider will communicate any anticipated delays as early as possible.</li>
+            <li>Force majeure events (natural disasters, illness, emergencies) may extend the timeline without penalty to either party.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 3. PRICING & PAYMENT ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">3.</span> Pricing & Payment</h3>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="editable">[Website Design — Standard Package]</span></td>
+                    <td><span class="editable">$2,500.00</span></td>
+                </tr>
+                <tr>
+                    <td><span class="editable">[Additional integrations / features]</span></td>
+                    <td><span class="editable">$300.00</span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total Project Cost</td>
+                    <td><span class="editable">$2,800.00</span></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <p><strong>Payment schedule:</strong></p>
+        <ul class="sub-clauses">
+            <li><strong>50% deposit (<span class="editable">$1,400.00</span>)</strong> due upon signing this agreement. Work begins after the deposit is received.</li>
+            <li><strong>50% final payment (<span class="editable">$1,400.00</span>)</strong> due upon project completion, before the website is launched or final files are delivered.</li>
+            <li>Payment may be made by check, bank transfer (ACH), or credit card.</li>
+            <li>Invoices are due within <strong>15 days</strong> of the invoice date. Payments more than 30 days past due may be subject to a late fee of 1.5% per month.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 4. REVISIONS ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">4.</span> Revisions</h3>
+        <ul class="sub-clauses">
+            <li>This project includes <strong><span class="editable">[two (2)]</span> rounds of revisions</strong>. A revision round is defined as a single set of consolidated feedback submitted together.</li>
+            <li>Additional revision rounds beyond what is included will be billed at <strong>$75.00 per hour</strong>.</li>
+            <li>Revisions refer to changes to the agreed-upon design. Requests that significantly alter the project scope (e.g., adding new pages, new features, or complete redesigns) are considered change orders and will be quoted separately.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 5. CLIENT RESPONSIBILITIES ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">5.</span> Client Responsibilities</h3>
+        <p>The Client agrees to:</p>
+        <ul class="sub-clauses">
+            <li>Provide all content needed for the project (text, photos, logos, brand guidelines) in a timely manner. If content is not provided within <strong>10 business days</strong> of request, the Provider may use placeholder content, and the project timeline will be adjusted.</li>
+            <li>Designate a single point of contact for feedback and approvals.</li>
+            <li>Provide feedback within <strong>3 business days</strong> of receiving review materials.</li>
+            <li>Ensure that all content provided is owned by or licensed to the Client and does not infringe on any third-party rights.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 6. OWNERSHIP & INTELLECTUAL PROPERTY ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">6.</span> Ownership & Intellectual Property</h3>
+        <ul class="sub-clauses">
+            <li>Upon receipt of final payment, the Client owns all custom design work and code created specifically for this project.</li>
+            <li>The Provider retains the right to display the completed work in their portfolio and marketing materials unless the Client requests otherwise in writing.</li>
+            <li>Third-party assets (fonts, stock photos, plugins, libraries) remain subject to their respective licenses. The Provider will inform the Client of any third-party assets used.</li>
+            <li>The Provider retains ownership of any pre-existing tools, frameworks, or code libraries used in the project that were not created specifically for the Client.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 7. HOSTING, DOMAIN & ONGOING CARE ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">7.</span> Hosting, Domain & Ongoing Care</h3>
+        <ul class="sub-clauses">
+            <li>The Provider will advise on hosting and domain registration but is not responsible for third-party hosting or domain fees. These are the Client's responsibility.</li>
+            <li>After launch, website maintenance and support are available through a separate Website Care plan starting at <strong>$75/month</strong>. This is optional and not required.</li>
+            <li>Without a care plan, the Provider is not responsible for ongoing updates, security patches, or content changes after the project is completed and handed off.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 8. CONFIDENTIALITY ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">8.</span> Confidentiality</h3>
+        <p>Both parties agree to keep confidential any proprietary or sensitive information shared during the course of this project, including but not limited to business plans, customer data, login credentials, and financial information. This obligation survives the termination of this agreement.</p>
+    </div>
+
+    <!-- ========== 9. LIMITATION OF LIABILITY ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">9.</span> Limitation of Liability</h3>
+        <ul class="sub-clauses">
+            <li>The Provider's total liability under this agreement shall not exceed the total amount paid by the Client for the project.</li>
+            <li>The Provider is not liable for any indirect, incidental, or consequential damages, including lost profits, lost data, or business interruption.</li>
+            <li>The Provider is not responsible for issues caused by third-party services (hosting providers, domain registrars, payment processors, etc.) or for the Client's use or modification of delivered work.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 10. CANCELLATION & TERMINATION ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">10.</span> Cancellation & Termination</h3>
+        <ul class="sub-clauses">
+            <li>Either party may terminate this agreement with <strong>7 days' written notice</strong> (email is acceptable).</li>
+            <li>If the Client cancels after work has begun, the deposit is <strong>non-refundable</strong>. If work completed exceeds the deposit amount, the Client will be invoiced for the additional work at $75.00/hour.</li>
+            <li>If the Provider cancels, the Client will receive all completed work to date and a refund of any payment for work not yet performed.</li>
+            <li>If the Client becomes unresponsive for more than <strong>30 days</strong> without prior notice, the Provider may consider the project abandoned. The deposit is non-refundable in this case, and the Provider may reallocate resources to other projects. Restarting the project may require a new agreement.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 11. WARRANTY ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">11.</span> Warranty</h3>
+        <ul class="sub-clauses">
+            <li>The Provider warrants that the delivered work will function as described in the scope of work for a period of <strong>30 days</strong> after launch. During this period, the Provider will fix any bugs or issues in the delivered work at no additional cost.</li>
+            <li>This warranty does not cover issues caused by third-party services, the Client's modifications to the delivered work, or changes to the Client's hosting environment.</li>
+        </ul>
+    </div>
+
+    <!-- ========== 12. DISPUTE RESOLUTION ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">12.</span> Dispute Resolution</h3>
+        <p>In the event of a dispute, both parties agree to first attempt to resolve the matter informally through good-faith communication. If the dispute cannot be resolved informally within 30 days, it shall be resolved through mediation or, if necessary, binding arbitration in the state of Connecticut, in accordance with Connecticut law.</p>
+    </div>
+
+    <!-- ========== 13. GENERAL PROVISIONS ========== -->
+    <div class="section">
+        <h3 class="section-number"><span class="num">13.</span> General Provisions</h3>
+        <ul class="sub-clauses">
+            <li><strong>Entire Agreement:</strong> This document, together with any referenced proposal or change orders, constitutes the entire agreement between the parties and supersedes any prior discussions or agreements.</li>
+            <li><strong>Amendments:</strong> Changes to this agreement must be made in writing and agreed to by both parties. Email confirmation is acceptable.</li>
+            <li><strong>Governing Law:</strong> This agreement is governed by the laws of the State of Connecticut.</li>
+            <li><strong>Severability:</strong> If any provision of this agreement is found to be unenforceable, the remaining provisions shall continue in full force and effect.</li>
+        </ul>
+    </div>
+
+    <!-- ========== IMPORTANT NOTICE ========== -->
+    <div class="highlight-box">
+        <strong>Note:</strong> This agreement is provided as a standard service contract for Hammer & Pixels LLC. It is not a substitute for legal advice. Both parties are encouraged to consult with their own legal counsel if they have questions about any terms in this agreement.
+    </div>
+
+    <!-- ========== SIGNATURES ========== -->
+    <div class="signature-section">
+        <h3 class="section-number"><span class="num">14.</span> Acceptance</h3>
+        <p class="signature-intro">By signing below, both parties acknowledge that they have read, understood, and agree to all terms outlined in this Service Agreement.</p>
+
+        <div class="signature-grid">
+            <div class="signature-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Signature — Provider</div>
+                <div class="sig-printed-name">
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Printed Name</div>
+                </div>
+                <div class="sig-date">
+                    <div class="sig-line" style="width: 160px;"></div>
+                    <div class="sig-label">Date</div>
+                </div>
+            </div>
+            <div class="signature-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Signature — Client</div>
+                <div class="sig-printed-name">
+                    <div class="sig-line"></div>
+                    <div class="sig-label">Printed Name & Title</div>
+                </div>
+                <div class="sig-date">
+                    <div class="sig-line" style="width: 160px;"></div>
+                    <div class="sig-label">Date</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="agreement-footer">
+        Hammer & Pixels LLC — Web Design & IT Support — Farmington Valley, CT<br>
+        <a href="mailto:hello@hammerandpixels.com">hello@hammerandpixels.com</a> · <a href="https://hammerandpixels.com">hammerandpixels.com</a>
+    </footer>
+
+</body>
+</html>

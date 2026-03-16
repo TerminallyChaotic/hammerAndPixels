@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice — Hammer & Pixels</title>
+    <style>
+        /* ========== Reset & Base ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --charcoal: #1a1a1a;
+            --slate: #2d2d2d;
+            --warm-gray: #6b6b6b;
+            --light-gray: #e8e8e8;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --accent: #c8553a;
+            --accent-light: #f5ebe8;
+            --font-serif: 'DM Serif Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        @page {
+            size: letter;
+            margin: 0.75in;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background: var(--white);
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.75in;
+        }
+
+        @media print {
+            body { padding: 0; }
+        }
+
+        /* ========== Header ========== */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--charcoal);
+            margin-bottom: 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .brand h1 {
+            font-family: var(--font-serif);
+            font-size: 22pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .brand h1 .amp {
+            color: var(--accent);
+        }
+
+        .brand p {
+            font-size: 8.5pt;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        .invoice-badge {
+            font-family: var(--font-serif);
+            font-size: 28pt;
+            font-weight: 400;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ========== Invoice Meta ========== */
+        .invoice-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .meta-group label {
+            display: block;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            margin-bottom: 2px;
+        }
+
+        .meta-group .value {
+            font-size: 10.5pt;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .meta-group .value strong {
+            font-weight: 600;
+        }
+
+        /* ========== Editable fields ========== */
+        .editable {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        /* ========== Status Badge ========== */
+        .status-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== Addresses ========== */
+        .addresses {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .address-block label {
+            display: block;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .address-block .address-content {
+            font-size: 10pt;
+            line-height: 1.7;
+        }
+
+        /* ========== Line Items ========== */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 13pt;
+            font-weight: 400;
+            color: var(--charcoal);
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 12px;
+        }
+
+        .line-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .line-items thead th {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--warm-gray);
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 2px solid var(--charcoal);
+        }
+
+        .line-items thead th.col-qty,
+        .line-items thead th.col-rate,
+        .line-items thead th.col-amount {
+            text-align: right;
+            width: 100px;
+        }
+
+        .line-items tbody td {
+            padding: 12px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .line-items tbody td.col-qty,
+        .line-items tbody td.col-rate,
+        .line-items tbody td.col-amount {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .line-items tbody td.col-amount {
+            font-weight: 500;
+        }
+
+        .item-desc {
+            font-size: 9pt;
+            color: var(--warm-gray);
+            margin-top: 2px;
+        }
+
+        /* ========== Totals ========== */
+        .totals-area {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 32px;
+        }
+
+        .totals-box {
+            width: 280px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 12px;
+            font-size: 10pt;
+        }
+
+        .total-row.subtotal {
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .total-row.grand-total {
+            border-top: 2px solid var(--charcoal);
+            font-weight: 600;
+            font-size: 13pt;
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        .total-row.amount-due {
+            background: var(--accent-light);
+            border-radius: 4px;
+            margin-top: 8px;
+            padding: 10px 12px;
+            font-weight: 600;
+            font-size: 13pt;
+            color: var(--accent);
+        }
+
+        /* ========== Payment Info ========== */
+        .payment-section {
+            margin-bottom: 28px;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 12px;
+        }
+
+        .payment-method {
+            background: var(--bg);
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .payment-method h4 {
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--warm-gray);
+            margin-bottom: 8px;
+        }
+
+        .payment-method p {
+            font-size: 10pt;
+            line-height: 1.7;
+        }
+
+        /* ========== Notes ========== */
+        .notes-section {
+            margin-bottom: 28px;
+        }
+
+        .notes-box {
+            background: var(--bg);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            font-size: 9.5pt;
+            line-height: 1.7;
+            color: var(--slate);
+            margin-top: 12px;
+        }
+
+        /* ========== Footer ========== */
+        .invoice-footer {
+            margin-top: 48px;
+            padding-top: 16px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+            font-size: 8pt;
+            color: var(--warm-gray);
+        }
+
+        .invoice-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .thank-you {
+            font-family: var(--font-serif);
+            font-size: 14pt;
+            color: var(--charcoal);
+            text-align: center;
+            margin: 40px 0 16px;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="invoice-header">
+        <div class="brand">
+            <img src="../BrandLogoNoLabel.png" alt="Hammer & Pixels logo" class="brand-logo">
+            <div>
+                <h1>Hammer <span class="amp">&</span> Pixels</h1>
+                <p>Web Design & IT Support — Farmington Valley, CT</p>
+            </div>
+        </div>
+        <div class="invoice-badge">Invoice</div>
+    </header>
+
+    <!-- ========== INVOICE META ========== -->
+    <div class="invoice-meta">
+        <div class="status-row">
+            <div class="meta-group">
+                <label>Invoice Number</label>
+                <div class="value"><strong><span class="editable">[HP-INV-001]</span></strong></div>
+            </div>
+            <div class="meta-group">
+                <label>Invoice Date</label>
+                <div class="value"><span class="editable">[Month Day, Year]</span></div>
+            </div>
+        </div>
+        <div class="status-row" style="justify-content: flex-end;">
+            <div class="meta-group">
+                <label>Due Date</label>
+                <div class="value"><strong><span class="editable">[Month Day, Year]</span></strong></div>
+            </div>
+            <div class="meta-group">
+                <label>Project Ref</label>
+                <div class="value"><span class="editable">[HP-001]</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ADDRESSES ========== -->
+    <div class="addresses">
+        <div class="address-block">
+            <label>From</label>
+            <div class="address-content">
+                <strong>Jesse — Hammer & Pixels</strong><br>
+                <span class="editable">[Your Address]</span><br>
+                <span class="editable">[City, CT ZIP]</span><br>
+                hello@hammerandpixels.com<br>
+                <span class="editable">[Phone]</span>
+            </div>
+        </div>
+        <div class="address-block">
+            <label>Bill To</label>
+            <div class="address-content">
+                <strong><span class="editable">[Client Name]</span></strong><br>
+                <span class="editable">[Business Name]</span><br>
+                <span class="editable">[Street Address]</span><br>
+                <span class="editable">[City, CT ZIP]</span><br>
+                <span class="editable">[client@email.com]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== LINE ITEMS ========== -->
+    <table class="line-items">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th class="col-qty">Qty</th>
+                <th class="col-rate">Rate</th>
+                <th class="col-amount">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="editable">[Website Design — Standard Package]</span>
+                    <div class="item-desc"><span class="editable">[Custom design, up to 8 pages, mobile-responsive, SEO setup]</span></div>
+                </td>
+                <td class="col-qty">1</td>
+                <td class="col-rate"><span class="editable">$2,500.00</span></td>
+                <td class="col-amount"><span class="editable">$2,500.00</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="editable">[Online Booking Integration]</span>
+                    <div class="item-desc"><span class="editable">[Third-party booking widget setup and styling]</span></div>
+                </td>
+                <td class="col-qty">1</td>
+                <td class="col-rate"><span class="editable">$300.00</span></td>
+                <td class="col-amount"><span class="editable">$300.00</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="editable">[Additional revision round]</span>
+                    <div class="item-desc"><span class="editable">[One additional round beyond included revisions]</span></div>
+                </td>
+                <td class="col-qty"><span class="editable">2</span></td>
+                <td class="col-rate"><span class="editable">$75.00</span></td>
+                <td class="col-amount"><span class="editable">$150.00</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ========== TOTALS ========== -->
+    <div class="totals-area">
+        <div class="totals-box">
+            <div class="total-row subtotal">
+                <span>Subtotal</span>
+                <span><span class="editable">$2,950.00</span></span>
+            </div>
+            <div class="total-row">
+                <span>Tax</span>
+                <span>$0.00</span>
+            </div>
+            <div class="total-row grand-total">
+                <span>Total</span>
+                <span><span class="editable">$2,950.00</span></span>
+            </div>
+            <div class="total-row">
+                <span>Deposit Paid</span>
+                <span>– <span class="editable">$1,250.00</span></span>
+            </div>
+            <div class="total-row amount-due">
+                <span>Amount Due</span>
+                <span><span class="editable">$1,700.00</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PAYMENT INFO ========== -->
+    <div class="payment-section">
+        <h3 class="section-title">Payment Methods</h3>
+        <div class="payment-grid">
+            <div class="payment-method">
+                <h4>Bank Transfer / ACH</h4>
+                <p>
+                    <span class="editable">[Bank Name]</span><br>
+                    Routing: <span class="editable">[XXXXXXXXX]</span><br>
+                    Account: <span class="editable">[XXXXXXXXX]</span><br>
+                    Name: Hammer & Pixels LLC
+                </p>
+            </div>
+            <div class="payment-method">
+                <h4>Check</h4>
+                <p>
+                    Make payable to:<br>
+                    <strong>Hammer & Pixels LLC</strong><br>
+                    <span class="editable">[Your Address]</span><br>
+                    <span class="editable">[City, CT ZIP]</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== NOTES ========== -->
+    <div class="notes-section">
+        <h3 class="section-title">Notes</h3>
+        <div class="notes-box">
+            <span class="editable">[Add any notes here — for example: "Payment is due within 15 days of invoice date. Thank you for your business!" or project-specific details like "This invoice covers the remaining balance for the Main Street Bakery website project, completed and launched on March 10, 2026."]</span>
+        </div>
+    </div>
+
+    <!-- ========== THANK YOU & FOOTER ========== -->
+    <p class="thank-you">Thank you for your business.</p>
+
+    <footer class="invoice-footer">
+        Hammer & Pixels LLC — Web Design & IT Support — Farmington Valley, CT<br>
+        <a href="mailto:hello@hammerandpixels.com">hello@hammerandpixels.com</a> · <a href="https://hammerandpixels.com">hammerandpixels.com</a>
+    </footer>
+
+</body>
+</html>
