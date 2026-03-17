@@ -313,6 +313,10 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
+.logo-img {
+    object-fit: contain;
+}
+
 .logo-text {
     font-family: var(--font-heading);
     font-size: 1.3rem;

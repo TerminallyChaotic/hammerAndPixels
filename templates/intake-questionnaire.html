@@ -499,6 +499,8 @@
                 <!-- Hidden field to identify this as an intake form -->
                 <input type="hidden" name="_subject" value="New Project Questionnaire Submission">
                 <input type="hidden" name="_form_type" value="intake-questionnaire">
+                <!-- Honeypot field for spam prevention — hidden from real users -->
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
                 <!-- ===== ABOUT YOU ===== -->
                 <div class="section-group">

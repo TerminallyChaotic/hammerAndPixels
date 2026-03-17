@@ -1,0 +1,4 @@
+# Block sensitive directories from public access
+/outreach/*    /404    404
+/templates/*   /404    404
+/REFERENCE_IMAGES.md  /404  404
