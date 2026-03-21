@@ -623,6 +623,19 @@ h1, h2, h3, h4, h5, h6 {
     align-items: start;
 }
 
+.meet-jesse-portrait {
+    margin-bottom: var(--space-sm);
+}
+
+.jesse-portrait-img {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.15));
+    mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, black 55%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 45%, black 55%, transparent 100%);
+}
+
 .meet-jesse-bio .section-label {
     display: flex;
 }
