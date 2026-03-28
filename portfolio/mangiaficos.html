@@ -41,17 +41,74 @@
 
     <!-- ========== HERO ========== -->
     <header class="hero" id="hero">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="hero-bg-slide active" style="background-image: url('Magnifico\'s art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/kirsten-drew-n49BjsFf5dI-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/peace-creative-pVY9k8pzTzM-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/mink-mingle-qZ5lPCPvdXE-unsplash.jpg')"></div>
+        </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-badge">Plainville, CT · Since 1996</div>
             <h1 class="hero-title">Baked with love.<br><span class="accent">The Italian way.</span></h1>
             <p class="hero-subtitle">Family-owned for nearly 30 years, Mangiafico's brings authentic Italian pastries, fresh cannoli, custom cakes, and old-world recipes to the heart of Plainville.</p>
+
+            <!-- Pastry Carousel -->
+            <div class="pastry-carousel">
+                <button class="carousel-arrow carousel-prev" aria-label="Previous item">&#8249;</button>
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track">
+                        <button class="carousel-item" data-title="Italian Cookie Trays" data-desc="Our famous assorted Italian cookie trays — perfect for holidays, parties, and family gatherings. Each tray is hand-arranged with a beautiful variety of traditional recipes." data-img="Magnifico's art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg">
+                            <img src="Magnifico's art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg" alt="Italian cookie display" loading="eager">
+                            <span class="carousel-label">Cookie Trays</span>
+                        </button>
+                        <button class="carousel-item" data-title="Fresh Pastries Daily" data-desc="From flaky sfogliatelle to cream-filled lobster tails, our pastry case is filled fresh every morning. Come early for the best selection." data-img="Magnifico's art/kirsten-drew-n49BjsFf5dI-unsplash.jpg">
+                            <img src="Magnifico's art/kirsten-drew-n49BjsFf5dI-unsplash.jpg" alt="Bakery pastry display" loading="eager">
+                            <span class="carousel-label">Fresh Pastries</span>
+                        </button>
+                        <button class="carousel-item" data-title="Cream Puffs & Éclairs" data-desc="Light, airy choux pastry filled with fresh whipped cream and topped with seasonal fruit. A customer favorite for celebrations and special treats." data-img="Magnifico's art/bohdan-stocek-acw-W7oeFOk-unsplash.jpg">
+                            <img src="Magnifico's art/bohdan-stocek-acw-W7oeFOk-unsplash.jpg" alt="Cream puffs with strawberries" loading="eager">
+                            <span class="carousel-label">Cream Puffs</span>
+                        </button>
+                        <button class="carousel-item" data-title="Butter Croissants" data-desc="Golden, flaky, and made from scratch with real butter. Our croissants are baked fresh every morning — plain, chocolate, or almond." data-img="Magnifico's art/conor-brown-sqkXyyj4WdE-unsplash.jpg">
+                            <img src="Magnifico's art/conor-brown-sqkXyyj4WdE-unsplash.jpg" alt="Fresh butter croissants" loading="eager">
+                            <span class="carousel-label">Croissants</span>
+                        </button>
+                        <button class="carousel-item" data-title="Pastry Display" data-desc="Our glass case is always full — croissants, danish, filled pastries, and seasonal specialties. Everything is baked in-house, never frozen." data-img="Magnifico's art/peace-creative-pVY9k8pzTzM-unsplash.jpg">
+                            <img src="Magnifico's art/peace-creative-pVY9k8pzTzM-unsplash.jpg" alt="Full pastry display case" loading="eager">
+                            <span class="carousel-label">Our Display</span>
+                        </button>
+                        <button class="carousel-item" data-title="Cinnamon Rolls" data-desc="Warm, gooey cinnamon rolls with a perfect sugar glaze. Made from our family recipe and best enjoyed fresh from the oven." data-img="Magnifico's art/otto-norin-uG3Vu5TXKxE-unsplash.jpg">
+                            <img src="Magnifico's art/otto-norin-uG3Vu5TXKxE-unsplash.jpg" alt="Fresh cinnamon rolls" loading="eager">
+                            <span class="carousel-label">Cinnamon Rolls</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" aria-label="Next item">&#8250;</button>
+            </div>
+
             <div class="hero-actions">
                 <a href="#menu" class="btn btn-primary">See Our Pastries</a>
                 <a href="tel:8607939167" class="btn btn-secondary">Call to Order</a>
             </div>
         </div>
     </header>
+
+    <!-- ========== ITEM DETAIL MODAL ========== -->
+    <div class="item-modal" id="itemModal" aria-hidden="true" role="dialog" aria-label="Pastry details">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close details">&times;</button>
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="">
+            </div>
+            <div class="modal-body">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+                <a href="tel:8607939167" class="btn btn-primary">Call to Order</a>
+            </div>
+        </div>
+    </div>
 
     <!-- ========== ABOUT ========== -->
     <section id="about" class="about section">
@@ -280,6 +337,97 @@
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        // Hero background slideshow
+        (function() {
+            const slides = document.querySelectorAll('.hero-bg-slide');
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 6000);
+        })();
+
+        // Pastry carousel
+        (function() {
+            const track = document.querySelector('.carousel-track');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            let position = 0;
+            let autoTimer;
+
+            function getItemWidth() {
+                return items[0].offsetWidth + 16; // width + gap
+            }
+
+            function getVisibleCount() {
+                const wrapper = document.querySelector('.carousel-track-wrapper');
+                return Math.floor(wrapper.offsetWidth / getItemWidth());
+            }
+
+            function getMaxPosition() {
+                return Math.max(0, items.length - getVisibleCount());
+            }
+
+            function updateTrack() {
+                track.style.transform = 'translateX(-' + (position * getItemWidth()) + 'px)';
+            }
+
+            function advance(dir) {
+                position += dir;
+                if (position > getMaxPosition()) position = 0;
+                if (position < 0) position = getMaxPosition();
+                updateTrack();
+            }
+
+            prevBtn.addEventListener('click', () => { advance(-1); resetAuto(); });
+            nextBtn.addEventListener('click', () => { advance(1); resetAuto(); });
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => advance(1), 4000);
+            }
+            resetAuto();
+
+            window.addEventListener('resize', () => {
+                if (position > getMaxPosition()) position = getMaxPosition();
+                updateTrack();
+            });
+        })();
+
+        // Item detail modal
+        (function() {
+            const modal = document.getElementById('itemModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const closeBtn = modal.querySelector('.modal-close');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            document.querySelectorAll('.carousel-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    modalImg.src = item.dataset.img;
+                    modalImg.alt = item.dataset.title;
+                    modalTitle.textContent = item.dataset.title;
+                    modalDesc.textContent = item.dataset.desc;
+                    modal.classList.add('open');
+                    modal.setAttribute('aria-hidden', 'false');
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        })();
     </script>
 </body>
 </html>
