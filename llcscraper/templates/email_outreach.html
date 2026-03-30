@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f7f3ec; color: #2d3436;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 30px 20px;">
+
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #b5652a;">
+            <h1 style="font-family: Georgia, 'Times New Roman', serif; color: #2d3436; margin: 0; font-size: 24px;">
+                Hammer &amp; Pixels
+            </h1>
+            <p style="color: #b8a078; margin: 5px 0 0 0; font-size: 13px; letter-spacing: 1px;">
+                WEB DESIGN &amp; IT SUPPORT
+            </p>
+        </div>
+
+        <!-- Body -->
+        <div style="background-color: #ffffff; border-radius: 8px; padding: 30px; border: 1px solid #e8e2d9;">
+
+            <p style="font-size: 16px; line-height: 1.6; margin-top: 0;">
+                Hi there,
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6;">
+                I saw that <strong>{{ business_name }}</strong> just got registered in Connecticut &mdash;
+                congratulations on the new venture!
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6;">
+                I'm {{ from_name }}, and I run a small web design shop right here in the Farmington Valley.
+                I build custom websites for local businesses &mdash; no templates, no cookie-cutter designs,
+                just a site that fits <em>your</em> business and makes you look great online.
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6;">
+                If you're thinking about getting a website set up (or even just curious about what's involved),
+                I'd be happy to chat &mdash; no pressure, no sales pitch. Just a neighbor offering to help.
+            </p>
+
+            <!-- Services -->
+            <div style="margin: 25px 0; padding: 20px; background-color: #faf8f5; border-radius: 6px; border-left: 4px solid #b5652a;">
+                <p style="font-weight: bold; color: #2d3436; margin-top: 0; font-size: 15px;">Here's what I do:</p>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 6px 0; font-size: 15px; color: #2d3436;">Custom Website Design</td>
+                        <td style="padding: 6px 0; font-size: 15px; color: #b5652a; text-align: right; font-weight: bold;">starting at $1,500</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px 0; font-size: 15px; color: #2d3436;">Website Care &amp; Maintenance</td>
+                        <td style="padding: 6px 0; font-size: 15px; color: #b5652a; text-align: right; font-weight: bold;">$75/month</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px 0; font-size: 15px; color: #2d3436;">IT Support</td>
+                        <td style="padding: 6px 0; font-size: 15px; color: #b5652a; text-align: right; font-weight: bold;">$75/hour</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center; margin: 25px 0;">
+                <a href="{{ site_url }}" style="display: inline-block; background-color: #b5652a; color: #ffffff; padding: 12px 28px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold;">
+                    Check Out My Work
+                </a>
+            </div>
+
+            <p style="font-size: 16px; line-height: 1.6;">
+                Either way, best of luck with <strong>{{ business_name }}</strong>!
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 0;">
+                Cheers,<br>
+                <strong>{{ from_name }}</strong><br>
+                <span style="color: #b8a078;">Hammer &amp; Pixels</span><br>
+                <span style="color: #999; font-size: 14px;">Web Design &amp; IT Support | Farmington Valley, CT</span>
+            </p>
+
+        </div>
+
+        <!-- Footer / CAN-SPAM -->
+        <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e8e2d9; text-align: center; font-size: 12px; color: #999; line-height: 1.5;">
+            <p style="margin: 0 0 8px 0;">
+                This is a one-time email. You're receiving it because {{ business_name }}
+                was recently registered with the Connecticut Secretary of State.
+            </p>
+            <p style="margin: 0 0 8px 0;">
+                If you'd prefer not to hear from me, simply reply with "unsubscribe"
+                and I'll make sure you're removed.
+            </p>
+            <p style="margin: 0; color: #ccc;">
+                Hammer &amp; Pixels | Farmington Valley, CT 06032
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

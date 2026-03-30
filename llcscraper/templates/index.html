@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CT LLC Scraper - Hammer &amp; Pixels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hammer &amp; Pixels</h1>
+            <p>CT LLC SCRAPER &amp; OUTREACH</p>
+        </header>
+
+        <main>
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="tab-button" onclick="showTab('settings')">Settings</button>
+                <button class="tab-button" onclick="showTab('llcs')">LLCs Found</button>
+                <button class="tab-button" onclick="showTab('queue')">Email Queue</button>
+                <button class="tab-button" onclick="showTab('history')">Sent History</button>
+                <button class="tab-button" onclick="showTab('logs')">Logs</button>
+            </div>
+
+            <div id="status-message"></div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-total">0</div>
+                        <div class="stat-label">Total LLCs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-pending-enrichment">0</div>
+                        <div class="stat-label">Pending Enrichment</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-have-email">0</div>
+                        <div class="stat-label">Have Email</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-approved">0</div>
+                        <div class="stat-label">Approved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-sent">0</div>
+                        <div class="stat-label">Emails Sent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-today">0</div>
+                        <div class="stat-label">Sent Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-skipped">0</div>
+                        <div class="stat-label">Skipped</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-have-website">0</div>
+                        <div class="stat-label">Have Website</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="runScraperNow()">Run Scraper Now</button>
+                    <button class="btn btn-secondary" onclick="runEnricherNow()">Run Enricher Now</button>
+                    <button class="btn btn-success" onclick="sendAllEmails()">Send Email Queue</button>
+                </div>
+
+                <!-- CSV Import -->
+                <div class="settings-section" style="margin-top: 20px;">
+                    <h2>Manual CSV Import</h2>
+                    <p class="hint">Paste CSV data with columns: filing_number, business_name, filing_date, principal_address, registered_agent</p>
+                    <div class="csv-import-area">
+                        <textarea id="csv-input" placeholder="filing_number,business_name,filing_date,principal_address,registered_agent&#10;1234567,Acme LLC,03/15/2026,123 Main St Hartford CT,John Smith"></textarea>
+                        <button class="btn btn-secondary" style="margin-top: 8px;" onclick="importCSV()">Import CSV</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <div class="settings-section">
+                    <h2>Scraper Configuration</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Lookback Days</label>
+                            <input type="number" id="scrape_lookback_days" placeholder="7" min="1" max="30">
+                            <small>How many days back to search for new filings</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Check Frequency (hours)</label>
+                            <input type="number" id="scrape_frequency_hours" placeholder="12" min="1" max="72">
+                            <small>Used if Scrape Times is empty</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Specific Scrape Times (24-hour format)</label>
+                        <input type="text" id="scrape_times" placeholder="08:00, 18:00">
+                        <small>Comma-separated. Leave empty to use frequency-based scheduling.</small>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Email Configuration</h2>
+                    <p class="hint">Your password is encrypted and stored securely in your OS keyring</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name (in emails)</label>
+                            <input type="text" id="email_from_name" placeholder="Jesse">
+                        </div>
+                        <div class="form-group">
+                            <label>Website URL</label>
+                            <input type="text" id="site_url" placeholder="https://hammerandpixels.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Provider</label>
+                        <select id="smtp_provider" onchange="onProviderChange()">
+                            <option value="gmail">Gmail</option>
+                            <option value="outlook">Outlook / Hotmail</option>
+                            <option value="yahoo">Yahoo Mail</option>
+                            <option value="protonmail">Proton Mail (Bridge)</option>
+                            <option value="sendgrid">SendGrid</option>
+                            <option value="custom">Custom SMTP</option>
+                        </select>
+                        <small id="smtp_help">Use an App Password from myaccount.google.com > Security > App Passwords</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sender Email Address</label>
+                        <input type="email" id="smtp_email" placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>App Password / SMTP Password</label>
+                        <input type="password" id="smtp_password" placeholder="Leave blank to keep current">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>SMTP Server</label>
+                            <input type="text" id="smtp_server" placeholder="smtp.gmail.com" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>SMTP Port</label>
+                            <input type="number" id="smtp_port" placeholder="587" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Security</label>
+                        <select id="smtp_security" disabled>
+                            <option value="starttls">STARTTLS (port 587)</option>
+                            <option value="ssl">SSL/TLS (port 465)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Outreach Settings</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Daily Email Limit</label>
+                            <input type="number" id="daily_email_limit" placeholder="10" min="1" max="50">
+                            <small>Max outreach emails per day</small>
+                        </div>
+                        <div class="form-group" style="display:flex;align-items:center;gap:10px;padding-top:25px;">
+                            <input type="checkbox" id="auto_send_enabled" style="width:auto;">
+                            <label for="auto_send_enabled" style="margin:0;cursor:pointer;">Auto-send to approved LLCs</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                </div>
+            </div>
+
+            <!-- LLCs Found Tab -->
+            <div id="llcs" class="tab-content">
+                <div class="filter-bar">
+                    <select id="filter-outreach" onchange="loadLLCs(0)">
+                        <option value="">All Outreach Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="sent">Sent</option>
+                        <option value="skipped">Skipped</option>
+                    </select>
+                    <select id="filter-enrichment" onchange="loadLLCs(0)">
+                        <option value="">All Enrichment</option>
+                        <option value="pending">Pending</option>
+                        <option value="enriched">Enriched</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                    <input type="text" id="filter-search" placeholder="Search by name..."
+                           onkeyup="if(event.key==='Enter')loadLLCs(0)">
+                    <button class="btn btn-secondary btn-small" onclick="loadLLCs(0)">Filter</button>
+                </div>
+                <div class="filter-bar" style="margin-top:8px;">
+                    <label style="font-size:0.85em;color:#888;margin-right:5px;">Filed from:</label>
+                    <input type="date" id="filter-date-from" onchange="loadLLCs(0)">
+                    <label style="font-size:0.85em;color:#888;margin:0 5px;">to:</label>
+                    <input type="date" id="filter-date-to" onchange="loadLLCs(0)">
+                </div>
+
+                <div class="llc-table-container">
+                    <table class="llc-table">
+                        <thead>
+                            <tr>
+                                <th>Business Name</th>
+                                <th>Filed</th>
+                                <th>Address</th>
+                                <th>Website</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="llc-table-body">
+                            <tr><td colspan="7" style="text-align:center;padding:20px;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                    <div id="llc-paging" style="display:flex;justify-content:center;align-items:center;padding:12px;gap:8px;"></div>
+                </div>
+            </div>
+
+            <!-- Email Queue Tab -->
+            <div id="queue" class="tab-content">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+                    <h2 style="margin:0;">Approved for Outreach</h2>
+                    <button class="btn btn-success" onclick="sendAllEmails()">Send All</button>
+                </div>
+                <div id="queue-list" class="logs-list">
+                    <p style="padding:15px;text-align:center;color:#888;">Loading...</p>
+                </div>
+            </div>
+
+            <!-- Sent History Tab -->
+            <div id="history" class="tab-content">
+                <h2>Sent Email History</h2>
+                <div id="history-list" class="logs-list">
+                    <p style="padding:15px;text-align:center;color:#888;">Loading...</p>
+                </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div id="logs" class="tab-content">
+                <h2>Activity Logs</h2>
+                <div id="logs-list" class="logs-list">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <!-- Scheduler Status -->
+            <div class="scheduler-status">
+                <h3>Scheduler Status</h3>
+                <div id="scheduler-info">
+                    <p>Loading...</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>CT LLC Scraper - Hammer &amp; Pixels Lead Generation</p>
+        </footer>
+    </div>
+
+    <!-- Email Preview Modal -->
+    <div id="modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal">
+            <h3>Email Preview</h3>
+            <div id="preview-to" class="email-subject" style="color:#888;font-size:0.9em;"></div>
+            <div id="preview-subject" class="email-subject"></div>
+            <div id="preview-body" class="email-preview-frame"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                <button class="btn btn-success" id="preview-send-btn">Send Email</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

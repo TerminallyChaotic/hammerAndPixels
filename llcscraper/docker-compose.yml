@@ -1,0 +1,15 @@
+services:
+  llcscraper:
+    build: .
+    container_name: llcscraper
+    # Host networking so the container can reach Proton Mail Bridge on localhost
+    network_mode: host
+    volumes:
+      # Persist the SQLite database between container restarts
+      - llcscraper-data:/app/config
+    env_file:
+      - .env
+    restart: unless-stopped
+
+volumes:
+  llcscraper-data:
