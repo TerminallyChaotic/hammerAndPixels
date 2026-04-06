@@ -143,11 +143,44 @@
                 var firstError = form.querySelector('.field-error');
                 if (firstError) firstError.focus();
             } else {
-                // Visual feedback while submitting
+                // Submit via fetch to stay on page
+                e.preventDefault();
                 if (submitBtn) {
                     submitBtn.disabled = true;
                     submitBtn.querySelector('span').textContent = 'Sending...';
                 }
+                var formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                }).then(function (response) {
+                    if (response.ok) {
+                        // Clear form and show success - static content only, no user input
+                        form.textContent = '';
+                        var successDiv = document.createElement('div');
+                        successDiv.className = 'form-success';
+                        var heading = document.createElement('h3');
+                        heading.textContent = 'Message sent!';
+                        var para = document.createElement('p');
+                        para.textContent = "Thanks for reaching out. I'll get back to you within one business day.";
+                        successDiv.appendChild(heading);
+                        successDiv.appendChild(para);
+                        form.appendChild(successDiv);
+                    } else {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.querySelector('span').textContent = 'Send it over';
+                        }
+                        alert('Something went wrong. Please try again or email me directly.');
+                    }
+                }).catch(function () {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.querySelector('span').textContent = 'Send it over';
+                    }
+                    alert('Something went wrong. Please try again or email me directly.');
+                });
             }
         });
 

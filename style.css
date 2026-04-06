@@ -202,6 +202,16 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 3.5rem;
 }
 
+.section-header .section-description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-header .section-title {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* ---- BUTTONS ---- */
 .btn {
@@ -844,6 +854,88 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
+
+/* ---- HOW IT WORKS ---- */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: var(--container-wide);
+    margin: 0 auto;
+}
+
+.step-item {
+    text-align: center;
+}
+
+.step-number-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-brand);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+}
+
+.step-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.step-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ---- POPULAR BADGE ---- */
+.pricing-card--popular {
+    border: 2px solid var(--color-brand);
+    position: relative;
+}
+
+.popular-badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-brand);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 1rem;
+    border-radius: 980px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+/* ---- FORM SUCCESS ---- */
+.form-success {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.form-success h3 {
+    font-size: 1.5rem;
+    color: var(--color-brand);
+    margin-bottom: 0.75rem;
+}
+
+.form-success p {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+}
 
 /* ---- FOOTER ---- */
 .footer {

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="BrandLogoNoLabel.png">
 </head>
 <body>
 
@@ -126,12 +127,40 @@
 
     <!-- ========== PHOTO MOMENT ========== -->
     <div class="photo-moment" aria-hidden="true">
-        <img src="reference-images/rivers-bridges/mark-valentine-90CgJlWk5hk-unsplash.jpg" alt="" loading="lazy">
+        <img src="images/mill-village-downtown.png" alt="" loading="lazy">
         <div class="photo-moment-overlay"></div>
         <div class="photo-moment-text" data-reveal="fade-up">
             <h2>Your business deserves a website as good as your work.</h2>
         </div>
     </div>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-header" data-reveal="fade-up">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">Three steps. That's it.</h2>
+            </div>
+
+            <div class="steps-grid" data-reveal="fade-up">
+                <div class="step-item">
+                    <div class="step-number-circle">1</div>
+                    <h3>We talk.</h3>
+                    <p>You tell me about your business, what you need, and what's not working. No forms, no tickets - just a conversation.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number-circle">2</div>
+                    <h3>I build it.</h3>
+                    <p>I design and build your site from scratch. You see drafts along the way and we fine-tune until it's right.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number-circle">3</div>
+                    <h3>You launch.</h3>
+                    <p>Your site goes live. I handle hosting, DNS, and all the technical stuff. You focus on your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ========== WHY ME ========== -->
     <section id="why-me" class="section section--dark">
@@ -195,7 +224,8 @@
                 </div>
 
                 <!-- Standard -->
-                <div class="pricing-card">
+                <div class="pricing-card pricing-card--popular">
+                    <span class="popular-badge">Most Popular</span>
                     <span class="pricing-tier">Standard</span>
                     <h3>Standard Site</h3>
                     <div class="pricing-amount">
@@ -316,6 +346,15 @@
                         </div>
                         <div class="contact-detail">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M2 3.5C2 2.67 2.67 2 3.5 2H6.5C6.88 2 7.21 2.28 7.28 2.65L8.03 6.4C8.09 6.72 7.95 7.05 7.68 7.22L5.92 8.28C7.18 10.92 9.08 12.82 11.72 14.08L12.78 12.32C12.95 12.05 13.28 11.91 13.6 11.97L17.35 12.72C17.72 12.79 18 13.12 18 13.5V16.5C18 17.33 17.33 18 16.5 18C8.51 18 2 11.49 2 3.5Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            <div>
+                                <span class="contact-label">Phone</span>
+                                <a href="tel:+18602953847">(860) 295-3847</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M10 2C6.13 2 3 5.13 3 9C3 14.25 10 18 10 18C10 18 17 14.25 17 9C17 5.13 13.87 2 10 2Z" stroke="currentColor" stroke-width="1.5"/>
                                 <circle cx="10" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
                             </svg>
@@ -336,12 +375,6 @@
                         </div>
                     </div>
 
-                    <div class="contact-quote">
-                        <blockquote>
-                            <p>"I'd rather have a conversation than give you a sales pitch. Let's figure out what you need."</p>
-                        </blockquote>
-                        <span class="attribution">- Jesse, Hammer & Pixels</span>
-                    </div>
                 </aside>
             </div>
         </div>
