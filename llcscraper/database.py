@@ -2,6 +2,7 @@ import sqlite3
 import json
 import os
 from pathlib import Path
+from glob import glob
 
 DB_PATH = Path('config/llcscraper.db')
 
@@ -419,3 +420,55 @@ def get_stats():
 
     conn.close()
     return stats
+
+
+# --- Migrations ---
+
+def run_migrations():
+    """Run pending SQL migrations from migrations/ directory."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    migration_dir = os.path.join(os.path.dirname(__file__), 'migrations')
+    if not os.path.exists(migration_dir):
+        os.makedirs(migration_dir)
+
+    migration_files = sorted(glob(os.path.join(migration_dir, '*.sql')))
+
+    if not migration_files:
+        print("✓ No migrations to run")
+        return
+
+    for filepath in migration_files:
+        migration_file = os.path.basename(filepath)
+        with open(filepath, 'r') as f:
+            sql = f.read()
+
+        # Split by semicolon and execute each statement separately
+        statements = [stmt.strip() for stmt in sql.split(';') if stmt.strip()]
+        success = True
+        for statement in statements:
+            try:
+                cursor.execute(statement)
+            except sqlite3.OperationalError as e:
+                # If column already exists, that's okay — just log and continue
+                if "already exists" in str(e).lower() or "duplicate column" in str(e).lower():
+                    print(f"  (column already exists, skipping)")
+                else:
+                    print(f"✗ Migration {migration_file} failed: {str(e)}")
+                    success = False
+                    break
+            except Exception as e:
+                print(f"✗ Migration {migration_file} failed: {str(e)}")
+                success = False
+                break
+
+        if success:
+            conn.commit()
+            print(f"✓ Migration {migration_file} applied")
+        else:
+            conn.rollback()
+
+    cursor.close()
+    conn.close()
+    print("✓ Migrations complete")

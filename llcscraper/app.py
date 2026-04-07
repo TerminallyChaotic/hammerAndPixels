@@ -9,7 +9,8 @@ from scraper import run_scraper, import_csv
 from enricher import run_enricher
 from emailer import (
     save_smtp_credentials, SMTP_PROVIDERS, process_email_queue,
-    send_outreach_email, preview_outreach_email
+    send_outreach_email, preview_outreach_email,
+    render_outreach_email, send_email
 )
 
 load_dotenv()
@@ -19,6 +20,9 @@ app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(32))
 
 # Initialize database
 database.init_db()
+
+# Run migrations
+database.run_migrations()
 
 
 def apply_env_defaults():
@@ -311,6 +315,61 @@ def send_emails_endpoint():
     except Exception as e:
         database.add_log(f"Email queue error: {str(e)}", "error")
         return jsonify({'success': False, 'message': 'Email processing failed'}), 500
+
+
+@app.route('/api/manual-preview', methods=['POST'])
+@require_api_key
+def manual_preview():
+    """Preview an email for a manually entered business."""
+    data = request.json or {}
+    business_name = data.get('business_name', '').strip()
+    email_address = data.get('email_address', '').strip()
+
+    if not business_name or not email_address:
+        return jsonify({'error': 'Business name and email are required'}), 400
+
+    llc = {'business_name': business_name, 'email_address': email_address}
+    html_content = render_outreach_email(llc)
+    from_name = database.get_setting('email_from_name', 'Jesse')
+    subject = f"Congrats on {business_name} - a quick hello from a fellow CT small biz"
+
+    return jsonify({
+        'subject': subject,
+        'html': html_content,
+        'to': email_address,
+        'business_name': business_name
+    })
+
+
+@app.route('/api/manual-send', methods=['POST'])
+@require_api_key
+def manual_send():
+    """Send an outreach email to a manually entered business."""
+    data = request.json or {}
+    business_name = data.get('business_name', '').strip()
+    email_address = data.get('email_address', '').strip()
+
+    if not business_name or not email_address:
+        return jsonify({'error': 'Business name and email are required'}), 400
+
+    # Insert as a manual record so it shows up in history
+    import time
+    filing_number = f"MANUAL-{int(time.time())}"
+    row_id = database.save_llc(
+        filing_number=filing_number,
+        business_name=business_name,
+        source='manual',
+        email_address=email_address
+    )
+
+    if not row_id:
+        return jsonify({'error': 'Failed to create record'}), 500
+
+    llc = database.get_llc(row_id)
+    database.update_llc_outreach_status(row_id, 'approved')
+    success = send_outreach_email(llc)
+
+    return jsonify({'success': success, 'business_name': business_name})
 
 
 @app.route('/api/email-history', methods=['GET'])

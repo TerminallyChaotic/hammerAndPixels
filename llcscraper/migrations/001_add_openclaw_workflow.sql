@@ -1,0 +1,24 @@
+-- Add columns to existing llcs table for OpenClaw workflow
+-- Note: Using PRAGMA to check first, then conditionally adding
+ALTER TABLE llcs ADD COLUMN openclaw_reviewed BOOLEAN DEFAULT 0;
+ALTER TABLE llcs ADD COLUMN openclaw_approved_at DATETIME NULL;
+ALTER TABLE llcs ADD COLUMN approved_by_user BOOLEAN DEFAULT 0;
+ALTER TABLE llcs ADD COLUMN user_approved_at DATETIME NULL;
+ALTER TABLE llcs ADD COLUMN sent BOOLEAN DEFAULT 0;
+ALTER TABLE llcs ADD COLUMN sent_at DATETIME NULL;
+
+-- Create review log table for audit trail
+CREATE TABLE IF NOT EXISTS openclaw_review_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    llc_id INTEGER NOT NULL,
+    action VARCHAR(50) NOT NULL,
+    notes TEXT,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (llc_id) REFERENCES llcs(id) ON DELETE CASCADE
+);
+
+-- Create indexes for efficient querying
+CREATE INDEX IF NOT EXISTS idx_llcs_openclaw_reviewed ON llcs(openclaw_reviewed);
+CREATE INDEX IF NOT EXISTS idx_review_log_llc ON openclaw_review_log(llc_id);
+CREATE INDEX IF NOT EXISTS idx_review_log_timestamp ON openclaw_review_log(timestamp);
