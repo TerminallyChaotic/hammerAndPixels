@@ -43,7 +43,7 @@ def receive_llcs():
         saved_count = 0
         for llc_data in llcs:
             # Validate required fields
-            required = ['filing_number', 'business_name', 'filing_date', 'address', 'registered_agent']
+            required = ['filing_number', 'business_name', 'filing_date', 'address']
             missing_fields = [f for f in required if f not in llc_data]
             if missing_fields:
                 log_msg = f"Skipped LLC: missing fields {missing_fields}"
