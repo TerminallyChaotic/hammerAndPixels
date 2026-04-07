@@ -23,6 +23,9 @@ def test_scraper_posts_found_llcs_to_webhook(monkeypatch):
     import scraper
     import database
 
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
+
     # Mock the API request
     mock_response = Mock()
     mock_response.json.return_value = [
@@ -67,6 +70,9 @@ def test_scraper_posts_found_llcs_to_webhook(monkeypatch):
 def test_scraper_batches_llcs_in_single_post(monkeypatch):
     """Test that scraper batches multiple LLCs into a single POST."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     # Mock the API request to return 2 LLCs
     mock_response = Mock()
@@ -124,6 +130,9 @@ def test_scraper_batches_llcs_in_single_post(monkeypatch):
 def test_scraper_posts_correct_payload_format(monkeypatch):
     """Test that scraper posts payload in correct format."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     mock_response = Mock()
     mock_response.json.return_value = [
@@ -209,7 +218,9 @@ def test_scraper_includes_api_key_in_webhook_post(monkeypatch):
 def test_scraper_retries_webhook_on_failure(monkeypatch):
     """Test that scraper retries webhook POST on failure (3 retries with backoff)."""
     import scraper
-    import time
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     mock_response = Mock()
     mock_response.json.return_value = [
@@ -230,31 +241,36 @@ def test_scraper_retries_webhook_on_failure(monkeypatch):
 
     monkeypatch.setattr('scraper.requests.get', Mock(return_value=mock_response))
 
-    # Mock webhook to fail first 2 times, then succeed on 3rd
+    # Mock webhook to fail first 2 times (500 server error), succeed on 3rd
     mock_webhook_fail = Mock()
-    mock_webhook_fail.raise_for_status.side_effect = Exception("Connection error")
+    mock_webhook_fail.status_code = 500
+    mock_webhook_fail.json.return_value = {'success': False}
 
     mock_webhook_success = Mock()
+    mock_webhook_success.status_code = 200
     mock_webhook_success.json.return_value = {'success': True, 'count': 1}
-    mock_webhook_success.raise_for_status = Mock()
 
     with patch('scraper.requests.post', side_effect=[mock_webhook_fail, mock_webhook_fail, mock_webhook_success]) as mock_post:
-        with patch('scraper.add_log') as mock_log:
-            result = scraper.run_scraper()
+        with patch('scraper.time.sleep') as mock_sleep:
+            with patch('scraper.add_log'):  # Mock logging to reduce noise
+                result = scraper.run_scraper()
 
-            # Should have retried 3 times total
-            assert mock_post.call_count == 3, f"Expected 3 POST calls (retry), got {mock_post.call_count}"
+                # Should have retried 3 times total
+                assert mock_post.call_count == 3, f"Expected 3 POST calls (retry), got {mock_post.call_count}"
 
-            # Verify that retries were logged
-            log_calls = [str(c) for c in mock_log.call_args_list]
-            assert any('retry' in str(c).lower() or 'attempt' in str(c).lower() for c in log_calls), \
-                "Should log retry attempts"
+                # Verify exponential backoff: 1 second, then 2 seconds
+                assert mock_sleep.call_count == 2, f"Expected 2 sleeps (after failures 1 and 2), got {mock_sleep.call_count}"
+                assert mock_sleep.call_args_list == [call(1), call(2)], \
+                    f"Backoff should be [1s, 2s], got {mock_sleep.call_args_list}"
 
 
 def test_scraper_gives_up_after_max_retries(monkeypatch):
     """Test that scraper gives up after 3 failed retries and logs error."""
     import scraper
 
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
+
     mock_response = Mock()
     mock_response.json.return_value = [
         {
@@ -274,25 +290,30 @@ def test_scraper_gives_up_after_max_retries(monkeypatch):
 
     monkeypatch.setattr('scraper.requests.get', Mock(return_value=mock_response))
 
-    # Mock webhook to always fail
-    mock_webhook_fail = Mock()
-    mock_webhook_fail.raise_for_status.side_effect = Exception("Webhook unreachable")
+    # Mock webhook to always fail with connection error (RequestException)
+    import requests as req_module
+    with patch('scraper.requests.post', side_effect=req_module.RequestException("Webhook unreachable")) as mock_post:
+        with patch('scraper.time.sleep') as mock_sleep:
+            with patch('scraper.add_log') as mock_log:
+                result = scraper.run_scraper()
 
-    with patch('scraper.requests.post', return_value=mock_webhook_fail) as mock_post:
-        with patch('scraper.add_log') as mock_log:
-            result = scraper.run_scraper()
+                # Should have made 3 attempts (initial + 2 retries)
+                assert mock_post.call_count == 3, f"Expected 3 attempts, got {mock_post.call_count}"
 
-            # Should have made 3 attempts (initial + 2 retries)
-            assert mock_post.call_count == 3, f"Expected 3 attempts, got {mock_post.call_count}"
+                # Verify backoff sleep was called twice
+                assert mock_sleep.call_count == 2, f"Expected 2 backoff sleeps, got {mock_sleep.call_count}"
 
-            # Verify error was logged
-            error_logs = [str(c) for c in mock_log.call_args_list if 'error' in str(c).lower()]
-            assert len(error_logs) > 0, "Should log error after max retries exceeded"
+                # Verify error was logged
+                error_logs = [str(c) for c in mock_log.call_args_list if 'error' in str(c).lower()]
+                assert len(error_logs) > 0, "Should log error after max retries exceeded"
 
 
 def test_scraper_handles_webhook_validation_errors(monkeypatch):
     """Test that scraper handles webhook validation errors gracefully."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     mock_response = Mock()
     mock_response.json.return_value = [
@@ -317,20 +338,27 @@ def test_scraper_handles_webhook_validation_errors(monkeypatch):
     mock_webhook_error = Mock()
     mock_webhook_error.status_code = 400
     mock_webhook_error.json.return_value = {'error': 'Invalid payload: missing required field'}
-    mock_webhook_error.raise_for_status.side_effect = Exception("400 Bad Request")
 
     with patch('scraper.requests.post', return_value=mock_webhook_error) as mock_post:
-        with patch('scraper.add_log') as mock_log:
-            result = scraper.run_scraper()
+        with patch('scraper.time.sleep') as mock_sleep:
+            with patch('scraper.add_log') as mock_log:
+                result = scraper.run_scraper()
 
-            # Should log the validation error
-            error_logs = [str(c) for c in mock_log.call_args_list if 'error' in str(c).lower()]
-            assert len(error_logs) > 0, "Should log validation error"
+                # Should NOT retry on 4xx error — make only 1 attempt
+                assert mock_post.call_count == 1, f"Expected 1 attempt (no retry on 4xx), got {mock_post.call_count}"
+                assert mock_sleep.call_count == 0, "Should not sleep on client error"
+
+                # Should log the validation error
+                error_logs = [str(c) for c in mock_log.call_args_list if 'error' in str(c).lower()]
+                assert len(error_logs) > 0, "Should log validation error"
 
 
 def test_scraper_does_not_crash_on_webhook_failure(monkeypatch):
     """Test that scraper continues gracefully even if webhook fails completely."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     mock_response = Mock()
     mock_response.json.return_value = [
@@ -353,19 +381,23 @@ def test_scraper_does_not_crash_on_webhook_failure(monkeypatch):
 
     # Mock webhook to always fail
     with patch('scraper.requests.post', side_effect=Exception("Webhook totally broken")):
-        with patch('scraper.add_log'):
-            # Should not raise an exception
-            try:
-                result = scraper.run_scraper()
-                # The scraper should return a result (empty or with error logged)
-                assert isinstance(result, list), "run_scraper should return a list even on webhook failure"
-            except Exception as e:
-                pytest.fail(f"run_scraper should not raise exception, got: {e}")
+        with patch('scraper.time.sleep') as mock_sleep:
+            with patch('scraper.add_log'):
+                # Should not raise an exception
+                try:
+                    result = scraper.run_scraper()
+                    # The scraper should return a result (empty or with error logged)
+                    assert isinstance(result, list), "run_scraper should return a list even on webhook failure"
+                except Exception as e:
+                    pytest.fail(f"run_scraper should not raise exception, got: {e}")
 
 
 def test_scraper_uses_configurable_webhook_url(monkeypatch):
     """Test that webhook URL can be configured via environment or default."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     # Set a custom webhook URL
     custom_url = 'http://custom-server:8080/api/llc/webhook'
@@ -408,6 +440,9 @@ def test_scraper_uses_configurable_webhook_url(monkeypatch):
 def test_scraper_logs_success_when_webhook_accepts(monkeypatch):
     """Test that scraper logs success when webhook accepts LLCs."""
     import scraper
+
+    # Set API key for webhook auth
+    monkeypatch.setenv('LLCSCRAPER_API_KEY', 'test-key-12345')
 
     mock_response = Mock()
     mock_response.json.return_value = [
