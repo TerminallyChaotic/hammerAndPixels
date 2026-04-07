@@ -165,6 +165,61 @@ def get_pending_review():
         return jsonify({'error': 'Internal server error'}), 500
 
 
+def _update_llc_review_status(llc_id_int, action, notes):
+    """Mark an LLC as approved or rejected, creating audit trail entry.
+
+    Args:
+        llc_id_int (int): The LLC ID to update
+        action (str): "approved" or "rejected"
+        notes (str): Optional notes for audit trail
+
+    Returns:
+        Tuple[dict, int]: (response_dict, status_code)
+    """
+    conn = None
+    cursor = None
+
+    try:
+        conn = sqlite3.connect(database.DB_PATH)
+        cursor = conn.cursor()
+
+        # Check LLC exists
+        existing_llc = database.get_llc(llc_id_int)
+        if not existing_llc:
+            return {'error': 'LLC not found'}, 404
+
+        # Begin transaction
+        cursor.execute('BEGIN')
+
+        # Update status and approval fields (both approve and reject mark as user-decided)
+        cursor.execute('''
+            UPDATE llcs
+            SET status = ?, approved_by_user = 1, user_approved_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        ''', (action, llc_id_int))
+
+        # Create audit trail entry
+        cursor.execute('''
+            INSERT INTO openclaw_review_log (llc_id, action, notes, timestamp)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        ''', (llc_id_int, action, notes or ''))
+
+        conn.commit()
+        return {'success': True, 'status': action}, 200
+
+    except Exception:
+        if conn:
+            conn.rollback()
+        database.add_log(traceback.format_exc(), "error")
+        return {'error': 'Internal server error'}, 500
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
 @webhook_bp.route('/<llc_id>/approve', methods=['POST'])
 @require_api_key
 def approve_llc(llc_id):
@@ -173,54 +228,27 @@ def approve_llc(llc_id):
     Request body: {action: "approve", notes?: "optional notes"}
     Returns: {success: true, status: "approved"}
     """
-    conn = None
-    cursor = None
+    # Validate llc_id is a valid integer
     try:
-        # Validate that the LLC exists
-        existing_llc = database.get_llc(int(llc_id))
-        if not existing_llc:
-            return jsonify({'error': 'LLC not found'}), 404
+        llc_id_int = int(llc_id)
+    except ValueError:
+        return jsonify({'error': 'LLC ID must be a valid integer'}), 400
 
-        # Parse optional notes from request
-        try:
-            payload = request.get_json() or {}
-        except Exception:
-            payload = {}
+    # Parse optional notes from request
+    try:
+        payload = request.get_json() or {}
+    except Exception:
+        payload = {}
 
-        notes = payload.get('notes', '')
+    notes = payload.get('notes', '')
 
-        # Update LLC and log action in a transaction
-        conn = sqlite3.connect(database.DB_PATH)
-        cursor = conn.cursor()
+    # Update LLC and log action
+    response_dict, status_code = _update_llc_review_status(llc_id_int, 'approved', notes)
 
-        # Update LLC status and approval fields
-        cursor.execute('''
-            UPDATE llcs
-            SET status = ?, approved_by_user = 1, user_approved_at = CURRENT_TIMESTAMP
-            WHERE id = ?
-        ''', ('approved', int(llc_id)))
+    if status_code == 200:
+        database.add_log(f"LLC {llc_id_int} approved by user", "info")
 
-        # Log the action to audit trail
-        cursor.execute('''
-            INSERT INTO openclaw_review_log (llc_id, action, notes, timestamp)
-            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-        ''', (int(llc_id), 'approved', notes))
-
-        conn.commit()
-        database.add_log(f"LLC {llc_id} approved by user", "info")
-        return jsonify({'success': True, 'status': 'approved'}), 200
-
-    except Exception as e:
-        if conn:
-            conn.rollback()
-        database.add_log(f"Approve LLC error: {traceback.format_exc()}", "error")
-        return jsonify({'error': 'Internal server error'}), 500
-
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+    return jsonify(response_dict), status_code
 
 
 @webhook_bp.route('/<llc_id>/reject', methods=['POST'])
@@ -231,51 +259,24 @@ def reject_llc(llc_id):
     Request body: {action: "reject", notes?: "optional notes"}
     Returns: {success: true, status: "rejected"}
     """
-    conn = None
-    cursor = None
+    # Validate llc_id is a valid integer
     try:
-        # Validate that the LLC exists
-        existing_llc = database.get_llc(int(llc_id))
-        if not existing_llc:
-            return jsonify({'error': 'LLC not found'}), 404
+        llc_id_int = int(llc_id)
+    except ValueError:
+        return jsonify({'error': 'LLC ID must be a valid integer'}), 400
 
-        # Parse optional notes from request
-        try:
-            payload = request.get_json() or {}
-        except Exception:
-            payload = {}
+    # Parse optional notes from request
+    try:
+        payload = request.get_json() or {}
+    except Exception:
+        payload = {}
 
-        notes = payload.get('notes', '')
+    notes = payload.get('notes', '')
 
-        # Update LLC and log action in a transaction
-        conn = sqlite3.connect(database.DB_PATH)
-        cursor = conn.cursor()
+    # Update LLC and log action
+    response_dict, status_code = _update_llc_review_status(llc_id_int, 'rejected', notes)
 
-        # Update LLC status
-        cursor.execute('''
-            UPDATE llcs
-            SET status = ?, user_approved_at = CURRENT_TIMESTAMP
-            WHERE id = ?
-        ''', ('rejected', int(llc_id)))
+    if status_code == 200:
+        database.add_log(f"LLC {llc_id_int} rejected by user", "info")
 
-        # Log the action to audit trail
-        cursor.execute('''
-            INSERT INTO openclaw_review_log (llc_id, action, notes, timestamp)
-            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-        ''', (int(llc_id), 'rejected', notes))
-
-        conn.commit()
-        database.add_log(f"LLC {llc_id} rejected by user", "info")
-        return jsonify({'success': True, 'status': 'rejected'}), 200
-
-    except Exception as e:
-        if conn:
-            conn.rollback()
-        database.add_log(f"Reject LLC error: {traceback.format_exc()}", "error")
-        return jsonify({'error': 'Internal server error'}), 500
-
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+    return jsonify(response_dict), status_code
