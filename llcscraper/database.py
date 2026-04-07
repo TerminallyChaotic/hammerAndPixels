@@ -82,60 +82,92 @@ def init_db():
 
 def get_setting(key, default=None):
     """Get a setting from the database."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('SELECT value FROM settings WHERE key = ?', (key,))
-    result = cursor.fetchone()
-    conn.close()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('SELECT value FROM settings WHERE key = ?', (key,))
+        result = cursor.fetchone()
 
-    if result:
-        try:
-            return json.loads(result[0])
-        except (json.JSONDecodeError, TypeError):
-            return result[0]
-    return default
+        if result:
+            try:
+                return json.loads(result[0])
+            except (json.JSONDecodeError, TypeError):
+                return result[0]
+        return default
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def set_setting(key, value):
     """Save a setting to the database."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-    if isinstance(value, (dict, list)):
-        value = json.dumps(value)
+        if isinstance(value, (dict, list)):
+            value = json.dumps(value)
 
-    cursor.execute('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)', (key, str(value)))
-    conn.commit()
-    conn.close()
+        cursor.execute('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)', (key, str(value)))
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_all_settings():
     """Get all settings."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('SELECT key, value FROM settings')
-    results = cursor.fetchall()
-    conn.close()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('SELECT key, value FROM settings')
+        results = cursor.fetchall()
 
-    settings = {}
-    for key, value in results:
-        try:
-            settings[key] = json.loads(value)
-        except (json.JSONDecodeError, TypeError):
-            settings[key] = value
-    return settings
+        settings = {}
+        for key, value in results:
+            try:
+                settings[key] = json.loads(value)
+            except (json.JSONDecodeError, TypeError):
+                settings[key] = value
+        return settings
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 # --- LLC Records ---
 
 def is_llc_seen(filing_number):
     """Check if an LLC has already been recorded."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('SELECT 1 FROM llcs WHERE filing_number = ?', (filing_number,))
-    result = cursor.fetchone() is not None
-    conn.close()
-    return result
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('SELECT 1 FROM llcs WHERE filing_number = ?', (filing_number,))
+        result = cursor.fetchone() is not None
+        return result
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def save_llc(filing_number, business_name, filing_date=None, principal_address=None,
@@ -143,9 +175,11 @@ def save_llc(filing_number, business_name, filing_date=None, principal_address=N
              status='active', source='ct_sots', business_type='LLC',
              email_address=None, naics_code=None):
     """Save a new LLC record. Returns the new row id or None if duplicate."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
     try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
         cursor.execute('''
             INSERT OR IGNORE INTO llcs
             (filing_number, business_name, business_type, filing_date, principal_address,
@@ -164,137 +198,225 @@ def save_llc(filing_number, business_name, filing_date=None, principal_address=N
                 WHERE id = ?
             ''', (row_id,))
             conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
     finally:
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
     return row_id
 
 
 def get_llc(llc_id):
     """Get a single LLC by id."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM llcs WHERE id = ?', (llc_id,))
-    result = cursor.fetchone()
-    conn.close()
-    return dict(result) if result else None
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM llcs WHERE id = ?', (llc_id,))
+        result = cursor.fetchone()
+        return dict(result) if result else None
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def get_llc_by_filing_number(filing_number):
+    """Fetch LLC by filing number."""
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM llcs WHERE filing_number = ? LIMIT 1', (filing_number,))
+        result = cursor.fetchone()
+        return dict(result) if result else None
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def mark_openclaw_unreviewed(llc_id):
+    """Mark an LLC as not reviewed by OpenClaw."""
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('UPDATE llcs SET openclaw_reviewed = 0 WHERE id = ?', (llc_id,))
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_llcs(limit=50, offset=0, outreach_status=None, enrichment_status=None,
              has_email=None, search=None, date_from=None, date_to=None):
     """Get LLC records with optional filters."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
 
-    query = 'SELECT * FROM llcs WHERE 1=1'
-    params = []
+        query = 'SELECT * FROM llcs WHERE 1=1'
+        params = []
 
-    if outreach_status:
-        query += ' AND outreach_status = ?'
-        params.append(outreach_status)
+        if outreach_status:
+            query += ' AND outreach_status = ?'
+            params.append(outreach_status)
 
-    if enrichment_status:
-        query += ' AND enrichment_status = ?'
-        params.append(enrichment_status)
+        if enrichment_status:
+            query += ' AND enrichment_status = ?'
+            params.append(enrichment_status)
 
-    if has_email is not None:
-        if has_email:
-            query += ' AND email_address IS NOT NULL AND email_address != ""'
-        else:
-            query += ' AND (email_address IS NULL OR email_address = "")'
+        if has_email is not None:
+            if has_email:
+                query += ' AND email_address IS NOT NULL AND email_address != ""'
+            else:
+                query += ' AND (email_address IS NULL OR email_address = "")'
 
-    if search:
-        query += ' AND business_name LIKE ?'
-        params.append(f'%{search}%')
+        if search:
+            query += ' AND business_name LIKE ?'
+            params.append(f'%{search}%')
 
-    if date_from:
-        query += ' AND filing_date >= ?'
-        params.append(date_from)
+        if date_from:
+            query += ' AND filing_date >= ?'
+            params.append(date_from)
 
-    if date_to:
-        query += ' AND filing_date <= ?'
-        params.append(date_to)
+        if date_to:
+            query += ' AND filing_date <= ?'
+            params.append(date_to)
 
-    query += ' ORDER BY discovered_at DESC LIMIT ? OFFSET ?'
-    params.extend([limit, offset])
+        query += ' ORDER BY discovered_at DESC LIMIT ? OFFSET ?'
+        params.extend([limit, offset])
 
-    cursor.execute(query, params)
-    results = [dict(row) for row in cursor.fetchall()]
-    conn.close()
-    return results
+        cursor.execute(query, params)
+        results = [dict(row) for row in cursor.fetchall()]
+        return results
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_llc_count(outreach_status=None, enrichment_status=None, has_email=None):
     """Get count of LLCs matching filters."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-    query = 'SELECT COUNT(*) FROM llcs WHERE 1=1'
-    params = []
+        query = 'SELECT COUNT(*) FROM llcs WHERE 1=1'
+        params = []
 
-    if outreach_status:
-        query += ' AND outreach_status = ?'
-        params.append(outreach_status)
+        if outreach_status:
+            query += ' AND outreach_status = ?'
+            params.append(outreach_status)
 
-    if enrichment_status:
-        query += ' AND enrichment_status = ?'
-        params.append(enrichment_status)
+        if enrichment_status:
+            query += ' AND enrichment_status = ?'
+            params.append(enrichment_status)
 
-    if has_email is not None:
-        if has_email:
-            query += ' AND email_address IS NOT NULL AND email_address != ""'
-        else:
-            query += ' AND (email_address IS NULL OR email_address = "")'
+        if has_email is not None:
+            if has_email:
+                query += ' AND email_address IS NOT NULL AND email_address != ""'
+            else:
+                query += ' AND (email_address IS NULL OR email_address = "")'
 
-    cursor.execute(query, params)
-    result = cursor.fetchone()[0]
-    conn.close()
-    return result
+        cursor.execute(query, params)
+        result = cursor.fetchone()[0]
+        return result
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def update_llc_enrichment(llc_id, website_url=None, has_website=0,
                           email_address=None, phone=None, enrichment_status='enriched',
                           enrichment_notes=None):
     """Update enrichment fields for an LLC."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        UPDATE llcs SET
-            website_url = ?, has_website = ?, email_address = ?, phone = ?,
-            enrichment_status = ?, enriched_at = CURRENT_TIMESTAMP, enrichment_notes = ?
-        WHERE id = ?
-    ''', (website_url, has_website, email_address, phone, enrichment_status,
-          enrichment_notes, llc_id))
-    conn.commit()
-    conn.close()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE llcs SET
+                website_url = ?, has_website = ?, email_address = ?, phone = ?,
+                enrichment_status = ?, enriched_at = CURRENT_TIMESTAMP, enrichment_notes = ?
+            WHERE id = ?
+        ''', (website_url, has_website, email_address, phone, enrichment_status,
+              enrichment_notes, llc_id))
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def update_llc_outreach_status(llc_id, status, skip_reason=None):
     """Update outreach status for an LLC."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-    if status == 'approved':
-        cursor.execute('''
-            UPDATE llcs SET outreach_status = ?, approved_at = CURRENT_TIMESTAMP
-            WHERE id = ?
-        ''', (status, llc_id))
-    elif status == 'sent':
-        cursor.execute('''
-            UPDATE llcs SET outreach_status = ?, emailed_at = CURRENT_TIMESTAMP
-            WHERE id = ?
-        ''', (status, llc_id))
-    elif status == 'skipped':
-        cursor.execute('''
-            UPDATE llcs SET outreach_status = ?, skip_reason = ?
-            WHERE id = ?
-        ''', (status, skip_reason, llc_id))
-    else:
-        cursor.execute('UPDATE llcs SET outreach_status = ? WHERE id = ?', (status, llc_id))
+        if status == 'approved':
+            cursor.execute('''
+                UPDATE llcs SET outreach_status = ?, approved_at = CURRENT_TIMESTAMP
+                WHERE id = ?
+            ''', (status, llc_id))
+        elif status == 'sent':
+            cursor.execute('''
+                UPDATE llcs SET outreach_status = ?, emailed_at = CURRENT_TIMESTAMP
+                WHERE id = ?
+            ''', (status, llc_id))
+        elif status == 'skipped':
+            cursor.execute('''
+                UPDATE llcs SET outreach_status = ?, skip_reason = ?
+                WHERE id = ?
+            ''', (status, skip_reason, llc_id))
+        else:
+            cursor.execute('UPDATE llcs SET outreach_status = ? WHERE id = ?', (status, llc_id))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_pending_enrichment(limit=20):
@@ -311,164 +433,220 @@ def get_approved_for_email(limit=20):
 
 def log_email_sent(llc_id, to_address, subject, status='sent', error_message=None):
     """Log an email send attempt."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        INSERT INTO email_log (llc_id, to_address, subject, status, error_message)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (llc_id, to_address, subject, status, error_message))
-    conn.commit()
-    conn.close()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO email_log (llc_id, to_address, subject, status, error_message)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (llc_id, to_address, subject, status, error_message))
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_email_history(limit=50):
     """Get email send history with LLC info."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute('''
-        SELECT e.*, l.business_name, l.filing_number
-        FROM email_log e
-        JOIN llcs l ON e.llc_id = l.id
-        ORDER BY e.sent_at DESC
-        LIMIT ?
-    ''', (limit,))
-    results = [dict(row) for row in cursor.fetchall()]
-    conn.close()
-    return results
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT e.*, l.business_name, l.filing_number
+            FROM email_log e
+            JOIN llcs l ON e.llc_id = l.id
+            ORDER BY e.sent_at DESC
+            LIMIT ?
+        ''', (limit,))
+        results = [dict(row) for row in cursor.fetchall()]
+        return results
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_emails_sent_today():
     """Count emails sent today (for daily limit enforcement)."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        SELECT COUNT(*) FROM email_log
-        WHERE DATE(sent_at) = DATE('now') AND status = 'sent'
-    ''')
-    result = cursor.fetchone()[0]
-    conn.close()
-    return result
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT COUNT(*) FROM email_log
+            WHERE DATE(sent_at) = DATE('now') AND status = 'sent'
+        ''')
+        result = cursor.fetchone()[0]
+        return result
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 # --- Logs ---
 
 def add_log(message, status='info'):
     """Add a log entry."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('INSERT INTO logs (message, status) VALUES (?, ?)', (message, status))
-    conn.commit()
-    conn.close()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO logs (message, status) VALUES (?, ?)', (message, status))
+        conn.commit()
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def get_logs(limit=50):
     """Get recent logs."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute('''
-        SELECT timestamp, message, status
-        FROM logs
-        ORDER BY timestamp DESC
-        LIMIT ?
-    ''', (limit,))
-    results = cursor.fetchall()
-    conn.close()
-    return results
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT timestamp, message, status
+            FROM logs
+            ORDER BY timestamp DESC
+            LIMIT ?
+        ''', (limit,))
+        results = cursor.fetchall()
+        return results
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 # --- Stats ---
 
 def get_stats():
     """Get dashboard statistics."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-    stats = {}
-    cursor.execute('SELECT COUNT(*) FROM llcs')
-    stats['total_llcs'] = cursor.fetchone()[0]
+        stats = {}
+        cursor.execute('SELECT COUNT(*) FROM llcs')
+        stats['total_llcs'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE enrichment_status = 'pending'")
-    stats['pending_enrichment'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE enrichment_status = 'pending'")
+        stats['pending_enrichment'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE enrichment_status = 'enriched'")
-    stats['enriched'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE enrichment_status = 'enriched'")
+        stats['enriched'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'pending'")
-    stats['pending_outreach'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'pending'")
+        stats['pending_outreach'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'approved'")
-    stats['approved'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'approved'")
+        stats['approved'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'sent'")
-    stats['emails_sent'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'sent'")
+        stats['emails_sent'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'skipped'")
-    stats['skipped'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE outreach_status = 'skipped'")
+        stats['skipped'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE has_website = 1")
-    stats['have_website'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE has_website = 1")
+        stats['have_website'] = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM llcs WHERE email_address IS NOT NULL AND email_address != ''")
-    stats['have_email'] = cursor.fetchone()[0]
+        cursor.execute("SELECT COUNT(*) FROM llcs WHERE email_address IS NOT NULL AND email_address != ''")
+        stats['have_email'] = cursor.fetchone()[0]
 
-    cursor.execute('''
-        SELECT COUNT(*) FROM email_log
-        WHERE DATE(sent_at) = DATE('now') AND status = 'sent'
-    ''')
-    stats['emails_today'] = cursor.fetchone()[0]
+        cursor.execute('''
+            SELECT COUNT(*) FROM email_log
+            WHERE DATE(sent_at) = DATE('now') AND status = 'sent'
+        ''')
+        stats['emails_today'] = cursor.fetchone()[0]
 
-    conn.close()
-    return stats
+        return stats
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 # --- Migrations ---
 
 def run_migrations():
     """Run pending SQL migrations from migrations/ directory."""
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
 
-    migration_dir = os.path.join(os.path.dirname(__file__), 'migrations')
-    if not os.path.exists(migration_dir):
-        os.makedirs(migration_dir)
+        migration_dir = os.path.join(os.path.dirname(__file__), 'migrations')
+        if not os.path.exists(migration_dir):
+            os.makedirs(migration_dir)
 
-    migration_files = sorted(glob(os.path.join(migration_dir, '*.sql')))
+        migration_files = sorted(glob(os.path.join(migration_dir, '*.sql')))
 
-    if not migration_files:
-        print("✓ No migrations to run")
-        return
+        if not migration_files:
+            print("✓ No migrations to run")
+            return
 
-    for filepath in migration_files:
-        migration_file = os.path.basename(filepath)
-        with open(filepath, 'r') as f:
-            sql = f.read()
+        for filepath in migration_files:
+            migration_file = os.path.basename(filepath)
+            with open(filepath, 'r') as f:
+                sql = f.read()
 
-        # Split by semicolon and execute each statement separately
-        statements = [stmt.strip() for stmt in sql.split(';') if stmt.strip()]
-        success = True
-        for statement in statements:
-            try:
-                cursor.execute(statement)
-            except sqlite3.OperationalError as e:
-                # If column already exists, that's okay — just log and continue
-                if "already exists" in str(e).lower() or "duplicate column" in str(e).lower():
-                    print(f"  (column already exists, skipping)")
-                else:
+            # Split by semicolon and execute each statement separately
+            statements = [stmt.strip() for stmt in sql.split(';') if stmt.strip()]
+            success = True
+            for statement in statements:
+                try:
+                    cursor.execute(statement)
+                except sqlite3.OperationalError as e:
+                    # If column already exists, that's okay — just log and continue
+                    if "already exists" in str(e).lower() or "duplicate column" in str(e).lower():
+                        print(f"  (column already exists, skipping)")
+                    else:
+                        print(f"✗ Migration {migration_file} failed: {str(e)}")
+                        success = False
+                        break
+                except Exception as e:
                     print(f"✗ Migration {migration_file} failed: {str(e)}")
                     success = False
                     break
-            except Exception as e:
-                print(f"✗ Migration {migration_file} failed: {str(e)}")
-                success = False
-                break
 
-        if success:
-            conn.commit()
-            print(f"✓ Migration {migration_file} applied")
-        else:
-            conn.rollback()
+            if success:
+                conn.commit()
+                print(f"✓ Migration {migration_file} applied")
+            else:
+                conn.rollback()
 
-    cursor.close()
-    conn.close()
-    print("✓ Migrations complete")
+        print("✓ Migrations complete")
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
