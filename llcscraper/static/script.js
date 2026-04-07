@@ -10,15 +10,57 @@ const SMTP_PRESETS = {
 
 // --- Tab switching ---
 
-function showTab(tabName) {
+function showTab(tabName, buttonElement) {
+    event.preventDefault();
+
+    const tabElement = document.getElementById(tabName);
+    if (!tabElement) {
+        console.error('Tab not found:', tabName);
+        return;
+    }
+
     const contents = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
 
     contents.forEach(c => c.classList.remove('active'));
-    buttons.forEach(b => b.classList.remove('active'));
+    buttons.forEach(b => {
+        b.classList.remove('active');
+        b.removeAttribute('aria-current');
+    });
 
-    document.getElementById(tabName).classList.add('active');
-    event.target.classList.add('active');
+    tabElement.classList.add('active');
+    buttonElement.classList.add('active');
+    buttonElement.setAttribute('aria-current', 'page');
+
+    // Lazy-load data
+    if (tabName === 'dashboard') loadStats();
+    else if (tabName === 'llcs') loadLLCs();
+    else if (tabName === 'queue') loadEmailQueue();
+    else if (tabName === 'history') loadEmailHistory();
+    else if (tabName === 'logs') loadLogs();
+}
+
+function navShowTab(event, navElement, tabName) {
+    event.preventDefault();
+
+    const tabElement = document.getElementById(tabName);
+    if (!tabElement) {
+        console.error('Tab not found:', tabName);
+        return;
+    }
+
+    const contents = document.querySelectorAll('.tab-content');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    contents.forEach(c => c.classList.remove('active'));
+    navItems.forEach(n => {
+        n.classList.remove('active');
+        n.removeAttribute('aria-current');
+    });
+
+    tabElement.classList.add('active');
+    navElement.classList.add('active');
+    navElement.setAttribute('aria-current', 'page');
 
     // Lazy-load data
     if (tabName === 'dashboard') loadStats();
@@ -450,6 +492,70 @@ function runEnricherNow() {
                 loadStats();
             } else {
                 showMessage('Error: ' + data.message, 'error');
+            }
+        })
+        .catch(err => showMessage('Error: ' + err.message, 'error'));
+}
+
+// --- Manual send ---
+
+function manualPreview() {
+    const businessName = document.getElementById('manual-business-name').value.trim();
+    const email = document.getElementById('manual-email').value.trim();
+
+    if (!businessName || !email) {
+        showMessage('Enter both a business name and email address', 'error');
+        return;
+    }
+
+    fetch('/api/manual-preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ business_name: businessName, email_address: email })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                showMessage(data.error, 'error');
+                return;
+            }
+            document.getElementById('preview-subject').textContent = 'Subject: ' + data.subject;
+            document.getElementById('preview-to').textContent = 'To: ' + data.to;
+            document.getElementById('preview-body').innerHTML = data.html;
+            document.getElementById('preview-send-btn').onclick = () => {
+                closeModal();
+                manualSend();
+            };
+            document.getElementById('modal-overlay').classList.add('active');
+        })
+        .catch(err => showMessage('Error: ' + err.message, 'error'));
+}
+
+function manualSend() {
+    const businessName = document.getElementById('manual-business-name').value.trim();
+    const email = document.getElementById('manual-email').value.trim();
+
+    if (!businessName || !email) {
+        showMessage('Enter both a business name and email address', 'error');
+        return;
+    }
+
+    if (!confirm('Send outreach email to ' + businessName + ' (' + email + ')?')) return;
+
+    fetch('/api/manual-send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ business_name: businessName, email_address: email })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                showMessage('Email sent to ' + data.business_name + '!', 'success');
+                document.getElementById('manual-business-name').value = '';
+                document.getElementById('manual-email').value = '';
+                loadStats();
+            } else {
+                showMessage('Send failed: ' + (data.error || 'unknown error'), 'error');
             }
         })
         .catch(err => showMessage('Error: ' + err.message, 'error'));
