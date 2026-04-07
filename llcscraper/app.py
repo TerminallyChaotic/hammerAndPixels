@@ -22,7 +22,12 @@ app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(32))
 database.init_db()
 
 # Run migrations
-database.run_migrations()
+try:
+    database.run_migrations()
+except Exception as e:
+    print(f"✗ FATAL: Database migrations failed: {str(e)}")
+    print("Cannot start app without successful migration. Fix and restart.")
+    exit(1)
 
 
 def apply_env_defaults():

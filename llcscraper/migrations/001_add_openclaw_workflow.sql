@@ -1,3 +1,7 @@
+-- NOTE: SQLite doesn't support IF NOT EXISTS for ALTER TABLE ADD COLUMN.
+-- Idempotency is handled by the migration runner catching "already exists" errors.
+-- Running this file twice is safe because the runner skips columns that exist.
+--
 -- Add columns to existing llcs table for OpenClaw workflow
 -- Note: Using SQLite syntax (INTEGER, DATETIME, DEFAULT) to match actual database
 ALTER TABLE llcs ADD COLUMN status VARCHAR(50) DEFAULT 'new';
