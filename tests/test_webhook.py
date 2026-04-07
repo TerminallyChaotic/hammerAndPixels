@@ -198,3 +198,167 @@ def test_webhook_with_invalid_json(client):
     assert response.status_code == 500
     data = response.get_json()
     assert 'error' in data
+
+
+def test_get_pending_review_llcs(client):
+    """Test GET /api/llc/pending-review returns LLCs awaiting curation."""
+    import database
+
+    # Insert test LLCs
+    payload = {
+        "llcs": [
+            {"filing_number": "p1", "business_name": "Pending 1", "filing_date": "2026-04-07",
+             "address": "123 Main St", "registered_agent": "Agent 1"},
+            {"filing_number": "p2", "business_name": "Pending 2", "filing_date": "2026-04-07",
+             "address": "456 Oak Ave", "registered_agent": "Agent 2"}
+        ]
+    }
+    client.post('/api/llc/webhook', data=json.dumps(payload), content_type='application/json')
+
+    response = client.get('/api/llc/pending-review')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['count'] >= 2
+    assert len(data['llcs']) >= 2
+
+    # Verify all are pending_review status
+    for llc in data['llcs']:
+        assert llc['status'] == 'pending_review'
+
+
+def test_get_pending_review_empty(client):
+    """Test pending-review returns empty list if no pending LLCs."""
+    response = client.get('/api/llc/pending-review')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['count'] == 0
+    assert data['llcs'] == []
+
+
+def test_get_pending_review_with_last_hours_filter(client):
+    """Test ?last_hours=24 filters to recent LLCs only."""
+    # Insert test LLCs via webhook
+    payload = {
+        "llcs": [
+            {"filing_number": "recent", "business_name": "Recent LLC", "filing_date": "2026-04-07",
+             "address": "123 Main", "registered_agent": "Agent"}
+        ]
+    }
+    client.post('/api/llc/webhook', data=json.dumps(payload), content_type='application/json')
+
+    # Query with last_hours=24 (should include the just-created LLC)
+    response = client.get('/api/llc/pending-review?last_hours=24')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['count'] >= 1
+
+    # Query with last_hours=0 (last 0 hours = none)
+    response = client.get('/api/llc/pending-review?last_hours=0')
+    assert response.status_code == 200
+    data = response.get_json()
+    # Might be empty or might have LLCs created in the current second, just check it doesn't error
+    assert 'count' in data
+
+
+def test_get_pending_review_with_date_range(client):
+    """Test date_from and date_to parameters."""
+    from datetime import datetime, timedelta
+
+    # Insert test LLCs
+    payload = {
+        "llcs": [
+            {"filing_number": "date_test_1", "business_name": "Date Test LLC 1", "filing_date": "2026-04-07",
+             "address": "123 Main", "registered_agent": "Agent"},
+            {"filing_number": "date_test_2", "business_name": "Date Test LLC 2", "filing_date": "2026-04-07",
+             "address": "456 Oak", "registered_agent": "Agent"}
+        ]
+    }
+    client.post('/api/llc/webhook', data=json.dumps(payload), content_type='application/json')
+
+    # Use a very wide date range that will definitely include the LLCs
+    # (since we just created them, they're in the current datetime range)
+    far_past = datetime.utcnow() - timedelta(days=30)
+    far_future = datetime.utcnow() + timedelta(days=30)
+
+    # Query with wide date range that includes the insertion time
+    response = client.get(f'/api/llc/pending-review?date_from={far_past.isoformat()}&date_to={far_future.isoformat()}')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['count'] >= 2, f"Expected at least 2 LLCs, got {data['count']}"
+
+    # Query with date range that excludes today (in the past)
+    way_past = (datetime.utcnow() - timedelta(days=2)).isoformat()
+    even_more_past = (datetime.utcnow() - timedelta(days=1)).isoformat()
+
+    response = client.get(f'/api/llc/pending-review?date_from={way_past}&date_to={even_more_past}')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['count'] == 0, f"Expected 0 LLCs in the past, got {data['count']}"
+
+
+def test_get_pending_review_invalid_last_hours(client):
+    """Test that invalid last_hours parameter returns 400 error."""
+    response = client.get('/api/llc/pending-review?last_hours=not_a_number')
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+
+
+def test_get_pending_review_invalid_date_from(client):
+    """Test that invalid date_from parameter returns 400 error."""
+    response = client.get('/api/llc/pending-review?date_from=not-a-valid-date')
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+
+
+def test_get_pending_review_invalid_date_to(client):
+    """Test that invalid date_to parameter returns 400 error."""
+    response = client.get('/api/llc/pending-review?date_to=not-a-valid-date')
+    assert response.status_code == 400
+    data = response.get_json()
+    assert 'error' in data
+
+
+def test_get_pending_review_ordered_by_creation_date(client):
+    """Test that pending-review returns LLCs ordered by creation date ascending (FIFO)."""
+    import time
+    import database
+
+    # Insert first LLC
+    payload1 = {
+        "llcs": [
+            {"filing_number": "first", "business_name": "First LLC", "filing_date": "2026-04-07",
+             "address": "123 Main", "registered_agent": "Agent"}
+        ]
+    }
+    client.post('/api/llc/webhook', data=json.dumps(payload1), content_type='application/json')
+
+    # Small delay to ensure different timestamps
+    time.sleep(0.1)
+
+    # Insert second LLC
+    payload2 = {
+        "llcs": [
+            {"filing_number": "second", "business_name": "Second LLC", "filing_date": "2026-04-07",
+             "address": "456 Oak", "registered_agent": "Agent"}
+        ]
+    }
+    client.post('/api/llc/webhook', data=json.dumps(payload2), content_type='application/json')
+
+    # Get pending-review LLCs
+    response = client.get('/api/llc/pending-review')
+    assert response.status_code == 200
+    data = response.get_json()
+
+    # Find our two test LLCs
+    llcs = data['llcs']
+    first_idx = next((i for i, llc in enumerate(llcs) if llc['filing_number'] == 'first'), None)
+    second_idx = next((i for i, llc in enumerate(llcs) if llc['filing_number'] == 'second'), None)
+
+    # Both should be present
+    assert first_idx is not None
+    assert second_idx is not None
+
+    # First should come before second (FIFO order)
+    assert first_idx < second_idx

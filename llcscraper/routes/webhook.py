@@ -3,6 +3,8 @@ import database
 import traceback
 from functools import wraps
 import os
+from datetime import datetime, timedelta
+import sqlite3
 
 webhook_bp = Blueprint('webhook', __name__, url_prefix='/api/llc')
 
@@ -78,4 +80,86 @@ def receive_llcs():
     except Exception as e:
         # Log full traceback for debugging, but don't expose it to caller
         database.add_log(f"Webhook error: {traceback.format_exc()}", "error")
+        return jsonify({'error': 'Internal server error'}), 500
+
+
+@webhook_bp.route('/pending-review', methods=['GET'])
+@require_api_key
+def get_pending_review():
+    """Return LLCs with status='pending_review' for OpenClaw curation.
+
+    Query parameters:
+    - last_hours: Get LLCs created in last N hours (e.g., ?last_hours=24)
+    - date_from: ISO format datetime for range start
+    - date_to: ISO format datetime for range end
+
+    Returns: {llcs: [...], count: N}
+    """
+    try:
+        conn = sqlite3.connect(database.DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        # Build query with optional date filtering
+        query = """
+            SELECT id, filing_number, business_name, filing_date, principal_address,
+                   registered_agent, status, openclaw_reviewed, discovered_at
+            FROM llcs
+            WHERE status = 'pending_review'
+        """
+        params = []
+
+        # Handle last_hours filter
+        last_hours = request.args.get('last_hours')
+        if last_hours:
+            try:
+                hours = int(last_hours)
+                cutoff_time = datetime.utcnow() - timedelta(hours=hours)
+                # Convert to SQLite format (space instead of T)
+                cutoff_str = cutoff_time.isoformat().replace('T', ' ')
+                query += " AND discovered_at >= ?"
+                params.append(cutoff_str)
+            except ValueError:
+                return jsonify({'error': 'last_hours must be an integer'}), 400
+
+        # Handle date_from / date_to range
+        date_from = request.args.get('date_from')
+        date_to = request.args.get('date_to')
+
+        if date_from:
+            try:
+                datetime.fromisoformat(date_from)  # Validate format
+                # Convert ISO format to SQLite format (space instead of T)
+                date_from_str = date_from.replace('T', ' ')
+                query += " AND discovered_at >= ?"
+                params.append(date_from_str)
+            except ValueError:
+                return jsonify({'error': 'date_from must be ISO format (e.g., 2026-04-07T00:00:00)'}), 400
+
+        if date_to:
+            try:
+                datetime.fromisoformat(date_to)  # Validate format
+                # Convert ISO format to SQLite format (space instead of T)
+                date_to_str = date_to.replace('T', ' ')
+                query += " AND discovered_at <= ?"
+                params.append(date_to_str)
+            except ValueError:
+                return jsonify({'error': 'date_to must be ISO format (e.g., 2026-04-07T23:59:59)'}), 400
+
+        # Note: If both date_from/to and last_hours provided, both filters are applied (AND logic)
+
+        # Order by creation date ascending (FIFO for OpenClaw)
+        query += " ORDER BY discovered_at ASC"
+
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        llcs = [dict(row) for row in rows]
+        database.add_log(f"Pending-review query returned {len(llcs)} LLC(s)", "info")
+        return jsonify({'llcs': llcs, 'count': len(llcs)}), 200
+
+    except Exception as e:
+        database.add_log(f"Pending-review query error: {traceback.format_exc()}", "error")
         return jsonify({'error': 'Internal server error'}), 500
