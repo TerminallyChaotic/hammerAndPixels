@@ -495,6 +495,15 @@ main > section { padding-block: var(--section-pad); }
   background: rgba(168, 152, 133, 0.14);
   border: 1px dashed var(--stone);
 }
+.visit-media img.visit-map {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  box-shadow: var(--shadow-soft);
+}
 
 .visit-upsell {
   max-width: 48rem;
