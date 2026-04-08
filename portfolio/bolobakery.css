@@ -589,3 +589,27 @@ main > section { padding-block: var(--section-pad); }
 @media (max-width: 400px) {
   .brand { font-size: 1.5rem; }
 }
+
+/* ----- Real photos (replaced placeholders) ----- */
+.hero-media .hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.bake-card > img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
