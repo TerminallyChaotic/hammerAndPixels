@@ -450,52 +450,10 @@ p { margin: 0 0 1rem; }
   vertical-align: middle;
   white-space: nowrap;
 }
-.menu-banner {
-  position: relative;
-  margin: 4rem 0 2rem;
-  overflow: hidden;
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
-          mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
-}
-.menu-banner img {
-  width: 100%;
-  aspect-ratio: 21 / 7;
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
-}
-.menu-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
-  pointer-events: none;
-}
-.menu-banner-caption {
-  position: absolute;
-  left: 50%;
-  bottom: 1.25rem;
-  transform: translateX(-50%);
-  margin: 0;
-  z-index: 1;
-}
-.menu-banner-caption span {
-  font-family: var(--font-script);
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  color: var(--cream);
-  line-height: 1;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-}
-
 .menu-footnote {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
   color: var(--text-muted);
-}
-
-@media (max-width: 720px) {
-  .menu-banner img { aspect-ratio: 16 / 10; }
 }
 
 /* ---------- Private dining ---------- */
