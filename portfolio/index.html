@@ -70,6 +70,38 @@
             font-weight: 600;
             text-align: center;
             padding: 2rem;
+            overflow: hidden;
+        }
+
+        .portfolio-card-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-card-preview:has(img) {
+            padding: 0;
+            background: none;
+        }
+
+        .portfolio-card-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.4rem 0.7rem;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .portfolio-card {
+            position: relative;
         }
 
         .portfolio-card-content {
@@ -169,6 +201,19 @@
             </div>
 
             <div class="portfolio-grid">
+                <!-- Bolo Bakery (LIVE) -->
+                <div class="portfolio-card" data-reveal="fade-up" data-delay="50">
+                    <span class="portfolio-card-badge">Live Demo</span>
+                    <div class="portfolio-card-preview">
+                        <img src="BoloBakeryAssets/hero-background.jpg" alt="Interior of Bolo Bakery — fresh-built demo site" loading="lazy">
+                    </div>
+                    <div class="portfolio-card-content">
+                        <h3>Bolo Bakery</h3>
+                        <p>A Portuguese-American family bakery in small-town Connecticut. Warm, rustic, and unhurried — with fresh-from-the-oven product shots, a wood-fired oven story, and full hours.</p>
+                        <a href="bolobakery.html" class="btn btn-primary">View Demo</a>
+                    </div>
+                </div>
+
                 <!-- Embers & Oak Restaurant -->
                 <div class="portfolio-card" data-reveal="fade-up" data-delay="100">
                     <div class="portfolio-card-preview">
