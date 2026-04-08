@@ -1,334 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bolo Bakery & Café - Portuguese-style bakery in Plainville, CT. Fresh pastries, danishes, scones, espresso, and breakfast served daily.">
-    <title>Bolo Bakery & Café | Plainville, CT</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="bolobakery.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bolo Bakery — a Portuguese-American family bakery in small-town Connecticut. Fresh bread, quiet mornings.">
+  <title>Bolo Bakery — Fresh bread, quiet mornings.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bolobakery.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ========== DEMO BANNER ========== -->
-    <div class="demo-banner" role="alert">
-        <p><strong>Demo Site</strong> — This is a concept design by <a href="../index.html">Hammer & Pixels</a> to show what Bolo Bakery's online presence could look like.</p>
+  <header class="site-nav" id="site-nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#main" aria-label="Bolo Bakery — home">Bolo</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#story">Story</a></li>
+          <li><a href="#bakes">Bakes</a></li>
+          <li><a href="#visit">Visit</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links-mobile" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <!-- ========== NAVIGATION ========== -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="#" class="logo" aria-label="Bolo Bakery - Home">
-                <span class="logo-text">bolo</span>
-                <span class="logo-sub">bakery & café</span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-            </button>
-            <ul class="nav-menu" id="nav-menu" role="menubar">
-                <li role="none"><a href="#about" role="menuitem">About</a></li>
-                <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
-                <li role="none"><a href="#espresso" role="menuitem">Espresso Bar</a></li>
-                <li role="none"><a href="#visit" role="menuitem">Visit</a></li>
-                <li role="none"><a href="#visit" role="menuitem" class="nav-cta">Find Us</a></li>
-            </ul>
-        </div>
-    </nav>
+  <main id="main">
 
-    <!-- ========== HERO ========== -->
-    <header class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Plainville, CT</div>
-            <h1 class="hero-title">Start your morning<br><span class="accent">the right way.</span></h1>
-            <p class="hero-subtitle">Portuguese-inspired pastries, flaky danishes, buttery scones, and espresso drinks — baked fresh and brewed with care every single morning.</p>
-            <div class="hero-actions">
-                <a href="#menu" class="btn btn-primary">See the Menu</a>
-                <a href="#visit" class="btn btn-secondary">Visit Us</a>
-            </div>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-media" aria-hidden="true">
+        <div class="img-placeholder hero-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>image pending</span>
         </div>
-        <div class="hero-visual">
-            <div class="image-placeholder hero-img">
-                <span class="placeholder-icon">☕</span>
-                <span class="placeholder-text">Hero Photo</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- ========== ABOUT ========== -->
-    <section id="about" class="about section">
-        <div class="container">
-            <div class="about-layout">
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <span class="placeholder-icon">🧁</span>
-                        <span class="placeholder-text">Interior / Team Photo</span>
-                    </div>
-                </div>
-                <div class="about-content">
-                    <span class="section-label">Our Story</span>
-                    <h2 class="section-title">A little bakery<br><span class="accent">with a lot of heart.</span></h2>
-                    <p>Bolo Bakery & Café is Plainville's home for Portuguese-inspired baked goods and fresh breakfast. We bake everything from scratch every morning using quality ingredients and time-tested recipes.</p>
-                    <p>Whether you're grabbing a pastel de nata on your way to work, sitting down for fluffy pancakes, or picking up a dozen pastries for the office — we're here to make your day a little sweeter.</p>
-                    <div class="about-features">
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <span>Baked fresh daily</span>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 6V12L16 14" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <span>Open early for you</span>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/>
-                                </svg>
-                            </div>
-                            <span>Made with love</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="hero-tint"></div>
+      </div>
+      <div class="container hero-content">
+        <p class="label hero-eyebrow" data-reveal>Farmington Valley · Since 1987</p>
+        <h1 id="hero-heading" data-reveal>Fresh bread,<br>quiet mornings.</h1>
+        <p class="hero-sub" data-reveal>A small Portuguese-American bakery in small-town Connecticut. Three generations, one oven, and the smell of something good in the air before the sun is up.</p>
+        <a class="btn-primary" href="#bakes" data-reveal>See today's bakes</a>
+      </div>
+      <a class="hero-scroll-hint" href="#story" aria-label="Scroll to story">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
     </section>
 
-    <!-- ========== MENU ========== -->
-    <section id="menu" class="menu section">
-        <div class="container">
-            <header class="section-header">
-                <span class="section-label">Our Menu</span>
-                <h2 class="section-title">Pastries, breakfast,<br><span class="accent">and everything in between.</span></h2>
-            </header>
-
-            <div class="menu-grid">
-                <div class="menu-card">
-                    <div class="menu-card-header">
-                        <span class="menu-emoji">🥐</span>
-                        <h3>Pastries & Baked Goods</h3>
-                    </div>
-                    <ul class="menu-list">
-                        <li>Pastel de Nata <span class="tag">Portuguese classic</span></li>
-                        <li>Butter Croissants</li>
-                        <li>Danishes — assorted flavors</li>
-                        <li>Scones — blueberry, cranberry, chocolate</li>
-                        <li>Muffins — daily rotation</li>
-                        <li>Cookies & Biscotti</li>
-                        <li>Tarts — fruit & custard</li>
-                    </ul>
-                </div>
-
-                <div class="menu-card">
-                    <div class="menu-card-header">
-                        <span class="menu-emoji">🍳</span>
-                        <h3>Breakfast</h3>
-                    </div>
-                    <ul class="menu-list">
-                        <li>Pancakes <span class="tag">fluffy & golden</span></li>
-                        <li>Omelets — build your own</li>
-                        <li>Scrambles — veggie, meat, combo</li>
-                        <li>Breakfast Sandwiches</li>
-                        <li>French Toast</li>
-                        <li>Avocado Toast</li>
-                        <li>Fresh Fruit & Yogurt</li>
-                    </ul>
-                </div>
-
-                <div class="menu-card">
-                    <div class="menu-card-header">
-                        <span class="menu-emoji">🥪</span>
-                        <h3>Lunch & Savory</h3>
-                    </div>
-                    <ul class="menu-list">
-                        <li>Sandwiches — deli & specialty</li>
-                        <li>Soups — seasonal rotation</li>
-                        <li>Quiche — daily selection</li>
-                        <li>Savory pastries</li>
-                        <li>Salads</li>
-                    </ul>
-                </div>
-
-                <div class="menu-card">
-                    <div class="menu-card-header">
-                        <span class="menu-emoji">🎂</span>
-                        <h3>Custom Orders</h3>
-                    </div>
-                    <ul class="menu-list">
-                        <li>Custom cakes & cupcakes</li>
-                        <li>Pastry trays for events</li>
-                        <li>Cookie platters</li>
-                        <li>Catering packages</li>
-                        <li>Holiday specials <span class="tag">seasonal</span></li>
-                    </ul>
-                </div>
-            </div>
+    <section id="story" class="story" aria-labelledby="story-heading">
+      <div class="container story-grid">
+        <figure class="story-media" data-reveal>
+          <div class="img-placeholder story-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span>image pending</span>
+          </div>
+          <figcaption class="label">The oven</figcaption>
+        </figure>
+        <div class="story-copy" data-reveal>
+          <p class="label">Our story</p>
+          <h2 id="story-heading">A small oven, a long line of mornings.</h2>
+          <p>Bolo started in a Connecticut kitchen with a grandmother, a rolling pin, and a stack of recipes brought over from Portugal. Three generations later, the oven is a little bigger, the kitchen has a sign out front, and the recipes are still the same.</p>
+          <p>We bake in small batches, by hand, every morning. Some days we sell out. On those days, we are sorry — and also a little proud.</p>
+          <p class="hand signature">— The Ferreira Family</p>
         </div>
+      </div>
     </section>
 
-    <!-- ========== ESPRESSO BAR ========== -->
-    <section id="espresso" class="espresso section">
-        <div class="container">
-            <div class="espresso-layout">
-                <div class="espresso-content">
-                    <span class="section-label">Espresso Bar</span>
-                    <h2 class="section-title">Your morning fuel.<br><span class="accent">Crafted right.</span></h2>
-                    <p>Our espresso bar serves up the perfect companion to your pastry. Whether you're a straight espresso person or a lavender latte lover, we've got you covered.</p>
-                    <div class="drink-grid">
-                        <div class="drink-item">
-                            <span class="drink-name">Espresso</span>
-                            <span class="drink-desc">Single or double</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Latte</span>
-                            <span class="drink-desc">Hot or iced</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Cappuccino</span>
-                            <span class="drink-desc">Traditional</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Americano</span>
-                            <span class="drink-desc">Bold & smooth</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Mocha</span>
-                            <span class="drink-desc">Chocolate + espresso</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Drip Coffee</span>
-                            <span class="drink-desc">Fresh brewed</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Hot Tea</span>
-                            <span class="drink-desc">Assorted varieties</span>
-                        </div>
-                        <div class="drink-item">
-                            <span class="drink-name">Seasonal Specials</span>
-                            <span class="drink-desc">Ask us!</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="espresso-visual">
-                    <div class="image-placeholder">
-                        <span class="placeholder-icon">☕</span>
-                        <span class="placeholder-text">Espresso Bar Photo</span>
-                    </div>
-                </div>
+    <section id="bakes" class="bakes" aria-labelledby="bakes-heading">
+      <div class="container">
+        <header class="bakes-header" data-reveal>
+          <p class="hand">today's bake</p>
+          <h2 id="bakes-heading">Small batches, baked by hand.</h2>
+          <p class="bakes-intro">A rotating selection from this morning's oven. When it's gone, it's gone — and tomorrow we start again.</p>
+        </header>
+        <ul class="bakes-grid" role="list">
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Pastéis de Nata</h3>
+              <p>Portuguese custard tarts with a lacquered, cinnamon-dusted top.</p>
+              <p class="price">$3.50</p>
             </div>
-        </div>
+          </li>
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Country Loaf</h3>
+              <p>Slow-fermented sourdough with a dark, crackling crust.</p>
+              <p class="price">$8.00</p>
+            </div>
+          </li>
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Bolo de Arroz</h3>
+              <p>Tender rice-flour muffin with vanilla and lemon zest.</p>
+              <p class="price">$2.75</p>
+            </div>
+          </li>
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Almond Croissant</h3>
+              <p>Twice-baked with frangipane and a generous snowfall of sugar.</p>
+              <p class="price">$4.25</p>
+            </div>
+          </li>
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Sourdough Miche</h3>
+              <p>A large, heritage-grain round for the table. Feeds a small crowd.</p>
+              <p class="price">$14.00</p>
+            </div>
+          </li>
+          <li class="bake-card" data-reveal>
+            <div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>image pending</span></div>
+            <div class="bake-body">
+              <h3>Broa de Milho</h3>
+              <p>Portuguese corn bread with a quiet sweetness and a dense crumb.</p>
+              <p class="price">$7.00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <!-- ========== VISIT ========== -->
-    <section id="visit" class="visit section">
-        <div class="container">
-            <header class="section-header">
-                <span class="section-label">Visit Us</span>
-                <h2 class="section-title">Come say <span class="accent">bom dia.</span></h2>
-            </header>
-
-            <div class="visit-layout">
-                <div class="visit-card">
-                    <h3>Hours</h3>
-                    <div class="hours-list">
-                        <div class="hours-row">
-                            <span class="day">Monday – Friday</span>
-                            <span class="time">6:30 AM – 3:00 PM</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="day">Saturday</span>
-                            <span class="time">7:00 AM – 3:00 PM</span>
-                        </div>
-                        <div class="hours-row">
-                            <span class="day">Sunday</span>
-                            <span class="time">7:00 AM – 2:00 PM</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="visit-card">
-                    <h3>Find Us</h3>
-                    <address>
-                        33 Whiting Street<br>
-                        Plainville, CT 06062
-                    </address>
-                    <div class="contact-links">
-                        <a href="tel:8604104292" class="contact-link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                            (860) 410-4292
-                        </a>
-                        <a href="mailto:info@bolobakery.com" class="contact-link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6L12 13 2 6"/></svg>
-                            info@bolobakery.com
-                        </a>
-                    </div>
-                </div>
-
-                <div class="visit-card visit-card-wide">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2976.5!2d-72.8560!3d41.6748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e7b1a1a1a1a1a1%3A0xabcdef1234567890!2s33+Whiting+St%2C+Plainville%2C+CT+06062!5e0!3m2!1sen!2sus!4v1234567890"
-                        width="100%"
-                        height="300"
-                        style="border:0; border-radius: 12px;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Bolo Bakery location on Google Maps">
-                    </iframe>
-                </div>
-            </div>
+    <section id="visit" class="visit" aria-labelledby="visit-heading">
+      <div class="container visit-grid">
+        <div class="visit-copy" data-reveal>
+          <p class="label">Visit</p>
+          <h2 id="visit-heading">Come say good morning.</h2>
+          <address class="visit-address">
+            42 Main Street<br>
+            Collinsville, CT 06019
+          </address>
+          <dl class="visit-hours">
+            <div><dt>Tue – Fri</dt><dd>6:30 am – 2:00 pm</dd></div>
+            <div><dt>Saturday</dt><dd>7:00 am – 3:00 pm</dd></div>
+            <div><dt>Sunday</dt><dd>7:00 am – 1:00 pm</dd></div>
+            <div><dt>Monday</dt><dd>Closed (we're resting)</dd></div>
+          </dl>
+          <p class="visit-phone">
+            <a href="tel:+18605552253">(860) 555-BAKE</a>
+          </p>
+          <p class="visit-walkin">Walk-ins welcome.</p>
         </div>
+        <figure class="visit-media" data-reveal>
+          <div class="img-placeholder visit-map">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>map pending</span>
+          </div>
+        </figure>
+      </div>
+      <p class="visit-upsell" data-reveal><em>We also do custom orders for weddings, birthdays, and celebrations. Ask at the counter or call ahead.</em></p>
     </section>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="footer-logo">bolo</span>
-                    <span class="footer-logo-sub">bakery & café</span>
-                    <p>Portuguese-inspired pastries and café in Plainville, CT.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#menu">Menu</a>
-                    <a href="#espresso">Espresso</a>
-                    <a href="#visit">Visit</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Bolo Bakery & Café. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  </main>
 
-    <script>
-        // Mobile nav toggle
-        const toggle = document.querySelector('.nav-toggle');
-        const menu = document.querySelector('.nav-menu');
-        if (toggle) {
-            toggle.addEventListener('click', () => {
-                const expanded = toggle.getAttribute('aria-expanded') === 'true';
-                toggle.setAttribute('aria-expanded', !expanded);
-                menu.classList.toggle('open');
-            });
-        }
+  <footer id="contact" class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand">Bolo</p>
+      <ul class="footer-social" aria-label="Social media">
+        <li><a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a></li>
+        <li><a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a></li>
+      </ul>
+      <p class="footer-tagline">Baked fresh daily since 1987.</p>
+      <div class="hp-attribution">
+        This is a demo site by <strong>Hammer &amp; Pixels</strong> — web design &amp; IT support in the Farmington Valley. Want a site like this for your business? <a href="../index.html#contact">Let's talk →</a>
+      </div>
+    </div>
+  </footer>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-    </script>
+  <script src="bolobakery.js" defer></script>
 </body>
 </html>
