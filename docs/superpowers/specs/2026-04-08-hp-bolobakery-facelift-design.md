@@ -48,6 +48,16 @@ For every image slot that is waiting for a real photo, render a crafted placehol
 
 The placeholder should read as deliberate and intentional — never as broken.
 
+### Fake-data convention (applies to every demo in the series)
+
+To keep demos obviously fictional and legally safe:
+
+- **Do not name any real or plausible individuals or families.** No surnames, no personal first names attached to the business. Use generic collective references only — "the bakers", "the team", "your neighborhood [thing]", etc.
+- **Every street address is `123 Main Street`.** The town, state, and zip can be anything that fits the demo (e.g., `123 Main Street, Collinsville, CT 06019`).
+- **Every phone number is `(860) 123-4567`.** Corresponding `tel:` href is `tel:+18601234567`.
+- **Every email is a generic handle** at the fake business domain (e.g., `hello@bolobakery.example`). Use `.example` TLD to guarantee it won't resolve.
+- These rules override any copy suggestions elsewhere in the spec. Apply to all sections, including footers, contact forms, schema.org metadata, and any passing mentions in about/story sections.
+
 ### H&P attribution pattern
 
 Every demo ends its footer with a `<div class="hp-attribution">` containing a single small muted centered line:
@@ -157,7 +167,8 @@ Approach A (tasteful micro-motion only):
 - Short sentences. Quiet confidence. No hype.
 - Zero emoji, zero exclamation marks.
 - One or two Portuguese words sprinkled naturally, never translated inline — context carries them.
-- Believable-example level: real-sounding but clearly a sample. Fake phone `(860) 555-BAKE`. Fake address `42 Main Street, Collinsville, CT 06019`.
+- No real or plausible person/family names. Signature line reads "— The bakers at Bolo" (collective, no surname).
+- Address `123 Main Street, Collinsville, CT 06019` and phone `(860) 123-4567` per the global fake-data convention.
 
 ### Image placeholders (the slots that need photos later)
 
