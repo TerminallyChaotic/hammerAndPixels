@@ -3,182 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of custom websites by Hammer and Pixels. See how we've helped local businesses look great and work right.">
+    <meta name="description" content="Recent custom websites built by Hammer & Pixels. Each one hand-designed for a local business in the Farmington Valley.">
     <title>Portfolio | Hammer & Pixels | Web Design & IT Support</title>
     <link rel="icon" type="image/png" href="../NewBrandLogo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <style>
-        .portfolio-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* ---- Portfolio page — uses real H&P tokens ---- */
+
+        .portfolio-main {
+            padding-top: calc(var(--nav-height) + 6rem);
+            padding-bottom: 6rem;
+            background: var(--color-bg-primary);
         }
+
+        .portfolio-container {
+            max-width: var(--container-full);
+            margin: 0 auto;
+            padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+        }
+
+        .portfolio-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-link);
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 3rem;
+            transition: color var(--transition);
+        }
+        .portfolio-back:hover { color: var(--color-brand); }
 
         .portfolio-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding-top: 2rem;
+            max-width: var(--container-text);
+            margin: 0 0 4.5rem;
         }
-
+        .portfolio-eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-brand);
+            margin: 0 0 1rem;
+        }
         .portfolio-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-family: var(--font-family);
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
             color: var(--color-text-primary);
+            margin: 0 0 1.25rem;
         }
-
         .portfolio-header p {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
+            line-height: 1.6;
             color: var(--color-text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 0;
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
         }
 
-        .portfolio-card {
-            background: var(--color-background);
-            border: 2px solid var(--color-border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .work-card {
+            position: relative;
             display: flex;
             flex-direction: column;
-            data-reveal: fade-up;
-        }
-
-        .portfolio-card:hover {
-            border-color: var(--color-accent);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .portfolio-card-preview {
-            height: 300px;
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-            padding: 2rem;
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-card);
             overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.18);
         }
 
-        .portfolio-card-preview img {
+        .work-card-media {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: var(--color-bg-dark);
+        }
+        .work-card-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 700ms var(--ease);
+        }
+        .work-card:hover .work-card-media img {
+            transform: scale(1.04);
         }
 
-        .portfolio-card-preview:has(img) {
-            padding: 0;
-            background: none;
-        }
-
-        .portfolio-card-badge {
+        .work-card-badge {
             position: absolute;
             top: 1rem;
             left: 1rem;
-            background: rgba(0, 0, 0, 0.75);
-            color: white;
-            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--color-text-primary);
+            font-size: 0.72rem;
             font-weight: 600;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0.4rem 0.7rem;
-            border-radius: 4px;
+            padding: 0.4rem 0.75rem;
+            border-radius: 980px;
+            backdrop-filter: blur(10px);
             z-index: 2;
         }
-
-        .portfolio-card {
-            position: relative;
+        .work-card-badge::before {
+            content: "";
+            width: 0.45rem;
+            height: 0.45rem;
+            border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
         }
 
-        .portfolio-card-content {
-            padding: 2rem;
-            flex: 1;
+        .work-card-body {
+            padding: 1.75rem 1.75rem 2rem;
             display: flex;
             flex-direction: column;
-        }
-
-        .portfolio-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-text-primary);
-        }
-
-        .portfolio-card p {
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5rem;
             flex: 1;
         }
-
-        .portfolio-card .btn {
-            align-self: flex-start;
+        .work-card-kicker {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-tertiary);
+            margin: 0 0 0.5rem;
         }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--color-accent);
-            text-decoration: none;
+        .work-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--color-text-primary);
+            margin: 0 0 0.75rem;
+            line-height: 1.2;
+        }
+        .work-card-desc {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--color-text-secondary);
+            margin: 0 0 1.5rem;
+            flex: 1;
+        }
+        .work-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--color-link);
+            font-size: 0.95rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: gap var(--transition);
+        }
+        .work-card:hover .work-card-link { gap: 0.6rem; }
+        .work-card-link::after { content: "→"; }
+
+        .portfolio-cta {
+            margin-top: clamp(4rem, 8vw, 6rem);
+            padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-card);
+            text-align: center;
+        }
+        .portfolio-cta h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            color: var(--color-text-primary);
+            margin: 0 0 0.75rem;
+        }
+        .portfolio-cta p {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            max-width: 560px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
         }
 
-        .back-link:hover {
-            color: var(--color-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .portfolio-header h1 {
-                font-size: 2rem;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+        @media (max-width: 640px) {
+            .portfolio-main { padding-top: calc(var(--nav-height) + 3.5rem); }
+            .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ========== NAVIGATION ========== -->
+    <!-- ========== NAVIGATION (matches main site) ========== -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="../" class="logo" aria-label="Hammer and Pixels - Home">
                 <span class="logo-icon" aria-hidden="true">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="6" width="18" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <path d="M19 14V28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <rect x="12" y="30" width="3" height="3" fill="currentColor" opacity="0.7"/>
-                        <rect x="17" y="30" width="3" height="3" fill="currentColor" opacity="0.5"/>
-                        <rect x="22" y="30" width="3" height="3" fill="currentColor" opacity="0.3"/>
-                        <path d="M7 10L4 8" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-                        <path d="M31 10L34 8" stroke="currentColor" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-                        <path d="M7 12L5 14" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
-                        <path d="M31 12L33 14" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
-                    </svg>
+                    <img src="../NewBrandLogo.png" alt="" width="28" height="28" class="logo-img">
                 </span>
-                <span class="logo-text">Hammer <span class="logo-ampersand">&</span> Pixels</span>
+                <span class="logo-text">Hammer <span class="logo-ampersand">&amp;</span> Pixels</span>
             </a>
 
             <ul class="nav-menu" id="navMenu" role="menubar">
                 <li role="none"><a href="../#about-jesse" role="menuitem">About Jesse</a></li>
                 <li role="none"><a href="../#services" role="menuitem">Services</a></li>
-                <li role="none"><a href="../#work" role="menuitem">My Work</a></li>
+                <li role="none"><a href="./" role="menuitem" aria-current="page">My Work</a></li>
                 <li role="none"><a href="../#pricing" role="menuitem">Pricing</a></li>
                 <li role="none"><a href="../#contact" role="menuitem" class="nav-cta">Let's Talk</a></li>
             </ul>
@@ -191,42 +231,47 @@
         </div>
     </nav>
 
-    <!-- ========== PORTFOLIO PAGE ========== -->
-    <section style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+    <!-- ========== MY WORK ========== -->
+    <main class="portfolio-main">
         <div class="portfolio-container">
-            <a href="../" class="back-link">← Back to Hammer and Pixels</a>
 
-            <div class="portfolio-header" data-reveal="fade-up">
-                <h1>Work I've Done</h1>
-                <p>Here are some recent projects. Each one was built from the ground up to help a local business look great and work right.</p>
-            </div>
+            <a href="../" class="portfolio-back">← Back to home</a>
+
+            <header class="portfolio-header" data-reveal="fade-up">
+                <p class="portfolio-eyebrow">Selected Work</p>
+                <h1>Sites I've built for<br>local businesses</h1>
+                <p>Each one is custom-designed from the ground up — no templates, no drag-and-drop kits. Click any project to see the live demo.</p>
+            </header>
 
             <div class="portfolio-grid">
-                <!-- Bolo Bakery (LIVE) -->
-                <div class="portfolio-card" data-reveal="fade-up" data-delay="50">
-                    <span class="portfolio-card-badge">Live Demo</span>
-                    <div class="portfolio-card-preview">
-                        <img src="BoloBakeryAssets/hero-background.jpg" alt="Interior of Bolo Bakery — fresh-built demo site" loading="lazy">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h3>Bolo Bakery</h3>
-                        <p>A Portuguese-American family bakery in small-town Connecticut. Warm, rustic, and unhurried — with fresh-from-the-oven product shots, a wood-fired oven story, and full hours.</p>
-                        <a href="bolobakery.html" class="btn btn-primary">View Demo</a>
-                    </div>
-                </div>
 
-                <!-- Embers & Oak (LIVE) -->
-                <div class="portfolio-card" data-reveal="fade-up" data-delay="100">
-                    <span class="portfolio-card-badge">Live Demo</span>
-                    <div class="portfolio-card-preview" style="background: linear-gradient(135deg, #1a1511 0%, #2c2218 60%, #E0732B 160%);">
-                        🔥 Embers &amp; Oak
+                <!-- Bolo Bakery -->
+                <a href="bolobakery.html" class="work-card" data-reveal="fade-up" data-delay="50">
+                    <div class="work-card-media">
+                        <span class="work-card-badge">Live Demo</span>
+                        <img src="BoloBakeryAssets/hero-background.jpg" alt="Bolo Bakery hero photograph — a warm Portuguese-American family bakery interior" loading="lazy">
                     </div>
-                    <div class="portfolio-card-content">
-                        <h3>Embers &amp; Oak</h3>
-                        <p>A modern farmhouse fine dining spot built around a wood-fired hearth. Short menu, wine pairings, private events, and a moody evening vibe.</p>
-                        <a href="restaurant.html" class="btn btn-primary">View Demo</a>
+                    <div class="work-card-body">
+                        <p class="work-card-kicker">Bakery · Collinsville, CT</p>
+                        <h2 class="work-card-title">Bolo Bakery</h2>
+                        <p class="work-card-desc">A Portuguese-American family bakery. Warm, rustic, unhurried — with fresh-from-the-oven product shots, a wood-fired oven story, and daily hours.</p>
+                        <span class="work-card-link">View the demo</span>
                     </div>
-                </div>
+                </a>
+
+                <!-- Embers & Oak -->
+                <a href="restaurant.html" class="work-card" data-reveal="fade-up" data-delay="100">
+                    <div class="work-card-media">
+                        <span class="work-card-badge">Live Demo</span>
+                        <img src="EmbersOakAssets/hero-hearth.jpg" alt="Embers and Oak hero photograph — a stone wood-fired hearth with a live fire burning" loading="lazy">
+                    </div>
+                    <div class="work-card-body">
+                        <p class="work-card-kicker">Fine Dining · Collinsville, CT</p>
+                        <h2 class="work-card-title">Embers &amp; Oak</h2>
+                        <p class="work-card-desc">Modern farmhouse fine dining built around a wood-fired hearth. Short seasonal menu, wine pairings, private events, and a moody evening vibe.</p>
+                        <span class="work-card-link">View the demo</span>
+                    </div>
+                </a>
 
                 <!--
                     ========================================================
@@ -234,44 +279,49 @@
                     ships through the facelift series.
                     ========================================================
 
-                <div class="portfolio-card" data-reveal="fade-up" data-delay="200">
-                    <div class="portfolio-card-preview">
-                        ☕ Local Coffee Shop
+                <a href="coffeeshop.html" class="work-card">
+                    <div class="work-card-media">
+                        <span class="work-card-badge">Live Demo</span>
+                        <img src="CoffeeShopAssets/hero.jpg" alt="Groundwork Coffee" loading="lazy">
                     </div>
-                    <div class="portfolio-card-content">
-                        <h3>Groundwork Coffee</h3>
-                        <p>A warm, inviting neighborhood coffee shop site. Menu showcase, seating info, community event calendar, and WiFi details. Your third place online.</p>
-                        <a href="coffeeshop.html" class="btn btn-primary">View Project</a>
+                    <div class="work-card-body">
+                        <p class="work-card-kicker">Coffee Shop · Collinsville, CT</p>
+                        <h2 class="work-card-title">Groundwork Coffee</h2>
+                        <p class="work-card-desc">A warm, inviting neighborhood coffee shop site. Menu showcase, seating info, community event calendar.</p>
+                        <span class="work-card-link">View the demo</span>
                     </div>
-                </div>
+                </a>
 
-                <div class="portfolio-card" data-reveal="fade-up" data-delay="300">
-                    <div class="portfolio-card-preview">
-                        🧘 Yoga & Fitness Studio
+                <a href="yogagym.html" class="work-card">
+                    <div class="work-card-media">
+                        <span class="work-card-badge">Live Demo</span>
+                        <img src="RootRiseAssets/hero.jpg" alt="Root & Rise Studio" loading="lazy">
                     </div>
-                    <div class="portfolio-card-content">
-                        <h3>Root & Rise Studio</h3>
-                        <p>A modern wellness hub. Full class schedule, instructor profiles, testimonials, and 3-tier pricing. Combines calm and energy for members.</p>
-                        <a href="yogagym.html" class="btn btn-primary">View Project</a>
+                    <div class="work-card-body">
+                        <p class="work-card-kicker">Yoga &amp; Fitness · Collinsville, CT</p>
+                        <h2 class="work-card-title">Root &amp; Rise Studio</h2>
+                        <p class="work-card-desc">A modern wellness hub. Full class schedule, instructor profiles, testimonials, and 3-tier pricing.</p>
+                        <span class="work-card-link">View the demo</span>
                     </div>
-                </div>
+                </a>
 
                 -->
-                <!-- END HIDDEN -->
             </div>
 
-            <div style="text-align: center; padding: 2rem 0;" data-reveal="fade-up">
-                <h2 style="margin-bottom: 1rem;">Ready for your own?</h2>
-                <p style="color: var(--color-text-secondary); margin-bottom: 1.5rem;">Each project is custom-built for the client. No templates. Just real, thoughtful web design.</p>
-                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+            <!-- CTA -->
+            <div class="portfolio-cta" data-reveal="fade-up">
+                <h2>Ready for yours?</h2>
+                <p>Every site is custom-built for the client — no templates, just real, thoughtful web design. Let's talk about what you need.</p>
+                <a href="../#contact" class="btn btn-primary">Start a project</a>
             </div>
+
         </div>
-    </section>
+    </main>
 
     <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2026 Hammer & Pixels. Made by Jesse, right here in Connecticut.</p>
+            <p>&copy; 2026 Hammer &amp; Pixels. Made by Jesse, right here in Connecticut.</p>
         </div>
     </footer>
 
