@@ -338,7 +338,7 @@ p { margin: 0 0 1rem; }
   aspect-ratio: 4 / 5;
   width: 100%;
   object-fit: cover;
-  border: 1px solid var(--brass-2);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(44, 61, 52, 0.08);
 }
 .story-media figcaption {
   position: absolute;
@@ -454,7 +454,9 @@ p { margin: 0 0 1rem; }
   position: relative;
   margin: 4rem 0 2rem;
   overflow: hidden;
-  border: 1px solid var(--brass-2);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse at center, #000 60%, transparent 100%);
 }
 .menu-banner img {
   width: 100%;
@@ -534,7 +536,7 @@ p { margin: 0 0 1rem; }
   aspect-ratio: 4 / 5;
   width: 100%;
   object-fit: cover;
-  border: 1px solid var(--brass-2);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(44, 61, 52, 0.08);
 }
 
 /* ---------- Reserve ---------- */
@@ -624,7 +626,7 @@ p { margin: 0 0 1rem; }
   aspect-ratio: 4 / 5;
   width: 100%;
   object-fit: cover;
-  border: 1px solid var(--brass-2);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(44, 61, 52, 0.08);
 }
 
 /* ---------- Footer ---------- */
