@@ -280,3 +280,69 @@ def reject_llc(llc_id):
         database.add_log(f"LLC {llc_id_int} rejected by user", "info")
 
     return jsonify(response_dict), status_code
+
+
+@webhook_bp.route('/<llc_id>/reset', methods=['POST'])
+@require_api_key
+def reset_llc_review(llc_id):
+    """Reset an LLC's review status back to pending_review.
+
+    Useful for un-rejecting or un-approving leads that were processed
+    by mistake. Clears approved_by_user/user_approved_at flags and
+    logs the action to openclaw_review_log as 'reset'.
+
+    Request body: {notes?: "optional notes"}
+    Returns: {success: true, status: "pending_review", previous_status: "..."}
+    """
+    try:
+        llc_id_int = int(llc_id)
+    except ValueError:
+        return jsonify({'error': 'LLC ID must be a valid integer'}), 400
+
+    try:
+        payload = request.get_json() or {}
+    except Exception:
+        payload = {}
+    notes = payload.get('notes', '')
+
+    conn = None
+    cursor = None
+    try:
+        conn = sqlite3.connect(database.DB_PATH)
+        cursor = conn.cursor()
+
+        existing_llc = database.get_llc(llc_id_int)
+        if not existing_llc:
+            return jsonify({'error': 'LLC not found'}), 404
+
+        previous_status = existing_llc.get('status') if isinstance(existing_llc, dict) else None
+
+        cursor.execute('BEGIN')
+        cursor.execute(
+            "UPDATE llcs SET status = 'pending_review', approved_by_user = 0, user_approved_at = NULL WHERE id = ?",
+            (llc_id_int,)
+        )
+        cursor.execute(
+            "INSERT INTO openclaw_review_log (llc_id, action, notes, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)",
+            (llc_id_int, 'reset', notes or f'reset from {previous_status}')
+        )
+        conn.commit()
+
+        database.add_log(f"LLC {llc_id_int} review reset (was: {previous_status})", "info")
+        return jsonify({
+            'success': True,
+            'status': 'pending_review',
+            'previous_status': previous_status,
+        }), 200
+
+    except Exception:
+        if conn:
+            conn.rollback()
+        database.add_log(traceback.format_exc(), "error")
+        return jsonify({'error': 'Internal server error'}), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
