@@ -277,7 +277,21 @@ p { margin: 0 0 1rem; }
 .hero-eyebrow { color: var(--brass); }
 .hero h1 {
   color: var(--cream);
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.5rem;
+  font-size: clamp(3.5rem, 9vw, 6.5rem);
+  letter-spacing: 0.01em;
+}
+.hero h1 .brand-amp {
+  color: var(--brass);
+  margin: 0 0.15em;
+  font-style: italic;
+}
+.hero-tagline {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  color: var(--brass);
+  line-height: 1;
+  margin: 0 0 1.75rem;
 }
 .hero-sub {
   font-size: 1.15rem;
