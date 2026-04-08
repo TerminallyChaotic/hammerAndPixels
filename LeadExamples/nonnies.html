@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nonnie's Italian Bakery - Made with Love. Gourmet pies, fresh cannoli, custom cakes, homemade grinders, and Italian pastries in Plainville, CT.">
+    <title>Nonnie's Italian Bakery | Made with Love | Plainville, CT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="nonnies.css">
+</head>
+<body>
+
+    <!-- ========== DEMO BANNER ========== -->
+    <div class="demo-banner" role="alert">
+        <p><strong>Demo Site</strong> — This is a concept design by <a href="../index.html">Hammer & Pixels</a> to show what Nonnie's online presence could look like.</p>
+    </div>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Nonnie's Italian Bakery - Home">
+                <span class="logo-text">Nonnie's</span>
+                <span class="logo-tagline">Italian Bakery</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#menu" role="menuitem">Menu</a></li>
+                <li role="none"><a href="#custom" role="menuitem">Custom Orders</a></li>
+                <li role="none"><a href="#visit" role="menuitem">Visit</a></li>
+                <li role="none"><a href="tel:8607939167" role="menuitem" class="nav-cta">Call to Order</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <header class="hero" id="hero">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="hero-bg-slide active" style="background-image: url('Magnifico\'s art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/kirsten-drew-n49BjsFf5dI-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/peace-creative-pVY9k8pzTzM-unsplash.jpg')"></div>
+            <div class="hero-bg-slide" style="background-image: url('Magnifico\'s art/mink-mingle-qZ5lPCPvdXE-unsplash.jpg')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Plainville, CT</div>
+            <h1 class="hero-title">Made with love.<br><span class="accent">Always from scratch.</span></h1>
+            <p class="hero-subtitle">Gourmet pies, fresh cannoli, custom cakes, and homemade grinders — baked daily in the heart of Plainville.</p>
+
+            <!-- Pastry Carousel -->
+            <div class="pastry-carousel">
+                <button class="carousel-arrow carousel-prev" aria-label="Previous item">&#8249;</button>
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track">
+                        <button class="carousel-item" data-title="Gourmet Pies" data-desc="From pistachio cream to chocolate peanut butter to key lime — our signature pies are baked fresh and made entirely from scratch. Perfect for any occasion or just because." data-img="Magnifico's art/kirsten-drew-n49BjsFf5dI-unsplash.jpg">
+                            <img src="Magnifico's art/kirsten-drew-n49BjsFf5dI-unsplash.jpg" alt="Gourmet pies and desserts" loading="eager">
+                            <span class="carousel-label">Gourmet Pies</span>
+                        </button>
+                        <button class="carousel-item" data-title="Fresh Cannoli" data-desc="Our cannoli are stuffed to order with fresh ricotta filling — never pre-filled, never sitting around. Customers call them some of the best in Connecticut." data-img="Magnifico's art/bohdan-stocek-acw-W7oeFOk-unsplash.jpg">
+                            <img src="Magnifico's art/bohdan-stocek-acw-W7oeFOk-unsplash.jpg" alt="Fresh cream-filled pastries" loading="eager">
+                            <span class="carousel-label">Fresh Cannoli</span>
+                        </button>
+                        <button class="carousel-item" data-title="Italian Cookie Trays" data-desc="Rainbow cookies, anisette, butter cookies, and more — hand-arranged on beautiful trays for holidays, parties, and family gatherings." data-img="Magnifico's art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg">
+                            <img src="Magnifico's art/sarah-elizabeth-dLNu65g0jMA-unsplash.jpg" alt="Italian cookie display" loading="eager">
+                            <span class="carousel-label">Cookie Trays</span>
+                        </button>
+                        <button class="carousel-item" data-title="Custom Cakes" data-desc="Birthday cakes, wedding cakes, gender reveals, cupcakes with floral designs — every cake is baked fresh and decorated by hand. We go above and beyond." data-img="Magnifico's art/conor-brown-sqkXyyj4WdE-unsplash.jpg">
+                            <img src="Magnifico's art/conor-brown-sqkXyyj4WdE-unsplash.jpg" alt="Custom baked goods" loading="eager">
+                            <span class="carousel-label">Custom Cakes</span>
+                        </button>
+                        <button class="carousel-item" data-title="Homemade Grinders" data-desc="Made on our own fresh-baked bread with freshly sliced meats and cheeses. Our grinders are generously filled and made to order — including our famous chicken parm." data-img="Magnifico's art/geri-chapple-fXdoHjQ2Pyg-unsplash.jpg">
+                            <img src="Magnifico's art/geri-chapple-fXdoHjQ2Pyg-unsplash.jpg" alt="Fresh-filled grinders" loading="eager">
+                            <span class="carousel-label">Grinders</span>
+                        </button>
+                        <button class="carousel-item" data-title="Pastry Case" data-desc="Our case is filled fresh every morning with cream puffs, pastries, cinnamon rolls, and seasonal specialties. Everything is baked in-house — never frozen." data-img="Magnifico's art/peace-creative-pVY9k8pzTzM-unsplash.jpg">
+                            <img src="Magnifico's art/peace-creative-pVY9k8pzTzM-unsplash.jpg" alt="Full pastry display case" loading="eager">
+                            <span class="carousel-label">Pastry Case</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" aria-label="Next item">&#8250;</button>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#menu" class="btn btn-primary">See Our Menu</a>
+                <a href="tel:8607939167" class="btn btn-secondary">Call to Order</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== ITEM DETAIL MODAL ========== -->
+    <div class="item-modal" id="itemModal" aria-hidden="true" role="dialog" aria-label="Item details">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close details">&times;</button>
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="">
+            </div>
+            <div class="modal-body">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDesc"></p>
+                <a href="tel:8607939167" class="btn btn-primary">Call to Order</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MENU ========== -->
+    <section id="menu" class="menu section polka-dots">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-label">What We Make</span>
+                <h2 class="section-title">Fresh from our ovens.<br><span class="accent">Every single day.</span></h2>
+            </header>
+
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <div class="category-image">
+                        <div class="image-placeholder small">
+                            <span class="placeholder-icon">&#127856;</span>
+                        </div>
+                    </div>
+                    <h3>Gourmet Pies</h3>
+                    <ul class="menu-list">
+                        <li><span class="item-name">Pistachio Cream</span><span class="item-note">Our signature</span></li>
+                        <li><span class="item-name">Chocolate Peanut Butter</span><span class="item-note">Fan favorite</span></li>
+                        <li><span class="item-name">Key Lime</span><span class="item-note">Bright & tangy</span></li>
+                        <li><span class="item-name">Seasonal Flavors</span><span class="item-note">Ask what's fresh</span></li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <div class="category-image">
+                        <div class="image-placeholder small">
+                            <span class="placeholder-icon">&#127846;</span>
+                        </div>
+                    </div>
+                    <h3>Italian Pastries</h3>
+                    <ul class="menu-list">
+                        <li><span class="item-name">Cannoli</span><span class="item-note">Stuffed to order</span></li>
+                        <li><span class="item-name">Cream Puffs</span><span class="item-note">Fresh whipped cream</span></li>
+                        <li><span class="item-name">Rainbow Cookies</span><span class="item-note">Tri-color almond</span></li>
+                        <li><span class="item-name">Anisette Cookies</span><span class="item-note">Classic Italian</span></li>
+                        <li><span class="item-name">Italian Cookie Trays</span><span class="item-note">Perfect for parties</span></li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <div class="category-image">
+                        <div class="image-placeholder small">
+                            <span class="placeholder-icon">&#127874;</span>
+                        </div>
+                    </div>
+                    <h3>Cakes & Cupcakes</h3>
+                    <ul class="menu-list">
+                        <li><span class="item-name">Chocolate PB Cake</span><span class="item-note">Whipped cream frosting</span></li>
+                        <li><span class="item-name">Pistachio Cupcakes</span><span class="item-note">Ricotta frosting</span></li>
+                        <li><span class="item-name">Custom Celebration Cakes</span><span class="item-note">Made to order</span></li>
+                        <li><span class="item-name">Gender Reveal Cakes</span><span class="item-note">Short notice OK</span></li>
+                        <li><span class="item-name">Gluten-Free Cakes</span><span class="item-note">Just as delicious</span></li>
+                    </ul>
+                </div>
+
+                <div class="menu-category">
+                    <div class="category-image">
+                        <div class="image-placeholder small">
+                            <span class="placeholder-icon">&#129386;</span>
+                        </div>
+                    </div>
+                    <h3>Grinders & More</h3>
+                    <ul class="menu-list">
+                        <li><span class="item-name">Chicken Parm Grinder</span><span class="item-note">Hot & crispy</span></li>
+                        <li><span class="item-name">Italian Combo</span><span class="item-note">Fresh-sliced meats</span></li>
+                        <li><span class="item-name">Classic Cold Cuts</span><span class="item-note">On house-baked bread</span></li>
+                        <li><span class="item-name">Stuffed Breads</span><span class="item-note">Savory & fresh</span></li>
+                        <li><span class="item-name">Coffee</span><span class="item-note">Hot & iced</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CUSTOM ORDERS ========== -->
+    <section id="custom" class="custom section">
+        <div class="container">
+            <div class="custom-layout">
+                <div class="custom-content">
+                    <span class="section-label">Custom Orders</span>
+                    <h2 class="section-title">Your celebration,<br><span class="accent">made with love.</span></h2>
+                    <p>From elegant wedding cakes to last-minute gender reveals, we put the same care and artistry into every custom order. Our cakes are known for combining exquisite design with outstanding flavor — because it should look as good as it tastes.</p>
+                    <ul class="custom-list">
+                        <li>Wedding & tiered cakes</li>
+                        <li>Birthday & celebration cakes</li>
+                        <li>Cupcakes with detailed floral designs</li>
+                        <li>Gender reveal cakes (short notice OK)</li>
+                        <li>Cookie & pastry trays for events</li>
+                        <li>Gluten-free options for all of the above</li>
+                    </ul>
+                    <p class="custom-cta">Call us to discuss your order — we recommend placing custom orders at least one week in advance.</p>
+                    <a href="tel:8607939167" class="btn btn-primary">Call (860) 793-9167</a>
+                </div>
+                <div class="custom-gallery">
+                    <div class="image-placeholder tall">
+                        <span class="placeholder-icon">&#127874;</span>
+                        <span class="placeholder-text">Custom Cake Gallery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VISIT ========== -->
+    <section id="visit" class="visit section polka-dots">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-label">Come See Us</span>
+                <h2 class="section-title">Stop in.<br><span class="accent">We saved you a cannoli.</span></h2>
+            </header>
+
+            <div class="visit-layout">
+                <div class="visit-info">
+                    <div class="info-card">
+                        <h3>Hours</h3>
+                        <div class="hours-grid">
+                            <span class="day">Tuesday – Saturday</span><span class="time">8:00 AM – 5:00 PM</span>
+                            <span class="day">Sunday</span><span class="time">8:00 AM – 1:00 PM</span>
+                            <span class="day closed">Monday</span><span class="time closed">Closed</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Location</h3>
+                        <address>
+                            104 East Main Street<br>
+                            Plainville, CT 06062
+                        </address>
+                        <p class="directions-note">Right on Main Street — street parking available.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Contact</h3>
+                        <p><strong>Phone:</strong> <a href="tel:8607939167">(860) 793-9167</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:info@nonniespies.com">info@nonniespies.com</a></p>
+                        <p class="contact-note">Call ahead for custom cake orders, large trays, and holiday specials.</p>
+                    </div>
+                </div>
+
+                <div class="visit-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2976.5!2d-72.8583!3d41.6744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e7b1a1a1a1a1a1%3A0x1234567890abcdef!2s104+E+Main+St%2C+Plainville%2C+CT+06062!5e0!3m2!1sen!2sus!4v1234567890"
+                        width="100%"
+                        height="400"
+                        style="border:0; border-radius: 12px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Nonnie's Italian Bakery location on Google Maps">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">Nonnie's</span>
+                    <p>Italian bakery in the heart of Plainville. Made with love.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#menu">Menu</a>
+                    <a href="#custom">Custom Orders</a>
+                    <a href="#visit">Visit</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nonnie's Italian Bakery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.nav-menu');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                const expanded = toggle.getAttribute('aria-expanded') === 'true';
+                toggle.setAttribute('aria-expanded', !expanded);
+                menu.classList.toggle('open');
+            });
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Hero background slideshow
+        (function() {
+            const slides = document.querySelectorAll('.hero-bg-slide');
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 6000);
+        })();
+
+        // Pastry carousel
+        (function() {
+            const track = document.querySelector('.carousel-track');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            let position = 0;
+            let autoTimer;
+
+            function getItemWidth() {
+                return items[0].offsetWidth + 16;
+            }
+
+            function getVisibleCount() {
+                const wrapper = document.querySelector('.carousel-track-wrapper');
+                return Math.floor(wrapper.offsetWidth / getItemWidth());
+            }
+
+            function getMaxPosition() {
+                return Math.max(0, items.length - getVisibleCount());
+            }
+
+            function updateTrack() {
+                track.style.transform = 'translateX(-' + (position * getItemWidth()) + 'px)';
+            }
+
+            function advance(dir) {
+                position += dir;
+                if (position > getMaxPosition()) position = 0;
+                if (position < 0) position = getMaxPosition();
+                updateTrack();
+            }
+
+            prevBtn.addEventListener('click', () => { advance(-1); resetAuto(); });
+            nextBtn.addEventListener('click', () => { advance(1); resetAuto(); });
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => advance(1), 4000);
+            }
+            resetAuto();
+
+            window.addEventListener('resize', () => {
+                if (position > getMaxPosition()) position = getMaxPosition();
+                updateTrack();
+            });
+        })();
+
+        // Item detail modal
+        (function() {
+            const modal = document.getElementById('itemModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const closeBtn = modal.querySelector('.modal-close');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            document.querySelectorAll('.carousel-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    modalImg.src = item.dataset.img;
+                    modalImg.alt = item.dataset.title;
+                    modalTitle.textContent = item.dataset.title;
+                    modalDesc.textContent = item.dataset.desc;
+                    modal.classList.add('open');
+                    modal.setAttribute('aria-hidden', 'false');
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        })();
+    </script>
+</body>
+</html>
