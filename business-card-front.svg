@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1050" height="600" viewBox="0 0 1050 600">
+  <!-- 3.5in x 2in at 300 DPI = 1050 x 600 -->
+  <defs>
+    <linearGradient id="copper-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C45D2C"/>
+      <stop offset="50%" stop-color="#E8814D"/>
+      <stop offset="100%" stop-color="#C45D2C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1050" height="600" fill="#1D1D1F" rx="12"/>
+
+  <!-- Copper accent line at bottom -->
+  <rect x="0" y="591" width="1050" height="9" fill="url(#copper-line)"/>
+
+  <!-- Logo area - replace xlink:href with your logo file -->
+  <image x="60" y="140" width="270" height="320" xlink:href="NewBrandLogo.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Divider line -->
+  <line x1="370" y1="120" x2="370" y2="480" stroke="#3A3A3C" stroke-width="2"/>
+
+  <!-- Name -->
+  <text x="410" y="210" fill="#FFFFFF" font-family="Inter, -apple-system, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Jesse DiMauro</text>
+
+  <!-- Title -->
+  <text x="410" y="250" fill="#C45D2C" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="500" letter-spacing="1.5" text-transform="uppercase">FOUNDER &amp; DEVELOPER</text>
+
+  <!-- Phone -->
+  <text x="410" y="320" fill="#A1A1A6" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400">(860) 295-3847</text>
+
+  <!-- Email -->
+  <text x="410" y="370" fill="#A1A1A6" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400">jesse@hammerandpixels.com</text>
+
+  <!-- Website -->
+  <text x="410" y="420" fill="#A1A1A6" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400">hammerandpixels.com</text>
+</svg>

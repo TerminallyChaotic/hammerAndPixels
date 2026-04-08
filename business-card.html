@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammer & Pixels - Business Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .card {
+    width: 3.5in;
+    height: 2in;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    position: relative;
+  }
+
+  /* ===== FRONT ===== */
+  .front {
+    background: #1D1D1F;
+    color: #F5F5F7;
+    display: flex;
+    padding: 0.25in 0.3in;
+    gap: 0.2in;
+    align-items: center;
+  }
+
+  .front-logo {
+    width: 0.9in;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .front-logo img {
+    width: 100%;
+    height: auto;
+  }
+
+  .front-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .front-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+  }
+
+  .front-title {
+    font-size: 8px;
+    font-weight: 500;
+    color: #C45D2C;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .front-detail {
+    font-size: 7.5px;
+    color: #A1A1A6;
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .front-detail a {
+    color: #A1A1A6;
+    text-decoration: none;
+  }
+
+  .front-detail-icon {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    color: #6E6E73;
+  }
+
+  .front-divider {
+    width: 1px;
+    height: 70%;
+    background: #3A3A3C;
+    align-self: center;
+  }
+
+  /* Copper accent line at bottom */
+  .front::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #C45D2C, #E8814D, #C45D2C);
+  }
+
+  /* ===== BACK ===== */
+  .back {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25in 0.35in;
+    text-align: center;
+  }
+
+  .back-tagline {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1D1D1F;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+
+  .back-services {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .back-service {
+    text-align: center;
+  }
+
+  .back-service-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #C45D2C;
+    margin: 0 auto 5px;
+  }
+
+  .back-service-name {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: #1D1D1F;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .back-service-desc {
+    font-size: 6.5px;
+    color: #6E6E73;
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .back-divider {
+    width: 40px;
+    height: 1px;
+    background: #E5E5E7;
+    margin-bottom: 10px;
+  }
+
+  .back-url {
+    font-size: 8px;
+    font-weight: 500;
+    color: #C45D2C;
+    letter-spacing: 0.02em;
+  }
+
+  .back-location {
+    font-size: 6.5px;
+    color: #86868B;
+    margin-top: 3px;
+  }
+
+  /* Print helper */
+  @media print {
+    body { background: white; padding: 0; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+    h2 { display: none; }
+  }
+
+  .instructions {
+    max-width: 500px;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h2>Front</h2>
+<div class="card front">
+  <div class="front-logo">
+    <img src="NewBrandLogo.png" alt="Hammer & Pixels">
+  </div>
+  <div class="front-divider"></div>
+  <div class="front-info">
+    <div class="front-name">Jesse DiMauro</div>
+    <div class="front-title">Founder & Developer</div>
+    <div class="front-detail">
+      <svg class="front-detail-icon" viewBox="0 0 20 20" fill="none"><path d="M2 3.5C2 2.67 2.67 2 3.5 2H6.5C6.88 2 7.21 2.28 7.28 2.65L8.03 6.4C8.09 6.72 7.95 7.05 7.68 7.22L5.92 8.28C7.18 10.92 9.08 12.82 11.72 14.08L12.78 12.32C12.95 12.05 13.28 11.91 13.6 11.97L17.35 12.72C17.72 12.79 18 13.12 18 13.5V16.5C18 17.33 17.33 18 16.5 18C8.51 18 2 11.49 2 3.5Z" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>(860) 295-3847</span>
+    </div>
+    <div class="front-detail">
+      <svg class="front-detail-icon" viewBox="0 0 20 20" fill="none"><path d="M3 5L10 11L17 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>jesse@hammerandpixels.com</span>
+    </div>
+    <div class="front-detail">
+      <svg class="front-detail-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.5V10L13 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>hammerandpixels.com</span>
+    </div>
+  </div>
+</div>
+
+<h2>Back</h2>
+<div class="card back">
+  <div class="back-tagline">Websites and tech support from your neighbor.</div>
+  <div class="back-services">
+    <div class="back-service">
+      <div class="back-service-dot"></div>
+      <div class="back-service-name">Web Design</div>
+      <div class="back-service-desc">Custom sites built<br>from scratch</div>
+    </div>
+    <div class="back-service">
+      <div class="back-service-dot"></div>
+      <div class="back-service-name">Website Care</div>
+      <div class="back-service-desc">Hosting, updates<br>& maintenance</div>
+    </div>
+    <div class="back-service">
+      <div class="back-service-dot"></div>
+      <div class="back-service-name">IT Support</div>
+      <div class="back-service-desc">Remote & on-site<br>tech help</div>
+    </div>
+  </div>
+  <div class="back-divider"></div>
+  <div class="back-url">hammerandpixels.com</div>
+  <div class="back-location">Farmington Valley, Connecticut</div>
+</div>
+
+<p class="instructions">
+  To save as PDF for printing: File > Print > Save as PDF. Set margins to none.<br>
+  Standard business card size: 3.5" x 2" (300 DPI recommended for print).
+</p>
+
+</body>
+</html>
